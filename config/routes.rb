@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "home/index"
   get "register" => "users#new", as: :new_user
   get "forgot-password" => "passwords#new", as: :new_password
   get "reset-password" => "passwords#edit", as: :edit_password
@@ -21,5 +20,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "home#index"
+  root "marketing_pages#home"
 end
