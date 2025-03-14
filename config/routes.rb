@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get "reset-password" => "passwords#edit", as: :edit_password
   get "login" => "sessions#new", as: :new_session
 
-  resources :dreams
-  resources :dictionary_entries
   resources :passwords, only: %i[new create edit update], param: :token
   resource :session, only: %i[new create destroy]
 
