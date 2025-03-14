@@ -5,16 +5,4 @@ class MarketingPagesController < ApplicationController
   def home
     render inertia: "MarketingPages/Home"
   end
-
-  def pricing
-  end
-
-  def terms
-  end
-
-  def privacy
-  end
-
-  def contact
-  end
 end
