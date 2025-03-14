@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "register" => "users#new", as: :new_user
+  post "register" => "users#create", as: :users
   get "forgot-password" => "passwords#new", as: :new_password
   get "reset-password" => "passwords#edit", as: :edit_password
   get "login" => "sessions#new", as: :new_session
