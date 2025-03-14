@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  get "home/index"
   get "register" => "users#new", as: :new_user
+  post "register" => "users#create", as: :users
   get "forgot-password" => "passwords#new", as: :new_password
   get "reset-password" => "passwords#edit", as: :edit_password
   get "login" => "sessions#new", as: :new_session
 
-  resources :dreams
-  resources :dictionary_entries
   resources :passwords, only: %i[new create edit update], param: :token
   resource :session, only: %i[new create destroy]
 
@@ -21,5 +19,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "home#index"
+  root "marketing_pages#home"
 end

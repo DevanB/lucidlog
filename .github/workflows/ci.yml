@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [master]
 
 jobs:
   scan_ruby:
@@ -52,6 +52,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install npm dependencies
+        uses: bahmutov/npm-install@v1
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1

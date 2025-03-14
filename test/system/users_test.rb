@@ -7,33 +7,19 @@ class UsersTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit users_url
-    assert_selector "h1", text: "Users"
+    assert_selector "h1", text: "Create an account"
   end
 
   test "should create user" do
+    skip "Skipping until able to implement tests with Inertia"
     visit users_url
-    click_on "New user"
-
-    click_on "Create User"
+    fill_in "Name", with: @user.name
+    fill_in "Email", with: @user.email_address
+    fill_in "Password", with: @user.password
+    fill_in "Confirm password", with: @user.password_confirmation
+    click_on "Create account"
 
     assert_text "User was successfully created"
     click_on "Back"
-  end
-
-  test "should update User" do
-    visit user_url(@user)
-    click_on "Edit this user", match: :first
-
-    click_on "Update User"
-
-    assert_text "User was successfully updated"
-    click_on "Back"
-  end
-
-  test "should destroy User" do
-    visit user_url(@user)
-    click_on "Destroy this user", match: :first
-
-    assert_text "User was successfully destroyed"
   end
 end
