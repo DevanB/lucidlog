@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   # GET /login
   def new
-return redirect_to after_authentication_url, notice: "Successfully logged in." if Current.user.present?
+    return redirect_to after_authentication_url, notice: "Successfully logged in." if Current.user.present?
     render inertia: "Authentication/Login"
   end
 
