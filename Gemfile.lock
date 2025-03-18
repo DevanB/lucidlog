@@ -119,7 +119,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    inertia_rails (3.6.1)
+    inertia_rails (3.7.0)
       railties (>= 6)
     io-console (0.8.0)
     irb (1.15.1)
@@ -368,7 +368,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
-  inertia_rails (~> 3.6)
+  inertia_rails (~> 3.7)
   jbuilder
   kamal
   letter_opener
