@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: %i[new]
+  allow_unauthenticated_access only: %i[new create]
 
   inertia_share flash: -> { flash.to_hash }
 
