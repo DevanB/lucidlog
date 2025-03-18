@@ -6,16 +6,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_user_url
+    get new_user_path
     assert_response :success
   end
 
   test "should create user" do
-    skip "Will implement when adding registration"
+    skip
     assert_difference("User.count") do
-      post users_url, params: { user: { name: "Test User", email_address: "one@example.com", password: "password", password_confirmation: "password" } }
+      post users_path, params: { user: { name: "Test User", email_address: "one@example.com", password: "password", password_confirmation: "password" } }
     end
 
-    assert_redirected_to user_url(User.last)
+    assert_redirected_to user_path(User.last)
   end
 end
