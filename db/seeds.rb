@@ -8,19 +8,22 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 puts "Clearing existing data..."
-Dream.destroy_all
+User.destroy_all
+# Dream.destroy_all
 
-user = User.create!(email_address: "user@example.com", password: "password", password_confirmation: "password")
-puts "Creating data for #{user.email_address}..."
+User.create!(email_address: "one@example.com", password: "password", password_confirmation: "password")
+# user = User.create!(email_address: "one@example.com", password: "password", password_confirmation: "password")
+puts "Created #{User.count} user(s)."
+# puts "Creating data for #{user.email_address}..."
 
-dreams = {
-  dream1: Dream.create!(title: "Dream 1", body: "This is the first dream", dream_date: Date.today),
-  dream2: Dream.create!(title: "Dream 2", body: "This is the second dream", dream_date: Date.today - 1.day),
-dream3: Dream.create!(title: "Dream 3", body: "This is the third dream", dream_date: Date.today - 2.days)
-}
-
-dreams.each do |dream|
-  Dream.create!(user: user, **dream)
-end
-
-puts "Created #{Dream.count} dreams."
+# dreams = {
+#   dream1: Dream.create!(title: "Dream 1", body: "This is the first dream", dream_date: Date.today),
+#   dream2: Dream.create!(title: "Dream 2", body: "This is the second dream", dream_date: Date.today - 1.day),
+# dream3: Dream.create!(title: "Dream 3", body: "This is the third dream", dream_date: Date.today - 2.days)
+# }
+#
+# dreams.each do |dream|
+#   Dream.create!(user: user, **dream)
+# end
+#
+# puts "Created #{Dream.count} dreams."
