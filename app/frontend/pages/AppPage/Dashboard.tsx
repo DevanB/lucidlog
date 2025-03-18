@@ -1,5 +1,5 @@
 import FlashMessages from '@/components/flash-messages'
-import { Head } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 
 export default function Dashboard() {
   return (
@@ -7,6 +7,7 @@ export default function Dashboard() {
       <Head title="Dashboard" />
       <FlashMessages />
       <h1>Dashboard</h1>
+      <Link href="/logout" method="delete" as="button">Log Out</Link>
     </>
   )
 }
