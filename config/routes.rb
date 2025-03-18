@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  # App
+  get "dashboard" => "app_pages#dashboard", as: :dashboard
+
+  # Authentication
   get "register" => "users#new", as: :new_user
   post "register" => "users#create", as: :users
   get "forgot-password" => "passwords#new", as: :new_password
   get "reset-password" => "passwords#edit", as: :edit_password
   get "login" => "sessions#new", as: :new_session
-
   resources :passwords, only: %i[new create edit update], param: :token
   resource :session, only: %i[new create destroy]
 
