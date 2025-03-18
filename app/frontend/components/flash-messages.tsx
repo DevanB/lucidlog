@@ -6,7 +6,7 @@ export default function FlashMessages() {
 
   if (flash.alert) {
     return (
-      <div className="rounded-md bg-red-50 p-4">
+      <div className="rounded-md bg-red-50 p-4" data-testid="flash-alert">
         <div className="flex">
           <div className="shrink-0">
             <XCircleIcon aria-hidden="true" className="size-5 text-red-400" />
@@ -21,7 +21,7 @@ export default function FlashMessages() {
 
   if (flash.notice) {
     return (
-      <div className="rounded-md bg-blue-50 p-4">
+      <div className="rounded-md bg-blue-50 p-4" data-testid="flash-notice">
         <div className="flex">
           <div className="shrink-0">
             <InformationCircleIcon aria-hidden="true" className="size-5 text-blue-400" />
