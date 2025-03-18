@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: %i[new]
+  allow_unauthenticated_access only: %i[new create]
 
   inertia_share flash: -> { flash.to_hash }, quote: { author: "J.K. Rowling", message: "In dreams, we enter a world that’s entirely our own." }
 
