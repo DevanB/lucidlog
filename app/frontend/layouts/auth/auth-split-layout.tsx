@@ -4,7 +4,6 @@ import { Link, usePage } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
 
 interface AuthLayoutProps {
-  children: React.ReactNode;
   title?: string;
   description?: string;
 }

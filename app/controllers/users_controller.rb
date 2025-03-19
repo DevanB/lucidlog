@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   inertia_share flash: -> { flash.to_hash }
   inertia_share name: "LucidLog"
-  inertia_share quote: { author: "Devan", message: "A message" }
+  inertia_share quote: { author: "Devan", message: "Do the hard right, not the easy wrong." }
 
   def new
     render inertia: "Authentication/Register"
