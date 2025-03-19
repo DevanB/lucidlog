@@ -2,13 +2,13 @@ class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new]
 
   inertia_share flash: -> { flash.to_hash }
+  inertia_share name: "LucidLog"
+  inertia_share quote: { author: "Devan", message: "Do the hard right, not the easy wrong." }
 
-  # GET /register
   def new
     render inertia: "Authentication/Register"
   end
 
-  # POST /users - create a new user
   def create
     @user = User.new(user_params)
 

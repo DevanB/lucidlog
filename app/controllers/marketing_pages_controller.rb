@@ -3,7 +3,6 @@ class MarketingPagesController < ApplicationController
 
   inertia_share flash: -> { flash.to_hash }
 
-  # GET /
   def home
     render inertia: "MarketingPages/Home"
   end
