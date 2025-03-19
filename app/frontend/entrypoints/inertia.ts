@@ -1,6 +1,7 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { createElement, ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { initializeTheme } from '../hooks/use-appearance';
 
 // Temporary type definition, until @inertiajs/react provides one
 type ResolvedComponent = {
@@ -43,9 +44,12 @@ createInertiaApp({
     } else {
       console.error(
         'Missing root element.\n\n' +
-          'If you see this error, it probably means you load Inertia.js on non-Inertia pages.\n' +
-          'Consider moving <%= vite_typescript_tag "inertia" %> to the Inertia-specific layout instead.',
+        'If you see this error, it probably means you load Inertia.js on non-Inertia pages.\n' +
+        'Consider moving <%= vite_typescript_tag "inertia" %> to the Inertia-specific layout instead.',
       )
     }
   },
 })
+
+// This will set light / dark mode on load...
+initializeTheme();
