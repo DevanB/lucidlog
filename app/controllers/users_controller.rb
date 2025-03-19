@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new]
 
-  inertia_share flash: -> { flash.to_hash }
-  inertia_share name: "LucidLog"
-  inertia_share quote: { author: "Devan", message: "Do the hard right, not the easy wrong." }
+  inertia_share flash: -> { flash.to_hash }, quote: { author: "J.K. Rowling", message: "In dreams, we enter a world that’s entirely our own." }
 
   def new
     render inertia: "Authentication/Register"
