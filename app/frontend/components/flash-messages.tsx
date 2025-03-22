@@ -1,7 +1,7 @@
 import { usePage } from "@inertiajs/react";
 import { InformationCircleIcon, XCircleIcon } from '@heroicons/react/20/solid'
 
-export default function FlashMessages() {
+export function FlashMessages() {
   const { flash } = usePage().props;
 
   if (flash.alert) {

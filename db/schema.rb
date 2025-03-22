@@ -11,22 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_03_18_181036) do
-  create_table "dictionary_entries", force: :cascade do |t|
-    t.string "term"
-    t.text "definition"
-    t.boolean "draft"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "dreams", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.date "dream_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -37,6 +21,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_18_181036) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "email_address", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false

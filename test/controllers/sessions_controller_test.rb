@@ -16,6 +16,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to dashboard_path
+    assert_match @user.email_address, response.body
   end
 
   test "should not log in with invalid credentials" do
