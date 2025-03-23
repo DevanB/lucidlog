@@ -1,48 +1,50 @@
-// Components
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
-import InputError from '@/components/input-error';
-import TextLink from '@/components/text-link';
+import { FlashMessages } from '@/components/flash-messages';
+import { InputError } from '@/components/input-error';
+import { TextLink } from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
 
-export default function ForgotPassword({ status }: { status?: string }) {
-  const { data, setData, post, processing, errors } = useForm({
-    email: '',
+export default function ForgotPassword() {
+  const { data, setData, post, processing, errors, reset, transform } = useForm({
+    email_address: '',
   });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
-
-    post('/forgot-password');
+    transform((data) => ({
+      user: { ...data }
+    }))
+    post('/forgot-password', {
+      onFinish: () => reset('email_address'),
+    });
   };
 
   return (
     <AuthLayout layout="simple" title="Forgot password" description="Enter your email to receive a password reset link">
       <Head title="Forgot password" />
-
-      {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
-
+      <FlashMessages />
       <div className="space-y-6">
         <form onSubmit={submit}>
           <div className="grid gap-2">
-            <Label htmlFor="email">Email address</Label>
+            <Label htmlFor="email_address">Email address</Label>
             <Input
-              id="email"
+              id="email_address"
               type="email"
-              name="email"
+              name="email_address"
               autoComplete="off"
-              value={data.email}
+              value={data.email_address}
               autoFocus
-              onChange={(e) => setData('email', e.target.value)}
+              onChange={(e) => setData('email_address', e.target.value)}
               placeholder="email@example.com"
             />
 
-            <InputError message={errors.email} />
+            <InputError message={errors.email_address} />
           </div>
 
           <div className="my-6 flex items-center justify-start">

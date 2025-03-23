@@ -2,13 +2,13 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
-import InputError from '@/components/input-error';
-import TextLink from '@/components/text-link';
+import { FlashMessages } from '@/components/flash-messages';
+import { InputError } from '@/components/input-error';
+import { TextLink } from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
-import FlashMessages from '@/components/flash-messages';
 
 type LoginForm = {
   email_address: string;
@@ -20,13 +20,16 @@ interface LoginProps {
 }
 
 export default function Login({ status }: LoginProps) {
-  const { data, setData, post, processing, errors, reset } = useForm<LoginForm>({
+  const { data, setData, post, processing, errors, reset, transform } = useForm<LoginForm>({
     email_address: '',
     password: '',
   });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
+    transform((data) => ({
+      user: { ...data }
+    }))
     post('/login', {
       onSuccess: () => reset('password'),
     });
@@ -75,7 +78,7 @@ export default function Login({ status }: LoginProps) {
             <InputError message={errors.password} />
           </div>
 
-          <Button type="submit" className="cursor-pointer mt-4 w-full" tabIndex={4} disabled={processing}>
+          <Button type="submit" className="cursor-pointer mt-4 w-full" tabIndex={3} disabled={processing}>
             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
             Log in
           </Button>
@@ -83,7 +86,7 @@ export default function Login({ status }: LoginProps) {
 
         <div className="text-muted-foreground text-center text-sm">
           Don't have an account?{' '}
-          <TextLink href='/register' tabIndex={5}>
+          <TextLink href='/register' tabIndex={4}>
             Sign up
           </TextLink>
         </div>

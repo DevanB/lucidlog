@@ -1,5 +1,5 @@
-import FlashMessages from '@/components/flash-messages'
 import { Head, Link } from '@inertiajs/react'
+import { FlashMessages } from '@/components/flash-messages'
 
 export default function Dashboard() {
   return (

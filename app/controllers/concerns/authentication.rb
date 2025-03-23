@@ -31,8 +31,7 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      flash[:alert] = "You must be logged in to access that page."
-      redirect_to new_session_path
+      redirect_to new_session_path, alert: "You must be logged in to access that page."
     end
 
     def after_authentication_url

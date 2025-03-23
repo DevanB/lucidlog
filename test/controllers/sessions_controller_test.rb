@@ -12,20 +12,21 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should log in with valid credentials" do
     assert_difference("Session.count") do
-      post sessions_path, params: { email_address: @user.email_address, password: "password" }
+      post sessions_path, params: { user: { email_address: @user.email_address, password: "p@ssw0rd!" } }
     end
 
     assert_redirected_to dashboard_path
+    assert_equal "Successfully logged in.", flash[:notice]
   end
 
   test "should not log in with invalid credentials" do
     assert_no_difference("Session.count") do
-      post sessions_path, params: { email_address: @user.email_address, password: "wrong_password" }
+      post sessions_path, params: { user: { email_address: @user.email_address, password: "wrong_password" } }
     end
   end
 
   test "should log out" do
-    post sessions_path, params: { email_address: @user.email_address, password: "password" }
+    post sessions_path, params: { user: { email_address: @user.email_address, password: "p@ssw0rd!" } }
 
     assert_difference("Session.count", -1) do
       delete delete_session_path

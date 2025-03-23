@@ -11,8 +11,7 @@ puts "Clearing existing data..."
 User.destroy_all
 # Dream.destroy_all
 
-User.create!(email_address: "one@example.com", password: "password", password_confirmation: "password")
-# user = User.create!(email_address: "one@example.com", password: "password", password_confirmation: "password")
+User.create!(first_name: "John", last_name: "Doe", email_address: "one@example.com", password: "luc1dl0g", password_confirmation: "luc1dl0g")
 puts "Created #{User.count} user(s)."
 # puts "Creating data for #{user.email_address}..."
 

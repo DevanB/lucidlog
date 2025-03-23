@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: %i[new]
+  allow_unauthenticated_access only: %i[new create]
 
   inertia_share flash: -> { flash.to_hash }, quote: { author: "J.K. Rowling", message: "In dreams, we enter a world that’s entirely our own." }
 
@@ -11,9 +11,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: "User was successfully created."
+      start_new_session_for @user
+      redirect_to dashboard_path, notice: "You've successfully registered. Welcome!"
     else
-      redirect_to new_user_url, inertia: { errors: @user.errors }
+      redirect_to new_user_path, inertia: { errors: @user.errors }
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email_address, :password, :password_confirmation)
   end
 end
