@@ -12,7 +12,7 @@ class AppPagesTest < ApplicationSystemTestCase
 
     visit new_session_path
     fill_in "Email address", with: user.email_address
-    fill_in "Password", with: "password"
+    fill_in "Password", with: "p@ssw0rd!"
     click_button "Log in"
     assert_selector '[data-testid="flash-notice"]', text: "Successfully logged in."
     assert_current_path dashboard_path
