@@ -2,7 +2,7 @@ require "test_helper"
 
 class AppPagesControllerTest < ActionDispatch::IntegrationTest
   test "should redirect to dashboard when authenticated" do
-    @user = users(:one)
+    @user = users(:unverified)
     post sessions_path, params: { user: {  email_address: @user.email_address, password: "p@ssw0rd!" } }
 
     get dashboard_path

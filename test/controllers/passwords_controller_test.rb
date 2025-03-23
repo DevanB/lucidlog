@@ -2,7 +2,7 @@ require "test_helper"
 
 class PasswordsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
+    @user = users(:unverified)
   end
 
   test "should get new" do

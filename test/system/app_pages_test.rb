@@ -8,7 +8,7 @@ class AppPagesTest < ApplicationSystemTestCase
   end
 
   test "redirects to dashboard after authenticating" do
-    user = users(:one)
+    user = users(:unverified)
 
     visit new_session_path
     fill_in "Email address", with: user.email_address

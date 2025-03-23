@@ -1,6 +1,6 @@
-import AuthCardLayoutTemplate from '@/layouts/auth/auth-card-layout';
-import AuthSimpleLayoutTemplate from '@/layouts/auth/auth-simple-layout';
-import AuthSplitLayoutTemplate from '@/layouts/auth/auth-split-layout';
+import { AuthCardLayout as AuthCardLayoutTemplate } from '@/layouts/auth/auth-card-layout';
+import { AuthSimpleLayout as AuthSimpleLayoutTemplate } from '@/layouts/auth/auth-simple-layout';
+import { AuthSplitLayout as AuthSplitLayoutTemplate } from '@/layouts/auth/auth-split-layout';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface AuthLayoutProps {
   layout?: "simple" | "split" | "card";
 }
 
-export default function AuthLayout({ children, title, description, ...props }: AuthLayoutProps) {
+export function AuthLayout({ children, title, description, ...props }: AuthLayoutProps) {
   switch (props.layout) {
     case "card":
       return (

@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class SessionsTest < ApplicationSystemTestCase
   setup do
-    @user = users(:one)
+    @user = users(:unverified)
   end
 
   test "should log in the user" do
