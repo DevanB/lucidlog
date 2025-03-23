@@ -66,7 +66,6 @@ export default function Register() {
               id="last_name"
               type="text"
               required
-              autoFocus
               tabIndex={2}
               autoComplete="family-name"
               value={data.last_name}
