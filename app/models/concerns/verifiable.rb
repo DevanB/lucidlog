@@ -32,8 +32,13 @@ module Verifiable
 
   def send_email_verification_email
     transaction do
-      UsersMailer.email_verification(self).deliver_now
-      update!(email_verification_sent_at: Time.current)
+      begin
+        UsersMailer.email_verification(self).deliver_now
+        update!(email_verification_sent_at: Time.current)
+      rescue StandardError => exception
+        Rails.logger.error("Failed to deliver email verification: #{exception.message}")
+        raise ActiveRecord::Rollback
+      end
     end
   end
 end
