@@ -5,7 +5,7 @@ module Verifiable
   ACCESS_BEFORE_CONFIRMATION_IN_HOURS = 168.hours
 
   included do
-    after_create :send_email_verification_email
+    after_create :enqueue_email_verification_email_job
     generates_token_for :email_verification, expires_in: ACCESS_BEFORE_CONFIRMATION_IN_HOURS
   end
 
@@ -28,6 +28,10 @@ module Verifiable
 
   def expiring_token
     generate_token_for(:email_verification)
+  end
+
+  def enqueue_email_verification_email_job
+    EmailVerificationJob.perform_later(self)
   end
 
   def send_email_verification_email

@@ -10,7 +10,7 @@ class SessionsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Log in"
 
     fill_in "Email address", with: @user.email_address
-    fill_in "Password", with: "p@ssw0rd!"
+    fill_in "Password", with: "luc1dl0g!"
     click_button "Log in"
 
     assert_selector '[data-testid="flash-notice"]', text: "Successfully logged in."
@@ -20,7 +20,7 @@ class SessionsTest < ApplicationSystemTestCase
   test "should log out the user" do
     visit new_session_path
     fill_in "Email address", with: @user.email_address
-    fill_in "Password", with: "p@ssw0rd!"
+    fill_in "Password", with: "luc1dl0g!"
     click_button "Log in"
     click_button "Log Out"
     assert_selector '[data-testid="flash-notice"]', text: "You have been logged out."

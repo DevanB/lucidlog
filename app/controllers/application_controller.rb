@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
   inertia_share flash: -> { flash.to_hash }, auth: { user: -> { inertia_user } }, name: Rails.application.config.application_name
-  before_action :verify_user_access
+  before_action :can_access_app
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -12,15 +12,17 @@ class ApplicationController < ActionController::Base
   end
 
   def inertia_user
-    return nil unless current_user.present?
+    return unless current_user
     {
       id: current_user.try(:id),
       email: current_user.try(:email_address)
     }
   end
 
-  def verify_user_access
-    return nil if current_user.nil?
+  # Ensures users have verified their email (or are within the grace period)
+  # before allowing access to the application
+  def can_access_app
+    return unless current_user
 
     if !current_user.can_access_app?
       terminate_session

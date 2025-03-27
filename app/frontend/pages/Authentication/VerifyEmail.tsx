@@ -6,11 +6,12 @@ import { TextLink } from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { AuthLayout } from '@/layouts/auth-layout';
 
-export default function VerifyEmail({ status }: { status?: string }) {
+export function VerifyEmail({ status }: { status?: string }) {
   const { post, processing } = useForm({});
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
+    // @TODO: Add error handling, possibly remove status (since flash should handle)
     post('/verify-email');
   };
 
