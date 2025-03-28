@@ -8,7 +8,7 @@ interface AuthLayoutProps {
   description?: string;
 }
 
-export default function AuthSplitLayout({ children, title, description }: PropsWithChildren<AuthLayoutProps>) {
+export function AuthSplitLayout({ children, title, description }: PropsWithChildren<AuthLayoutProps>) {
   const { name, quote } = usePage<SharedData>().props;
 
   return (

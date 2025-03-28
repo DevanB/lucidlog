@@ -1,0 +1,18 @@
+WELCOME, <%= @user.first_name %>!
+
+Thanks for signing up! We're excited to have you on board. To get started,
+please verify your email address by clicking the button below.
+
+Verify Email Address <%= verification_url(token: @user.expiring_token) %>
+
+If you do not verify your email address within one week, your account will 
+risk being removed. If you didn't create an account, you can safely ignore this email.
+
+If you're having trouble with the button above, copy and paste the URL below
+into your web browser:
+
+<%= verification_url(token: @user.expiring_token) %>
+
+Need help? Contact our support team at support@lucidlog.com
+
+© <%= Date.current.year %> LucidLog. All rights reserved.

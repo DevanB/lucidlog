@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Link } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
 
-export default function AuthCardLayout({
+export function AuthCardLayout({
   children,
   title,
   description,

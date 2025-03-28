@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :passwords, only: [ :edit, :update ], path: "reset-password", path_names: { edit: "" }, param: :token
   resources :sessions, only: [ :new, :create ], path: "login", path_names: { new: "" }
   delete "logout" => "sessions#destroy", as: :delete_session
+  resources :verifications, only: [ :index, :show ], path: "verify-email", param: :token
+  post "verify-email" => "verifications#create", as: :verifications_create
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
