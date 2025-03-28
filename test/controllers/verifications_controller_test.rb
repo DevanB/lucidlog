@@ -32,7 +32,7 @@ class VerificationsControllerTest < ActionDispatch::IntegrationTest
     # Additional assertions based on your implementation
   end
 
-  test "should handle invalid verifiation token" do
+  test "should handle invalid verification token" do
     skip
 
     patch verification_path(id: "invalid-token")
