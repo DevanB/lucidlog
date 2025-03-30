@@ -31,7 +31,7 @@ module Verifiable
   end
 
   def enqueue_email_verification_email_job
-    EmailVerificationJob.perform_later(self)
+    SendEmailVerificationEmailJob.perform_later(self)
   end
 
   def send_email_verification_email
