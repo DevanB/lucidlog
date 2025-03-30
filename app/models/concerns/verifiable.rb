@@ -40,7 +40,7 @@ module Verifiable
         UsersMailer.email_verification(self).deliver_now
         update!(email_verification_sent_at: Time.current)
       rescue StandardError => exception
-        Rails.logger.error("Failed to deliver email verification: #{exception.message}")
+        Rails.logger.error("Failed to deliver email verification email: #{exception.message}")
         raise ActiveRecord::Rollback
       end
     end
