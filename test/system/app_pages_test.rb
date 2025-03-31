@@ -15,7 +15,7 @@ class AppPagesTest < ApplicationSystemTestCase
     fill_in "Password", with: "luc1dl0g!"
     click_button "Log in"
     assert_selector '[data-testid="flash-notice"]', text: "Successfully logged in."
-    assert_selector '[data-testid="email-verification-baner"]', text: "Please verify your email address."
+    assert_selector '[data-testid="email-verification-banner"]', text: "Please verify your email address."
     assert_current_path dashboard_path
   end
 
