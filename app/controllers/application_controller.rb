@@ -15,7 +15,12 @@ class ApplicationController < ActionController::Base
     return unless current_user
     {
       id: current_user.try(:id),
-      email: current_user.try(:email_address)
+      email: current_user.try(:email_address),
+      first_name: current_user.try(:first_name),
+      last_name: current_user.try(:last_name),
+      email_verified_at: current_user.try(:email_verified_at),
+      created_at: current_user.try(:created_at),
+      updated_at: current_user.try(:updated_at)
     }
   end
 
