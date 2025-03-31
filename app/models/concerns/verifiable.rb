@@ -5,7 +5,7 @@ module Verifiable
   ACCESS_BEFORE_CONFIRMATION_IN_HOURS = 168.hours
 
   included do
-    after_create :send_email_verification_email
+    after_commit :send_email_verification_email, on: :create
     generates_token_for :email_verification, expires_in: ACCESS_BEFORE_CONFIRMATION_IN_HOURS
   end
 
@@ -23,7 +23,12 @@ module Verifiable
   end
 
   def verification_deadline
-    email_verification_sent_at + ACCESS_BEFORE_CONFIRMATION_IN_HOURS
+    unless email_verification_sent_at.present?
+      email_verification_sent_at + ACCESS_BEFORE_CONFIRMATION_IN_HOURS
+    end
+
+    Rails.logger.warn("email_verification_sent_at is nil for user ID #{id}. Falling back to created_at.")
+    created_at + ACCESS_BEFORE_CONFIRMATION_IN_HOURS
   end
 
   def expiring_token
