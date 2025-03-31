@@ -2,7 +2,7 @@ require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
+    @user = users(:unverified)
   end
 
   test "should get login page" do
@@ -12,7 +12,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should log in with valid credentials" do
     assert_difference("Session.count") do
-      post sessions_path, params: { user: { email_address: @user.email_address, password: "p@ssw0rd!" } }
+      post sessions_path, params: { user: { email_address: @user.email_address, password: "luc1dl0g!" } }
     end
 
     assert_redirected_to dashboard_path
@@ -26,7 +26,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should log out" do
-    post sessions_path, params: { user: { email_address: @user.email_address, password: "p@ssw0rd!" } }
+    post sessions_path, params: { user: { email_address: @user.email_address, password: "luc1dl0g!" } }
 
     assert_difference("Session.count", -1) do
       delete delete_session_path

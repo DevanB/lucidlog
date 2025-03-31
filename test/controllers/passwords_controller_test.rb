@@ -2,7 +2,7 @@ require "test_helper"
 
 class PasswordsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
+    @user = users(:unverified)
   end
 
   test "should get new" do
@@ -10,6 +10,14 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create user" do
+    skip
+  end
+
+  test "unverified users can access the password reset form" do
+    skip
+  end
+
+  test "unverified users can successfully reset their password" do
     skip
   end
 end

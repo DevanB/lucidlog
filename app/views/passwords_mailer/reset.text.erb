@@ -1,2 +1,21 @@
-You can reset your password within the next 15 minutes on this password reset page:
+PASSWORD RESET REQUEST
+
+Hello <%= @user.first_name %>,
+
+We received a request to reset your password. If you didn't make this request,
+you can safely ignore this email.
+
+To reset your password, please click the link below:
+
+RESET MY PASSWORD <%= edit_password_url(@user.password_reset_token) %>
+
+This link will expire in 15 minutes for security reasons.
+
+If you're having trouble with the button above, copy and paste the URL below
+into your web browser:
+
 <%= edit_password_url(@user.password_reset_token) %>
+
+Need help? Contact our support team at support@lucidlog.com
+
+© <%= Date.current.year %> LucidLog. All rights reserved.
