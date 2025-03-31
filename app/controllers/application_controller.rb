@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
   def inertia_user
     return unless current_user
     {
-      id: current_user.try(:id),
-      email: current_user.try(:email_address),
-      first_name: current_user.try(:first_name),
-      last_name: current_user.try(:last_name),
-      email_verified_at: current_user.try(:email_verified_at),
-      created_at: current_user.try(:created_at),
-      updated_at: current_user.try(:updated_at)
+      id: current_user.id,
+      email: current_user.email_address,
+      first_name: current_user.first_name,
+      last_name: current_user.last_name,
+      email_verified_at: current_user.email_verified_at,
+      created_at: current_user.created_at,
+      updated_at: current_user.updated_at
     }
   end
 
