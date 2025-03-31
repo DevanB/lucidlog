@@ -13,12 +13,6 @@ class VerifiableTest < ActiveSupport::TestCase
     )
   end
 
-  test "enqueue email verification job after create" do
-    assert_enqueued_with(job: SendEmailVerificationEmailJob) do
-      @user.save!
-    end
-  end
-
   test "send_email_verification_email sends email" do
     perform_enqueued_jobs do
       @user.save!

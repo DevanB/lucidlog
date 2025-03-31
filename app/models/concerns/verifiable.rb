@@ -5,7 +5,7 @@ module Verifiable
   ACCESS_BEFORE_CONFIRMATION_IN_HOURS = 168.hours
 
   included do
-    after_create :enqueue_email_verification_email_job
+    after_create :send_email_verification_email
     generates_token_for :email_verification, expires_in: ACCESS_BEFORE_CONFIRMATION_IN_HOURS
   end
 
@@ -30,14 +30,10 @@ module Verifiable
     generate_token_for(:email_verification)
   end
 
-  def enqueue_email_verification_email_job
-    SendEmailVerificationEmailJob.perform_later(self)
-  end
-
   def send_email_verification_email
     transaction do
       begin
-        UsersMailer.email_verification(self).deliver_now
+        UsersMailer.email_verification(self).deliver_later
         update!(email_verification_sent_at: Time.current)
       rescue StandardError => exception
         Rails.logger.error("Failed to deliver email verification email: #{exception.message}")
