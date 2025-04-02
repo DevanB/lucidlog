@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
   inertia_share flash: -> { flash.to_hash }, auth: { user: -> { inertia_user } }, name: Rails.application.config.application_name
-  before_action :can_access_app
+  before_action :allowed_to_login
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -26,12 +26,12 @@ class ApplicationController < ActionController::Base
 
   # Ensures users have verified their email (or are within the grace period)
   # before allowing access to the application
-  def can_access_app
+  def allowed_to_login
     return unless current_user
 
     if !current_user.can_access_app?
       terminate_session
-      redirect_to new_session_path, alert: "You need to verify your email address before using the app"
+      redirect_to new_session_path, alert: "You need to verify your email address before using LucidLog."
     end
   end
 end
