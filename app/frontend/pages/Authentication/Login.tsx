@@ -15,11 +15,7 @@ type LoginForm = {
   password: string;
 };
 
-interface LoginProps {
-  status?: string;
-}
-
-export default function Login({ status }: LoginProps) {
+export default function Login() {
   const { data, setData, post, processing, errors, reset, transform } = useForm<LoginForm>({
     email_address: '',
     password: '',
@@ -30,20 +26,21 @@ export default function Login({ status }: LoginProps) {
     transform((data) => ({
       user: { ...data }
     }))
+    // @TODO: Add error handling
     post('/login', {
       onSuccess: () => reset('password'),
     });
   };
 
   return (
-    <AuthLayout layout="simple" title="Log in to your account" description="Enter your email and password below to log in">
-      <Head title="Log in" />
+    <AuthLayout layout="simple" title="Log In" description="Enter your email and password below to log in">
+      <Head title="Log In" />
 
       <FlashMessages />
       <form className="flex flex-col gap-6" onSubmit={submit}>
         <div className="grid gap-6">
           <div className="grid gap-2">
-            <Label htmlFor="email_address">Email address</Label>
+            <Label htmlFor="email_address">Email Address</Label>
             <Input
               id="email_address"
               type="email"
@@ -62,7 +59,7 @@ export default function Login({ status }: LoginProps) {
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
               <TextLink href='/forgot-password' className="ml-auto text-sm" tabIndex={5}>
-                Forgot password?
+                Forgot Password?
               </TextLink>
             </div>
             <Input
@@ -80,19 +77,17 @@ export default function Login({ status }: LoginProps) {
 
           <Button type="submit" className="cursor-pointer mt-4 w-full" tabIndex={3} disabled={processing}>
             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-            Log in
+            Log In
           </Button>
         </div>
 
         <div className="text-muted-foreground text-center text-sm">
           Don't have an account?{' '}
           <TextLink href='/register' tabIndex={4}>
-            Sign up
+            Create An Account
           </TextLink>
         </div>
       </form>
-
-      {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
     </AuthLayout>
   );
 }
