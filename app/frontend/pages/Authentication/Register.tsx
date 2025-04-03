@@ -32,14 +32,15 @@ export default function Register() {
     transform((data) => ({
       user: { ...data }
     }))
+    // @TODO: Add error handling
     post('/register', {
       onFinish: () => reset('password', 'password_confirmation'),
     });
   };
 
   return (
-    <AuthLayout layout="split" title="Create an account" description="Enter your details below to create your account">
-      <Head title="Register" />
+    <AuthLayout layout="split" title="Create Account" description="Enter your details below to create your account">
+      <Head title="Create Account" />
       <FlashMessages />
       <form className="flex flex-col gap-6" onSubmit={submit}>
         <div className="grid gap-6">
@@ -55,7 +56,7 @@ export default function Register() {
               value={data.first_name}
               onChange={(e) => setData('first_name', e.target.value)}
               disabled={processing}
-              placeholder="First name"
+              placeholder="First Name"
             />
             <InputError message={errors.first_name} className="mt-2" />
           </div>
@@ -71,13 +72,13 @@ export default function Register() {
               value={data.last_name}
               onChange={(e) => setData('last_name', e.target.value)}
               disabled={processing}
-              placeholder="Last name"
+              placeholder="Last Name"
             />
             <InputError message={errors.last_name} className="mt-2" />
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="email_address">Email address</Label>
+            <Label htmlFor="email_address">Email Address</Label>
             <Input
               id="email_address"
               type="email"
@@ -109,7 +110,7 @@ export default function Register() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="password_confirmation">Confirm password</Label>
+            <Label htmlFor="password_confirmation">Confirm Password</Label>
             <Input
               id="password_confirmation"
               name="password_confirmation"
@@ -120,21 +121,21 @@ export default function Register() {
               value={data.password_confirmation}
               onChange={(e) => setData('password_confirmation', e.target.value)}
               disabled={processing}
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
             />
             <InputError message={errors.password_confirmation} />
           </div>
 
           <Button type="submit" className="cursor-pointer mt-2 w-full" tabIndex={6} disabled={processing}>
             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-            Create account
+            Create Account
           </Button>
         </div>
 
         <div className="text-muted-foreground text-center text-sm">
           Already have an account?{' '}
           <TextLink href='/login' tabIndex={7}>
-            Log in
+            Log In
           </TextLink>
         </div>
       </form>

@@ -6,11 +6,16 @@ verified:
   email_address: verified@example.com
   password_digest: <%= password_digest %>
   email_verified_at: <%= Time.now %>
-  email_verification_sent_at: <%= Time.now %>
 
 unverified:
   first_name: Unverified
   last_name: User
   email_address: unverified@example.com
   password_digest: <%= password_digest %>
-  email_verification_sent_at: <%= Time.now %>
+
+expired:
+  first_name: Expired
+  last_name: User
+  email_address: expired@example.com
+  password_digest: <%= password_digest %>
+  created_at: <%= 8.days.ago %>

@@ -20,19 +20,20 @@ export default function ForgotPassword() {
     transform((data) => ({
       user: { ...data }
     }))
+    // @TODO: Add error handling
     post('/forgot-password', {
       onFinish: () => reset('email_address'),
     });
   };
 
   return (
-    <AuthLayout layout="simple" title="Forgot password" description="Enter your email to receive a password reset link">
-      <Head title="Forgot password" />
+    <AuthLayout layout="simple" title="Forgot Password" description="Enter your email to receive a password reset link">
+      <Head title="Forgot Password" />
       <FlashMessages />
       <div className="space-y-6">
         <form onSubmit={submit}>
           <div className="grid gap-2">
-            <Label htmlFor="email_address">Email address</Label>
+            <Label htmlFor="email_address">Email Address</Label>
             <Input
               id="email_address"
               type="email"
@@ -50,7 +51,7 @@ export default function ForgotPassword() {
           <div className="my-6 flex items-center justify-start">
             <Button className="cursor-pointer w-full" disabled={processing}>
               {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-              Email password reset link
+              Email Password Reset Link
             </Button>
           </div>
         </form>
