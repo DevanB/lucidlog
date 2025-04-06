@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
-  before_action :resume_session, only: %i[destroy]
-  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Try again later." }
+  rate_limit to: 10, within: 3.minutes, only: :create, by: -> { request.domain }, with: -> { redirect_to new_session_path, alert: "Try again later." }
 
   inertia_share flash: -> { flash.to_hash }
 
@@ -11,12 +10,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(user_params)
-      start_new_session_for user
-      redirect_to after_authentication_url, notice: "Successfully logged in."
-    else
-      redirect_to new_session_path, alert: "Invalid email address or password. Please try again."
+    user = User.authenticate_by(user_params)
+    return redirect_to new_session_path, alert: "Invalid email address or password. Please try again." unless user
+
+    unless user.can_access_app?
+      return redirect_to new_session_path, alert: "You need to verify your email address before using LucidLog."
     end
+
+    start_new_session_for user
+    redirect_to after_authentication_url, notice: "Successfully logged in."
   end
 
   def destroy

@@ -15,7 +15,10 @@ module Verifiable
   end
 
   def can_access_app?
-    verified? || (Time.current < verification_deadline)
+    return true if verified? || Time.current < verification_deadline
+
+    send_email_verification_email
+    false
   end
 
   def verified?
@@ -23,11 +26,6 @@ module Verifiable
   end
 
   def verification_deadline
-    unless email_verification_sent_at.present?
-      email_verification_sent_at + ACCESS_BEFORE_CONFIRMATION_IN_HOURS
-    end
-
-    Rails.logger.warn("email_verification_sent_at is nil for user ID #{id}. Falling back to created_at.")
     created_at + ACCESS_BEFORE_CONFIRMATION_IN_HOURS
   end
 
@@ -36,14 +34,11 @@ module Verifiable
   end
 
   def send_email_verification_email
-    transaction do
-      begin
-        UsersMailer.email_verification(self).deliver_later
-        update!(email_verification_sent_at: Time.current)
-      rescue StandardError => exception
-        Rails.logger.error("Failed to deliver email verification email: #{exception.message}")
-        raise ActiveRecord::Rollback
-      end
+    begin
+      UsersMailer.email_verification(self).deliver_later
+    rescue StandardError => exception
+      Rails.logger.error("Failed to deliver email verification email: #{exception.message}")
+      raise ActiveRecord::Rollback
     end
   end
 end

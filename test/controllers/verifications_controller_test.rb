@@ -2,64 +2,50 @@ require "test_helper"
 
 class VerificationsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    skip
-
-    sign_in(users(:one))
+    sign_in_as(users(:unverified))
     get verifications_path
     assert_response :success
-    assert_select "h1", "Email Verification"
   end
 
   test "should get/post create" do
-    skip
-
-    sign_in(users(:unverified))
-    assert_difference -> { ActionMailer::Base.deliveries.count } do
-      post verifications_path
-    end
-    assert_redirected_to root_path
-    assert_equal "Verification email sent.", flash[:notice]
+    user = users(:unverified)
+    sign_in_as(user)
+    post verifications_create_path
+    assert_enqueued_email_with UsersMailer, :email_verification, args: [ user ]
+    assert_equal verifications_create_path, path
+    assert_equal "A new verification link has been sent to the email address you provided during registration.", flash[:notice]
   end
 
-  test "should get show" do
-    skip
-
+  test "should handle valid verification token" do
     user = users(:unverified)
-    token = "valid-token"
-    # Assume a helper method or directly set a token for testing
+    token = user.generate_token_for(:email_verification)
     get verification_path(token)
-    assert_response :success
-    # Additional assertions based on your implementation
+    assert_redirected_to dashboard_path
+    assert_equal "Email address verified successfully.", flash[:notice]
+  end
+
+  test "should handle already verified email addresses with valid token" do
+    user = users(:verified)
+    token = user.generate_token_for(:email_verification)
+    get verification_path(token)
+    assert_redirected_to dashboard_path
+    assert_equal "Email address verified successfully.", flash[:notice]
   end
 
   test "should handle invalid verification token" do
-    skip
-
-    patch verification_path(id: "invalid-token")
-    assert_response :unprocessable_entity
-    # or whatever response code your application uses for invalid tokens
-    assert_not_nil flash[:alert]
+    token = "invalid-token"
+    get verification_path(token)
+    assert_redirected_to new_session_path
+    assert_equal "Invalid or expired verification link.", flash[:alert]
   end
 
-  test "expired verification token" do
-    skip
-  end
-
-  # TODO: what do already verified accounts that are reverifying do?
-  test "already verified accounts do X" do
-    skip
-
-    user = users(:verified)
-    # Assuming you have a method to generate tokens
-    token = user.generate_verification_token
-    patch verification_path(id: token)
-    assert_response :redirect
-    assert_redirected_to root_path
-    assert_not_nil flash[:notice]
-  end
-
-  # TODO: do we need to rate limit verification requests?
-  test "rate limiting" do
-    skip
+  test "should handle expired verification token" do
+    user = users(:unverified)
+    token = user.generate_token_for(:email_verification)
+    travel_to 8.days.from_now do
+      get verification_path(token)
+    end
+    assert_redirected_to new_session_path
+    assert_equal "Invalid or expired verification link.", flash[:alert]
   end
 end
