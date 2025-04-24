@@ -1,6 +1,7 @@
 class PasswordsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_user_by_token, only: %i[ edit update ]
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_password_path, alert: "Try again later." }
 
   inertia_share flash: -> { flash.to_hash }
 
@@ -9,8 +10,12 @@ class PasswordsController < ApplicationController
   end
 
   def create
-    if @user = User.find_by(create_params)
-      PasswordsMailer.reset(@user).deliver_later
+    if user = User.find_by(create_params)
+      begin
+        PasswordsMailer.reset(user).deliver_later
+      rescue StandardError => exception
+        Rails.logger.error("Failed to deliver email verification email: #{exception.message}")
+      end
     end
 
     redirect_to new_session_path, notice: "Password reset instructions sent (if user with that email address exists)."
@@ -22,6 +27,8 @@ class PasswordsController < ApplicationController
 
   def update
     if @user.update(update_params)
+      @user.sessions.destroy_all
+      @user.update_columns(email_verified_at: Time.now) if @user.email_verified_at.nil?
       redirect_to new_session_path, notice: "Password has been reset."
     else
       redirect_to edit_password_path(params[:token]), inertia: { errors: @user.errors }

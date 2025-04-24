@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for @user
-      redirect_to dashboard_path, notice: "You've successfully registered. Welcome!"
+      redirect_to dashboard_path, notice: "You've successfully created an account. Welcome!"
     else
       redirect_to new_user_path, inertia: { errors: @user.errors }
     end
