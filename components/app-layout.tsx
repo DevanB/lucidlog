@@ -40,7 +40,7 @@ interface AppLayoutProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-export default ({ children, breadcrumbs = [] }: AppLayoutProps) => {
+export default function AppLayout({ children, breadcrumbs = [] }: AppLayoutProps) {
   const pathname = usePathname();
 
   return (

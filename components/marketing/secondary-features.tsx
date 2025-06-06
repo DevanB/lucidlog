@@ -26,7 +26,7 @@ const features: Array<Feature> = [
       'We talked about reporting in the section above but we needed three items here, so mentioning it one more time for posterity.',
     image: screenshotProfitLoss,
     icon: function ReportingIcon() {
-      let id = useId()
+      const id = useId()
       return (
         <>
           <defs>
@@ -123,7 +123,7 @@ function Feature({
       <div
         className={clsx(
           'w-9 rounded-lg',
-          isActive ? 'bg-violet-600' : 'bg-slate-500',
+          isActive ? 'bg-violet-600' : 'bg-slate-500 dark:bg-slate-400',
         )}
       >
         <svg aria-hidden="true" className="h-9 w-9" fill="none">
@@ -133,15 +133,15 @@ function Feature({
       <h3
         className={clsx(
           'mt-6 text-sm font-medium',
-          isActive ? 'text-violet-600' : 'text-slate-600',
+          isActive ? 'text-violet-600 dark:text-violet-400' : 'text-slate-600 dark:text-slate-500',
         )}
       >
         {feature.name}
       </h3>
-      <p className="mt-2 font-display text-xl text-slate-900">
+      <p className="mt-2 font-display text-xl text-slate-900 dark:text-slate-200">
         {feature.summary}
       </p>
-      <p className="mt-4 text-sm text-slate-600">{feature.description}</p>
+      <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">{feature.description}</p>
     </div>
   )
 }
@@ -233,10 +233,10 @@ export function SecondaryFeatures() {
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="font-display text-3xl tracking-tight text-slate-900 dark:text-slate-200 sm:text-4xl">
             Simplify everyday business tasks.
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
+          <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-300">
             Because you’d probably be a little confused if we suggested you
             complicate your everyday business tasks instead.
           </p>

@@ -38,12 +38,12 @@ export default async function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={clsx(
-        'h-full scroll-smooth bg-white antialiased',
+        'h-full scroll-smooth antialiased',
         inter.variable,
         lexend.variable,
       )}
     >
-      <body className="flex h-full flex-col">
+      <body className="flex h-full flex-col bg-white dark:bg-slate-950">
         <ThemeProvider attribute="class" enableSystem={true} defaultTheme="system" disableTransitionOnChange>
           <ClerkProvider>
             <Toaster expand={false} position="top-center" />

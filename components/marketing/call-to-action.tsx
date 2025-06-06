@@ -20,7 +20,7 @@ export function CallToAction() {
         unoptimized
       />
       <Container className="relative">
-        <div className="mx-auto max-w-lg text-center">
+        <div className="mx-auto max-w-xl text-center">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
             Make every dream count
           </h2>

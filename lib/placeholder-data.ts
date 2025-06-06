@@ -1,4 +1,4 @@
-const dreams = [
+export const dreams = [
   {
     public: false,
     date: '2025-06-03',
