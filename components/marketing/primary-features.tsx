@@ -16,7 +16,7 @@ const features = [
   {
     title: 'Journaling',
     description:
-      "Keep track of everyone's salaries and whether or not they've been paid. Direct deposit not supported.",
+      "Keep track of everyone’s salaries and whether or not they’ve been paid. Direct deposit not supported.",
     image: screenshotPayroll,
   },
   {
@@ -28,7 +28,7 @@ const features = [
   {
     title: 'Tag & organize',
     description:
-      "We only sell our software to companies who don't deal with VAT at all, so technically we do all the VAT stuff they need.",
+      "We only sell our software to companies who don’t deal with VAT at all, so technically we do all the VAT stuff they need.",
     image: screenshotVatReturns,
   },
   {

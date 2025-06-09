@@ -84,7 +84,7 @@ export function Faqs() {
             Frequently asked questions
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-300">
-            If you can't find what you're looking for, email our support team
+            If you can’t find what you’re looking for, email our support team
             and someone will get back to you.
           </p>
         </div>

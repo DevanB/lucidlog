@@ -1,7 +1,6 @@
 'use client';
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { usePathname } from 'next/navigation';
@@ -16,7 +15,7 @@ const formatBreadcrumb = (segment: string) => {
 export function Breadcrumbs() {
   const paths = usePathname();
   const pathNames = paths.split('/').filter(path => path);
-  
+
   return (
     <Breadcrumb>
       <BreadcrumbList>

@@ -112,18 +112,6 @@ LucidLog v1 is considered ready for public release when:
 
    - Pages: Home, Features, Pricing, FAQ, Terms, Privacy, Contact
 
-### Post-Launch Feature Backlog
-
-1. Public/private dream entries
-2. Dream search and filtering
-3. Tags & mood tracking
-4. Dream reminders and streaks
-5. AI summaries and interpretations
-6. AI chatbot for dream interaction
-7. Dream pattern analysis
-8. Data export (CSV, JSON, PDF)
-9. Sharing/public profile functionality
-10. About page and additional landing pages
 
 ---
 
@@ -230,7 +218,16 @@ LucidLog v1 is considered ready for public release when:
 
 ### Post-Launch Features
 
-(See Section 5: Feature Backlog)
+1. Public/private dream entries
+2. Dream search and filtering
+3. Tags & mood tracking
+4. Dream reminders and streaks
+5. AI summaries and interpretations
+6. AI chatbot for dream interaction
+7. Dream pattern analysis
+8. Data export (CSV, JSON, PDF)
+9. About page and additional landing pages
+10. Image support in dream entry editor
 
 ### Persona-Specific Features for Future Stories
 
@@ -238,12 +235,3 @@ LucidLog v1 is considered ready for public release when:
 - **Sophie** – Interpretations, symbolism, sharing
 - **Marcus** – Patterns, analytics, gamification
 - **Dr. Lin** – Export tools, clinical dashboard, data anonymization
-
-### Deferred/Removed Items
-
-- Waitlist functionality
-- Public/private toggling
-- Search and filter in v1
-- Image support in editor
-- In-app dictionary without login
-- About page on homepage
