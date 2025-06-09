@@ -29,7 +29,7 @@ export function CallToAction() {
             Join LucidLog and connect your subconscious to the conscious world.
           </p>
           <Button asChild variant="outline" className="mt-10">
-            <Link href="/register">
+            <Link href="/waitlist">
               Get started for free
             </Link>
           </Button>

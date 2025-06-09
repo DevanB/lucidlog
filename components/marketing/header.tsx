@@ -114,7 +114,7 @@ export function Header() {
                 <NavLink href="/login">Log In</NavLink>
               </div>
               <Button className="bg-violet-700 dark:bg-violet-500 hover:bg-violet-900 dark:hover:bg-violet-600 dark:text-slate-200">
-                <Link href="/register">
+                <Link href="/waitlist">
                   <span>
                     Get started <span className="hidden lg:inline">today</span>
                   </span>

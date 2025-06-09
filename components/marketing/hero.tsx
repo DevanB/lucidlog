@@ -24,7 +24,7 @@ export function Hero() {
         Traditional dream journals simply capture your memories. We help you understand them—with AI-powered summaries, insights, and interpretations.
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <Button><Link href="/register">Get started for free</Link></Button>
+        <Button><Link href="/waitlist">Get started for free</Link></Button>
       </div>
     </Container>
   )

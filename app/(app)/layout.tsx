@@ -6,14 +6,6 @@ import {
   SignedOut,
 } from '@clerk/nextjs'
 import AppLayout from '@/components/app-layout';
-import { type BreadcrumbItem } from '@/types';
-
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Dashboard',
-    href: '/dreams'
-  },
-];
 
 export default async function DreamsLayout({
   children,
@@ -25,7 +17,7 @@ export default async function DreamsLayout({
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <AppLayout breadcrumbs={breadcrumbs}>
+      <AppLayout>
         <SignedOut>
           <SignInButton />
           <SignUpButton />

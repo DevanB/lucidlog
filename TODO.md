@@ -1,9 +1,13 @@
 ### Focus
 
-- Create background-features and background-faqs images in ChatGPT on Friday (June 6, after 2:30PM)
-- Setup Waitlist page, update "Get 1 month free" button
-- Setup correct [layouts](https://www.google.com/search?q=nextjs+breadcrums+in+layout+app+router&client=safari&sca_esv=b42e03ff43b61ad3&source=hp&ei=JIs_aPOjK4WKwbkPqZquyQI&iflsig=AOw8s4IAAAAAaD-ZNBMnzFBlPeje-8AVQKi1kjV57O-H&ved=0ahUKEwjzxaPHudaNAxUFRTABHSmNKykQ4dUDCA8&uact=5&oq=nextjs+breadcrums+in+layout+app+router&gs_lp=Egdnd3Mtd2l6IiZuZXh0anMgYnJlYWRjcnVtcyBpbiBsYXlvdXQgYXBwIHJvdXRlcjIHECEYoAEYCjIHECEYoAEYCjIHECEYoAEYCjIHECEYoAEYCjIHECEYoAEYCkilOFAAWLI3cAN4AJABAJgBZKABnxuqAQQzOS4yuAEDyAEA-AEBmAIsoALmHMICCxAAGIAEGJECGIoFwgIREC4YgAQYkQIY0QMYxwEYigXCAgoQABiABBhDGIoFwgIREC4YgAQYsQMY0QMYgwEYxwHCAgsQABiABBixAxiDAcICCxAuGIAEGLEDGIMBwgIIEAAYgAQYsQPCAg4QABiABBixAxiDARiKBcICBRAAGIAEwgITEC4YgAQYsQMY0QMYQxjHARiKBcICEBAuGIAEGNEDGEMYxwEYigXCAhAQABiABBixAxhDGIMBGIoFwgIMEAAYgAQYQxiKBRgKwgIHEAAYgAQYCsICBhAAGBYYHsICCBAAGBYYChgewgILEAAYgAQYhgMYigXCAgUQIRigAcICBRAhGJ8FwgIHEAAYgAQYDcICCBAAGAgYDRgewgIIEAAYgAQYogTCAgUQIRirAsICBRAAGO8FmAMAkgcEMzguNqAHsfYBsgcEMzUuNrgH2BzCBwcyLjEzLjI5yAeEAQ&sclient=gws-wiz)
-- Add dynamic breadcrumbs
+- Build privacy policy page
+- Build terms of service/use page
+- Cleanup pricing section
+- Build pricing page
+- Review [metadata](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields)
+  - `npx check-site-meta localhost:3000`
+- Add robots.txt
+- Add webmanifest
 
 ### Backlog
 
