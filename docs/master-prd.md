@@ -15,20 +15,20 @@ Table of Contents:
 
 ## 1. Introduction
 
-This document outlines the requirements for **LucidLog**, a digital dream journaling platform. LucidLog allows users to record their dreams, revisit past entries, discover patterns over time, and explore potential interpretations using a built-in dream dictionary.
+This product requirements document outlines the requirements for LucidLog, a digital dream journaling and personal reflection platform. LucidLog allows users to record their dreams, revisit past entries, discover patterns over time, and explore potential interpretations.
 
-The core problem LucidLog addresses is the **ephemeral nature of dreams**: while dreams are a common and fascinating human experience, they are often forgotten quickly and rarely reflected upon. LucidLog provides a structured space to capture these experiences and gain insights from them.
+The core problem LucidLog addresses is the ephemeral nature of dreams: while dreams are a common and fascinating human experience, they are often forgotten quickly and rarely reflected upon. LucidLog provides a structured space to capture these experiences and gain insights from them.
 
-Unlike traditional journaling apps, LucidLog integrates a **semantic dream dictionary** and aims to offer **AI-assisted insights** in future iterations, helping users connect dots, observe recurring themes, and learn from their subconscious experiences.
+Unlike traditional journaling apps, LucidLog integrates a semantic dream dictionary and aims to offer AI-assisted insights in future iterations, helping users connect dots, observe recurring themes, and learn from their subconscious experiences.
 
 ---
 
 ## 2. Goals
 
-1. **Collect 100+ unique dream entries from at least 30 real users** within 60 days of launch to validate product engagement.
-2. **Launch AI-powered dream interpretation MVP**, and gather feedback to achieve **>75% "usefulness" rating** by the third product iteration.
-3. **10% of signed-up users log 2+ dreams per week** by week 4 post-onboarding.
-4. **Publish 50+ well-indexed dream symbols** in the dream dictionary by end of Month 3 to support organic traffic and user engagement.
+1. Collect 100+ unique dream entries from at least 30 real users within 60 days of launch to validate product engagement.
+2. Launch AI-powered dream interpretation MVP, and gather feedback to achieve >75% "usefulness" rating by the third product iteration.
+3. 10% of signed-up users log 2+ dreams per week by week 4 post-onboarding.
+4. Publish 50+ well-indexed dream symbols in the dream dictionary by end of Month 3 to support organic traffic and user engagement.
 
 ---
 
@@ -64,54 +64,67 @@ Target personas:
 - **Pain Points:** Lacks structured tools for dream data collection in clinical settings
 - **Scenario:** Uses LucidLog in studies involving trauma and recovery
 
+### Persona 5: "Avery the Aspiring Lucid Dreamer"
+
+- **Demographics:** 24, male, college student, Seattle
+- **Goals:** Improve dream recall and learn lucid dreaming techniques
+- **Pain Points:** Finds dream journaling inconsistent and difficult to search
+- **Scenario:** Wants a low-friction way to record dreams and track recall patterns
+
 ---
 
 ## 4. Release Criteria
 
 LucidLog v1 is considered ready for public release when:
 
-1. Users can securely create an account, log in, and write dream entries
+1. A marketing site is live with pages: Home, Features, Pricing, FAQ, Terms of Use, Privacy Policy, Contact
 2. A public dream dictionary is searchable and includes at least 10 live symbols
-3. Dreams are saved and viewable historically with edit/delete functionality
-4. Users see total dreams logged and time since last entry on a personal dashboard
-5. At least 5 non-admin users log 2+ dreams
-6. Site meets Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1) on desktop and mobile (4G+)
-7. A marketing site is live with pages: Home, Features, Pricing, FAQ, Terms of Use, Privacy Policy, Contact
+3. Users can securely create an account, log in, and manage their account
+4. Dreams can be recorded and viewable historically with edit/delete functionality
+5. Users see total dreams logged and time since last entry on a personal dashboard
+6. At least 5 non-admin users log 2+ dreams
+7. Site meets Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1) on desktop and mobile (4G+)
 
 ---
 
 ## 5. Features
 
-### Core Features
+### Feature: Dream Creation/Edit Entry Editor
 
-1. **Dream Entry Editor**
+- **Description:** Markdown-enabled editor with fields: title, content, date. No support for images or advanced formatting
+- **Priority:** High
+- **User Stories:** US-001
 
-   - Markdown-enabled editor with fields: title, content, date
-   - No support for images or advanced formatting
+### Feature: Dreams List (Dream History Viewer)
 
-2. **Dream History Viewer**
+- **Description:** Timeline/list view of previous dream entries. No search or filtering in v1
+- **Priority:** High
+- **User Stories:** US-002
 
-   - Timeline/list view of previous dream entries
-   - No search or filtering in v1
+### Feature: Public Dream Dictionary
 
-3. **Public Dream Dictionary**
+- **Description:** SEO-optimized `/dictionary` index and `/dictionary/[term]` pages
+- **Priority:** Medium
+- **User Stories:** US-003
+- **PRD:** Dream Dictionary PRD
 
-   - SEO-optimized `/dictionary` index and `/dictionary/[term]` pages
-   - Accessible slideover dictionary in-app (requires login)
+### Feature: Basic User Dashboard
 
-4. **User Dashboard**
+- **Description:** Displays entry count and time since last log. Includes "Add New Dream" CTA
+- **Priority:** High
+- **User Stories:** US-004
 
-   - Displays entry count and time since last log
-   - Includes "Add New Dream" CTA
+### Feature: Authentication & Account Management
 
-5. **Authentication & Account Management**
+- **Description:** Managed by Clerk; email login, , password reset
+- **Priority:** High
+- **User Stories:** US-005
 
-   - Managed by Clerk; email login, onboarding, password reset
+### Feature: Marketing Website
 
-6. **Marketing Website**
-
-   - Pages: Home, Features, Pricing, FAQ, Terms, Privacy, Contact
-
+- **Description:** Pages: Home, Features, Pricing, FAQ, Terms, Privacy, Contact
+- **Priority:** High
+- **User Stories:** US-006, US-007
 
 ---
 
@@ -178,18 +191,15 @@ LucidLog v1 is considered ready for public release when:
 4. Tags, moods, or analytics beyond basics
 5. Reminder systems and streak tracking
 6. Dream export functionality
-7. Full Markdown support (e.g., images)
+7. Non-textual Markdown features support (e.g., images)
 8. About page and separate landing pages
 
 ### Assumptions
 
-1. Web-first (not mobile native)
-2. Non-technical users unfamiliar with Markdown
-3. Journaling behavior is irregular
-4. AI is a post-launch feature
-5. Dictionary may be a key traffic source
-6. Privacy and trust are critical
-7. Cohesive design across site and app
+1. App is web-based only; no native mobile app
+2. Dictionary may be a key traffic source
+3. Privacy and trust are critical
+4. Cohesive design across site and app
 
 ### Constraints
 
@@ -204,7 +214,8 @@ LucidLog v1 is considered ready for public release when:
 
 - **Clerk** – auth & billing
 - **Custom Markdown Editor** – journaling
-- **Internal DB** – dream & dictionary data (via Supabase/Convex/Neon + Prisma/Drizzle)
+- **Turso** – database
+- **Drizzle** - ORM
 - **Vercel** – hosting
 - **PostHog** – analytics + error tracking
 - **Resend** – emails
