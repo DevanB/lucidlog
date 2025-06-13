@@ -4,17 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:db": "turso dev",
+    "dev:db": "turso dev --db-file=db/dev.db",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "test": "NODE_ENV=test concurrently -k -s first -n db,test \"pnpm test:db\" \"pnpm db:migrate && vitest run\"",
+    "test": "concurrently -k -s first -n db,test \"pnpm test:db\" \"pnpm test:run\"",
+    "test:ui": "npm-run-all --parallel test:db test:run:ui",
     "test:db": "turso dev --port=8081",
-    "test:ui": "NODE_ENV=test concurrently -k -s first -n db,test \"pnpm test:db\" \"pnpm db:migrate && vitest --ui\"",
-    "test:coverage": "NODE_ENV=test concurrently -k -s first -n db,test \"pnpm test:db\" \"pnpm db:migrate && vitest run --coverage\""
+    "test:run": "wait-on tcp:127.0.0.1:8081 && dotenvx run -f .env.test -- vitest run",
+    "test:run:ui": "wait-on tcp:127.0.0.1:8081 && dotenvx run -f .env.test -- vitest --ui"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.20.2",
@@ -45,6 +46,7 @@
     "tailwindcss": "^4"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.44.2",
     "@eslint/eslintrc": "^3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -60,9 +62,11 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "jsdom": "^26.1.0",
+    "npm-run-all": "^4.1.5",
     "tw-animate-css": "^1.3.3",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.3"
+    "vitest": "^3.2.3",
+    "wait-on": "^8.0.3"
   }
 }
