@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { db } from '../db/client';
-import { dictionaryTerms } from '../db/schema';
+import { db } from '@/db/client';
+import { dictionaryTerms } from '@/db/schema';
 import { sql } from 'drizzle-orm';
 
 describe('infrastructure', () => {

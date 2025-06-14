@@ -1,9 +1,28 @@
-import { db } from './client';
-import { dictionaryTerms, relatedTerms } from './schema';
-import { eq, like, asc, inArray } from 'drizzle-orm';
-// import { DictionaryTerm } from './types';
+import { db } from '@/db/client';
+import { dictionaryTerms, relatedTerms } from '@/db/schema';
+import { eq, asc, inArray } from 'drizzle-orm';
+import { 
+  DictionaryTerm, 
+  RelatedTermReference, 
+  CreateDictionaryTermInput, 
+  UpdateDictionaryTermInput,
+  DictionaryTermsGrouped 
+} from '@/types/services/dictionary-terms';
 
-async function getRelatedTerms(termId: number): Promise<{ id: number, name: string }[]> {
+function getEffectiveFirstLetter(term: string): string {
+  const trimmed = term.trim();
+  if (!trimmed) return '';
+  
+  const words = trimmed.split(/\s+/);
+  const firstWord = words[0].toLowerCase();
+  const articles = ['a', 'an', 'the'];
+  
+  return articles.includes(firstWord) && words.length > 1 
+    ? words[1][0].toUpperCase()
+    : words[0][0].toUpperCase();
+}
+
+async function getRelatedTerms(termId: number): Promise<Array<RelatedTermReference>> {
   // Find all relatedTermIds for this term
   const rels = await db.select().from(relatedTerms).where(eq(relatedTerms.termId, termId));
   if (rels.length === 0) return [];
@@ -16,7 +35,7 @@ async function getRelatedTerms(termId: number): Promise<{ id: number, name: stri
 }
 
 export class DictionaryTermService {
-  async getAllTerms(): Promise<any[]> {
+  async getAllTerms(): Promise<Array<DictionaryTerm>> {
     const rows = await db.select().from(dictionaryTerms);
     return Promise.all(rows.map(async row => ({
       ...row,
@@ -26,7 +45,7 @@ export class DictionaryTermService {
     })));
   }
 
-  async getTermByName(name: string): Promise<any | null> {
+  async getTermByName(name: string): Promise<DictionaryTerm | null> {
     const rows = await db.select().from(dictionaryTerms).where(eq(dictionaryTerms.name, name));
     if (rows.length === 0) return null;
     const row = rows[0];
@@ -38,13 +57,13 @@ export class DictionaryTermService {
     };
   }
 
-  async getTermsGroupedByLetter(): Promise<Record<string, any[]>> {
+  async getTermsGroupedByLetter(): Promise<DictionaryTermsGrouped> {
     const rows = await db.select().from(dictionaryTerms);
     // TODO: what if a Set was used?
-    const grouped: Record<string, any[]> = {};
+    const grouped: DictionaryTermsGrouped = {};
     for (const row of rows) {
-      const letter = row.name[0].toUpperCase();
-      if (!grouped[letter]) grouped[letter] = [];
+      const letter = getEffectiveFirstLetter(row.name);
+      grouped[letter] = grouped[letter] || [];
       grouped[letter].push({
         ...row,
         createdAt: new Date(row.createdAt),
@@ -55,12 +74,13 @@ export class DictionaryTermService {
     return grouped;
   }
 
-  async getTermsByLetter(letter: string): Promise<any[]> {
-    const pattern = letter.length === 1 ? `${letter[0]}%` : `${letter}%`;
-    const rows = await db.select().from(dictionaryTerms).where(like(dictionaryTerms.name, pattern)).orderBy(asc(dictionaryTerms.name));
+  async getTermsByLetter(letter: string): Promise<Array<DictionaryTerm>> {
+    const rows = await db.select().from(dictionaryTerms).orderBy(asc(dictionaryTerms.name));
+    const targetLetter = letter[0].toUpperCase();
+    
     return Promise.all(
       rows
-        .filter(row => row.name[0].toUpperCase() === letter[0].toUpperCase())
+        .filter(row => getEffectiveFirstLetter(row.name) === targetLetter)
         .map(async row => ({
           ...row,
           createdAt: new Date(row.createdAt),
@@ -70,23 +90,36 @@ export class DictionaryTermService {
     );
   }
 
-  async createTerm(term: Omit<any, 'id' | 'createdAt' | 'updatedAt'>): Promise<any> {
+  async createTerm(term: CreateDictionaryTermInput): Promise<DictionaryTerm> {
     const now = new Date();
+    const { relatedTerms: newRelatedTerms, ...termData } = term;
+    
     const [inserted] = await db.insert(dictionaryTerms).values({
-      name: term.name,
-      definition: term.definition,
+      name: termData.name,
+      definition: termData.definition,
       createdAt: now,
       updatedAt: now,
     }).returning();
+
+    // Handle related terms if provided
+    if (newRelatedTerms && newRelatedTerms.length > 0) {
+      await db.insert(relatedTerms).values(
+        newRelatedTerms.map(relatedId => ({
+          termId: inserted.id,
+          relatedTermId: relatedId
+        }))
+      );
+    }
+
     return {
       ...inserted,
       createdAt: new Date(inserted.createdAt),
       updatedAt: new Date(inserted.updatedAt),
-      relatedTerms: [],
+      relatedTerms: await getRelatedTerms(inserted.id),
     };
   }
 
-  async updateTerm(id: number, updates: Partial<any>): Promise<any> {
+  async updateTerm(id: number, updates: UpdateDictionaryTermInput): Promise<DictionaryTerm> {
     const now = new Date();
     const { relatedTerms: newRelatedTerms, ...termUpdates } = updates;
     
@@ -105,7 +138,7 @@ export class DictionaryTermService {
       // Add new relationships if any
       if (newRelatedTerms.length > 0) {
         await db.insert(relatedTerms).values(
-          newRelatedTerms.map((relatedId: number) => ({
+          newRelatedTerms.map(relatedId => ({
             termId: id,
             relatedTermId: relatedId
           }))
@@ -124,4 +157,4 @@ export class DictionaryTermService {
   async deleteTerm(id: number): Promise<void> {
     await db.delete(dictionaryTerms).where(eq(dictionaryTerms.id, id));
   }
-} 
+}
