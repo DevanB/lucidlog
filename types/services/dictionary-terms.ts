@@ -1,6 +1,7 @@
 export interface DictionaryTermRow {
   id: number;
   name: string;
+  slug: string;
   definition: string;
   createdAt: Date;
   updatedAt: Date;
@@ -9,6 +10,7 @@ export interface DictionaryTermRow {
 export interface RelatedTermReference {
   id: number;
   name: string;
+  slug: string;
 }
 
 export interface DictionaryTerm extends DictionaryTermRow {
@@ -17,12 +19,14 @@ export interface DictionaryTerm extends DictionaryTermRow {
 
 export interface CreateDictionaryTermInput {
   name: string;
+  slug: string;
   definition: string;
   relatedTerms?: Array<number>;
 }
 
 export interface UpdateDictionaryTermInput {
   name?: string;
+  slug?: string;
   definition?: string;
   relatedTerms?: Array<number>;
 }

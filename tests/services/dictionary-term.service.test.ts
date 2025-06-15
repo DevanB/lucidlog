@@ -7,11 +7,13 @@ describe('DictionaryTermService', () => {
   it('should create a new term', async () => {
     const created = await service.createTerm({
       name: 'Dream',
+      slug: 'dream',
       definition: 'A series of thoughts, images, or emotions during sleep.',
       relatedTerms: [],
     });
     expect(created.id).toBeDefined();
     expect(created.name).toBe('Dream');
+    expect(created.slug).toBe('dream');
     expect(created.definition).toBe('A series of thoughts, images, or emotions during sleep.');
     expect(created.createdAt).toBeInstanceOf(Date);
     expect(created.updatedAt).toBeInstanceOf(Date);
@@ -22,12 +24,14 @@ describe('DictionaryTermService', () => {
   it('should fetch a term by name', async () => {
     await service.createTerm({
       name: 'Lucid',
+      slug: 'lucid',
       definition: 'A dream in which the dreamer is aware they are dreaming.',
       relatedTerms: [],
     });
     const fetched = await service.getTermByName('Lucid');
     expect(fetched).not.toBeNull();
     expect(fetched?.name).toBe('Lucid');
+    expect(fetched?.slug).toBe('lucid');
     expect(fetched?.definition).toBe('A dream in which the dreamer is aware they are dreaming.');
     expect(Array.isArray(fetched?.relatedTerms)).toBe(true);
     expect(fetched?.relatedTerms.length).toBe(0);
@@ -35,15 +39,42 @@ describe('DictionaryTermService', () => {
     expect(fetched?.updatedAt).toBeInstanceOf(Date);
   });
 
+  it('should fetch a term by slug', async () => {
+    const created = await service.createTerm({
+      name: 'Test Term',
+      slug: 'test-term',
+      definition: 'A test term for slug testing.',
+      relatedTerms: [],
+    });
+    
+    const fetched = await service.getTermBySlug('test-term');
+    expect(fetched).not.toBeNull();
+    expect(fetched?.id).toBe(created.id);
+    expect(fetched?.name).toBe('Test Term');
+    expect(fetched?.slug).toBe('test-term');
+    expect(fetched?.definition).toBe('A test term for slug testing.');
+    expect(Array.isArray(fetched?.relatedTerms)).toBe(true);
+    expect(fetched?.relatedTerms.length).toBe(0);
+    expect(fetched?.createdAt).toBeInstanceOf(Date);
+    expect(fetched?.updatedAt).toBeInstanceOf(Date);
+  });
+
+  it('should return null when fetching a term by non-existent slug', async () => {
+    const fetched = await service.getTermBySlug('non-existent-slug');
+    expect(fetched).toBeNull();
+  });
+
   it('should fetch all terms', async () => {
     await Promise.all([
       service.createTerm({
         name: 'Nightmare',
+        slug: 'nightmare',
         definition: 'A frightening or unpleasant dream.',
         relatedTerms: [],
       }),
       service.createTerm({
         name: 'Vision',
+        slug: 'vision',
         definition: 'A vivid mental image, especially a fanciful one.',
         relatedTerms: [],
       })
@@ -65,16 +96,19 @@ describe('DictionaryTermService', () => {
     await Promise.all([
       service.createTerm({
         name: 'A Car',
+        slug: 'a-car',
         definition: 'A car.',
         relatedTerms: [],
       }),
       service.createTerm({
         name: 'Banana',
+        slug: 'banana',
         definition: 'Another fruit.',
         relatedTerms: [],
       }),
       service.createTerm({
         name: 'The Avocado',
+        slug: 'the-avocado',
         definition: 'Yet another fruit.',
         relatedTerms: [],
       })
@@ -103,21 +137,25 @@ describe('DictionaryTermService', () => {
   it('should get all terms by a given letter', async () => {
     await service.createTerm({
       name: 'Alpha',
+      slug: 'alpha',
       definition: 'First letter.',
       relatedTerms: [],
     });
     await service.createTerm({
       name: 'Albatross',
+      slug: 'albatross',
       definition: 'A bird.',
       relatedTerms: [],
     });
     await service.createTerm({
       name: 'Beta',
+      slug: 'beta',
       definition: 'Second letter.',
       relatedTerms: [],
     });
     await service.createTerm({
       name: 'Bravo',
+      slug: 'bravo',
       definition: 'A word for B.',
       relatedTerms: [],
     });
@@ -148,6 +186,7 @@ describe('DictionaryTermService', () => {
   it('should update a term', async () => {
     const created = await service.createTerm({
       name: 'UpdateMe',
+      slug: 'updateme',
       definition: 'Old definition.',
       relatedTerms: [],
     });
@@ -160,6 +199,7 @@ describe('DictionaryTermService', () => {
   it('should delete a term', async () => {
     const created = await service.createTerm({
       name: 'DeleteMe',
+      slug: 'deleteme',
       definition: 'To be deleted.',
       relatedTerms: [],
     });
@@ -171,11 +211,13 @@ describe('DictionaryTermService', () => {
   it('should not allow duplicate names', async () => {
     await service.createTerm({
       name: 'Unique',
+      slug: 'unique',
       definition: 'First.',
       relatedTerms: [],
     });
     await expect(service.createTerm({
       name: 'Unique',
+      slug: 'unique-2',
       definition: 'Second.',
       relatedTerms: [],
     })).rejects.toThrow();
@@ -190,16 +232,19 @@ describe('DictionaryTermService', () => {
     // Create three terms using the service
     const termA = await service.createTerm({
       name: 'Alpha',
+      slug: 'alpha',
       definition: 'First.',
       relatedTerms: [],
     });
     const termB = await service.createTerm({
       name: 'Beta',
+      slug: 'beta',
       definition: 'Second.',
       relatedTerms: [],
     });
     const termC = await service.createTerm({
       name: 'Bravo',
+      slug: 'bravo',
       definition: 'Third.',
       relatedTerms: [],
     });
@@ -244,11 +289,13 @@ describe('DictionaryTermService', () => {
       // First create some terms to use as related terms
       const term1 = await service.createTerm({
         name: 'Sleep',
+        slug: 'sleep',
         definition: 'A state of rest.',
         relatedTerms: [],
       });
       const term2 = await service.createTerm({
         name: 'REM',
+        slug: 'rem',
         definition: 'Rapid Eye Movement sleep stage.',
         relatedTerms: [],
       });
@@ -256,6 +303,7 @@ describe('DictionaryTermService', () => {
       // Create a new term with related terms
       const dreamTerm = await service.createTerm({
         name: 'Lucid Dreaming',
+        slug: 'lucid-dreaming',
         definition: 'Conscious awareness during dreams.',
         relatedTerms: [term1.id, term2.id],
       });
@@ -282,6 +330,7 @@ describe('DictionaryTermService', () => {
     it('should create term without related terms when none provided', async () => {
       const term = await service.createTerm({
         name: 'Simple Term',
+        slug: 'simple-term',
         definition: 'A term without relations.',
       });
 
@@ -291,6 +340,7 @@ describe('DictionaryTermService', () => {
     it('should create term without related terms when empty array provided', async () => {
       const term = await service.createTerm({
         name: 'Another Simple Term',
+        slug: 'another-simple-term',
         definition: 'A term with empty relations.',
         relatedTerms: [],
       });
@@ -302,11 +352,13 @@ describe('DictionaryTermService', () => {
       // Create related terms
       const relatedTerm1 = await service.createTerm({
         name: 'Night',
+        slug: 'night',
         definition: 'Time when we sleep.',
         relatedTerms: [],
       });
       const relatedTerm2 = await service.createTerm({
         name: 'Consciousness',
+        slug: 'consciousness',
         definition: 'State of awareness.',
         relatedTerms: [],
       });
@@ -314,6 +366,7 @@ describe('DictionaryTermService', () => {
       // Create main term with relations
       await service.createTerm({
         name: 'Dream State',
+        slug: 'dream-state',
         definition: 'State of dreaming.',
         relatedTerms: [relatedTerm1.id, relatedTerm2.id],
       });
@@ -334,16 +387,19 @@ describe('DictionaryTermService', () => {
       // Create terms
       const mainTerm = await service.createTerm({
         name: 'Main Term',
+        slug: 'main-term',
         definition: 'A main term.',
         relatedTerms: [],
       });
       const relatedTerm1 = await service.createTerm({
         name: 'Related One',
+        slug: 'related-one',
         definition: 'First related term.',
         relatedTerms: [],
       });
       const relatedTerm2 = await service.createTerm({
         name: 'Related Two',
+        slug: 'related-two',
         definition: 'Second related term.',
         relatedTerms: [],
       });
@@ -363,21 +419,25 @@ describe('DictionaryTermService', () => {
       // Create terms
       const mainTerm = await service.createTerm({
         name: 'Main Term',
+        slug: 'main-term-2',
         definition: 'A main term.',
         relatedTerms: [],
       });
       const oldRelated = await service.createTerm({
         name: 'Old Related',
+        slug: 'old-related',
         definition: 'Old related term.',
         relatedTerms: [],
       });
       const newRelated1 = await service.createTerm({
         name: 'New Related One',
+        slug: 'new-related-one',
         definition: 'New related term 1.',
         relatedTerms: [],
       });
       const newRelated2 = await service.createTerm({
         name: 'New Related Two',
+        slug: 'new-related-two',
         definition: 'New related term 2.',
         relatedTerms: [],
       });
@@ -411,11 +471,13 @@ describe('DictionaryTermService', () => {
       // Create terms with initial related terms
       const relatedTerm = await service.createTerm({
         name: 'To Remove',
+        slug: 'to-remove',
         definition: 'Term to be removed.',
         relatedTerms: [],
       });
       const mainTerm = await service.createTerm({
         name: 'Main Term',
+        slug: 'main-term-3',
         definition: 'A main term.',
         relatedTerms: [relatedTerm.id],
       });
@@ -436,11 +498,13 @@ describe('DictionaryTermService', () => {
       // Create terms
       const mainTerm = await service.createTerm({
         name: 'Main Term',
+        slug: 'main-term-6',
         definition: 'Original definition.',
         relatedTerms: [],
       });
       const relatedTerm = await service.createTerm({
         name: 'Related Term',
+        slug: 'related-term',
         definition: 'A related term.',
         relatedTerms: [],
       });
@@ -461,11 +525,13 @@ describe('DictionaryTermService', () => {
       // Create terms with initial related terms
       const relatedTerm = await service.createTerm({
         name: 'Keep Me',
+        slug: 'keep-me',
         definition: 'Term to keep.',
         relatedTerms: [],
       });
       const mainTerm = await service.createTerm({
         name: 'Main Term',
+        slug: 'main-term-5',
         definition: 'Original definition.',
         relatedTerms: [relatedTerm.id],
       });
@@ -487,26 +553,31 @@ describe('DictionaryTermService', () => {
       await Promise.all([
         service.createTerm({
           name: 'The Dream',
+          slug: 'the-dream',
           definition: 'A dream with the article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'An Apple',
+          slug: 'an-apple',
           definition: 'An apple with the article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'A Banana',
+          slug: 'a-banana',
           definition: 'A banana with the article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'Dream Journal',
+          slug: 'dream-journal',
           definition: 'A journal without article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'Beautiful Vision',
+          slug: 'beautiful-vision',
           definition: 'A vision without article.',
           relatedTerms: [],
         })
@@ -536,26 +607,31 @@ describe('DictionaryTermService', () => {
       await Promise.all([
         service.createTerm({
           name: 'The Cat',
+          slug: 'the-cat',
           definition: 'A cat with the article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'An Elephant',
+          slug: 'an-elephant',
           definition: 'An elephant with the article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'A Dog',
+          slug: 'a-dog',
           definition: 'A dog with the article.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'Cat Food',
+          slug: 'cat-food',
           definition: 'Food for cats.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'Elephant Trunk',
+          slug: 'elephant-trunk',
           definition: 'The trunk of an elephant.',
           relatedTerms: [],
         })
@@ -584,21 +660,25 @@ describe('DictionaryTermService', () => {
       await Promise.all([
         service.createTerm({
           name: 'A',
+          slug: 'a',
           definition: 'Just the letter A.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'The',
+          slug: 'the',
           definition: 'Just the word The.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'An',
+          slug: 'an',
           definition: 'Just the word An.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'THE UPPER',
+          slug: 'the-upper',
           definition: 'All caps with article.',
           relatedTerms: [],
         })
@@ -623,16 +703,19 @@ describe('DictionaryTermService', () => {
       await Promise.all([
         service.createTerm({
           name: 'Dream Journal Entry',
+          slug: 'dream-journal-entry',
           definition: 'A specific entry in a dream journal.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'Lucid Dream State',
+          slug: 'lucid-dream-state',
           definition: 'The state of being in a lucid dream.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'Beautiful Nightmare Vision',
+          slug: 'beautiful-nightmare-vision',
           definition: 'A complex multi-word term.',
           relatedTerms: [],
         })
@@ -654,16 +737,19 @@ describe('DictionaryTermService', () => {
       await Promise.all([
         service.createTerm({
           name: 'Dream Journal Entry',
+          slug: 'dream-journal-entry-2',
           definition: 'A specific entry in a dream journal.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'The Lucid Dream State',
+          slug: 'the-lucid-dream-state',
           definition: 'The state of being in a lucid dream.',
           relatedTerms: [],
         }),
         service.createTerm({
           name: 'A Beautiful Nightmare Vision',
+          slug: 'a-beautiful-nightmare-vision',
           definition: 'A complex multi-word term.',
           relatedTerms: [],
         })
@@ -681,4 +767,4 @@ describe('DictionaryTermService', () => {
       expect(grouped['B'].some(t => t.name === 'A Beautiful Nightmare Vision')).toBe(true);
     });
   });
-}); 
+});

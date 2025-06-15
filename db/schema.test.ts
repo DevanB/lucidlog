@@ -7,6 +7,7 @@ describe('dictionaryTerms schema', () => {
   it('should create and retrieve a term with related terms', async () => {
     const [lucidTerm] = await db.insert(dictionaryTerms).values({
       name: 'Lucid',
+      slug: 'lucid',
       definition: 'A dream in which the dreamer is aware they are dreaming.',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -14,6 +15,7 @@ describe('dictionaryTerms schema', () => {
 
     const [fallingTerm] = await db.insert(dictionaryTerms).values({
       name: 'Falling',
+      slug: 'falling',
       definition: 'A common dream where one feels like they are falling.',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -21,6 +23,7 @@ describe('dictionaryTerms schema', () => {
 
     const [flyingTerm] = await db.insert(dictionaryTerms).values({
       name: 'Flying',
+      slug: 'flying',
       definition: 'A dream where one can fly.',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -46,12 +49,14 @@ describe('dictionaryTerms schema', () => {
   it('should enforce unique name constraint', async () => {
     await db.insert(dictionaryTerms).values({
       name: 'Falling',
+      slug: 'falling',
       definition: 'A dream about falling can indicate loss of control.',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
     await expect(db.insert(dictionaryTerms).values({
       name: 'Falling',
+      slug: 'falling-duplicate',
       definition: 'Duplicate name test.',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -61,12 +66,14 @@ describe('dictionaryTerms schema', () => {
   it('should sort terms alphabetically by name', async () => {
     await db.insert(dictionaryTerms).values({
       name: 'Banana',
+      slug: 'banana',
       definition: 'Dreaming of bananas...',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
     await db.insert(dictionaryTerms).values({
       name: 'Apple',
+      slug: 'apple',
       definition: 'Dreaming of apples...',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -82,12 +89,14 @@ describe('relatedTerms schema', () => {
     // Insert two terms
     const termA = await db.insert(dictionaryTerms).values({
       name: 'A',
+      slug: 'a',
       definition: 'A',
       createdAt: new Date(),
       updatedAt: new Date(),
     }).returning();
     const termB = await db.insert(dictionaryTerms).values({
       name: 'B',
+      slug: 'b',
       definition: 'B',
       createdAt: new Date(),
       updatedAt: new Date(),

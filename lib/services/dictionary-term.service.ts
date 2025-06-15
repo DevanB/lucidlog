@@ -27,8 +27,8 @@ async function getRelatedTerms(termId: number): Promise<Array<RelatedTermReferen
   const rels = await db.select().from(relatedTerms).where(eq(relatedTerms.termId, termId));
   if (rels.length === 0) return [];
   const relatedIds = rels.map(r => r.relatedTermId);
-  // Get the names for these IDs
-  const terms = await db.select({ id: dictionaryTerms.id, name: dictionaryTerms.name })
+  // Get the names and slugs for these IDs
+  const terms = await db.select({ id: dictionaryTerms.id, name: dictionaryTerms.name, slug: dictionaryTerms.slug })
     .from(dictionaryTerms)
     .where(inArray(dictionaryTerms.id, relatedIds));
   return terms;
@@ -43,6 +43,18 @@ export class DictionaryTermService {
       updatedAt: new Date(row.updatedAt),
       relatedTerms: await getRelatedTerms(row.id),
     })));
+  }
+
+  async getTermBySlug(slug: string): Promise<DictionaryTerm | null> {
+    const rows = await db.select().from(dictionaryTerms).where(eq(dictionaryTerms.slug, slug));
+    if (rows.length === 0) return null;
+    const row = rows[0];
+    return {
+      ...row,
+      createdAt: new Date(row.createdAt),
+      updatedAt: new Date(row.updatedAt),
+      relatedTerms: await getRelatedTerms(row.id),
+    };
   }
 
   async getTermByName(name: string): Promise<DictionaryTerm | null> {
@@ -96,6 +108,7 @@ export class DictionaryTermService {
     
     const [inserted] = await db.insert(dictionaryTerms).values({
       name: termData.name,
+      slug: termData.slug,
       definition: termData.definition,
       createdAt: now,
       updatedAt: now,

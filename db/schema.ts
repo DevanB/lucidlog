@@ -4,6 +4,7 @@ import { sql } from 'drizzle-orm';
 export const dictionaryTerms = sqliteTable('dictionary_terms', {
   id: int().primaryKey({ autoIncrement: true }),
   name: text().notNull().unique(),
+  slug: text().notNull().unique(),
   definition: text().notNull(),
   createdAt: int('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
   updatedAt: int('updated_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),
