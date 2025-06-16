@@ -8,12 +8,13 @@ export function Footer() {
   return (
     <footer className="bg-slate-50 dark:bg-slate-950">
       <Container>
-        <div className="py-16">
+        <div className="py-20">
           <Logo className="mx-auto h-10 w-auto" />
           <nav className="mt-10 text-sm" aria-label="quick links">
             <div className="-my-1 flex justify-center gap-x-6">
               <NavLink href="/#features">Features</NavLink>
               <NavLink href="/#pricing">Pricing</NavLink>
+              <NavLink href="/dictionary">Dictionary</NavLink>
               <NavLink href="/#faq">FAQ</NavLink>
             </div>
           </nav>

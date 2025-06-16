@@ -75,6 +75,7 @@ function MobileNavigation() {
       >
         <MobileNavLink href="/#features">Features</MobileNavLink>
         <MobileNavLink href="/#pricing">Pricing</MobileNavLink>
+        <MobileNavLink href="/dictionary">Dictionary</MobileNavLink>
         <MobileNavLink href="/#faq">FAQ</MobileNavLink>
         <hr className="m-2 border-slate-300/40" />
         <SignedIn>
@@ -100,6 +101,7 @@ export function Header() {
             <div className="hidden md:flex md:gap-x-6">
               <NavLink href="/#features">Features</NavLink>
               <NavLink href="/#pricing">Pricing</NavLink>
+              <NavLink href="/dictionary">Dictionary</NavLink>
               <NavLink href="/#faq">FAQ</NavLink>
             </div>
           </div>

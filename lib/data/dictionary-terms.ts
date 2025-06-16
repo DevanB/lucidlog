@@ -232,46 +232,19 @@ export const dictionaryTermsData: DictionaryTermsGrouped = {
   ],
   C: [
     {
-      id: 5,
-      name: 'Cats',
-      slug: 'cats',
-      definition: 'Cats in dreams often represent independence, mystery, and feminine energy.',
-      relatedTerms: [{ id: 14, name: 'Animals', slug: 'animals' }],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 19,
-      name: 'Car',
-      slug: 'car',
-      definition: 'Cars in dreams often represent your drive and ambition, or the direction your life is taking.',
+      id: 316,
+      name: 'Cage',
+      slug: 'cage',
+      definition: 'Cages in dreams represent feeling trapped, restricted freedom, or protective boundaries.',
       relatedTerms: [],
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      id: 20,
-      name: 'Crying',
-      slug: 'crying',
-      definition: 'Crying in dreams often represents the release of pent-up emotions or grief.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 301,
-      name: 'Clock',
-      slug: 'clock',
-      definition: 'Clocks in dreams represent time pressure, deadlines, or awareness of mortality.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 302,
-      name: 'Cloud',
-      slug: 'cloud',
-      definition: 'Clouds in dreams symbolize confusion, unclear thinking, or temporary obstacles.',
+      id: 311,
+      name: 'Camera',
+      slug: 'camera',
+      definition: 'Cameras in dreams represent capturing memories, perspective, or the desire to preserve moments.',
       relatedTerms: [],
       createdAt: new Date(),
       updatedAt: new Date()
@@ -286,11 +259,29 @@ export const dictionaryTermsData: DictionaryTermsGrouped = {
       updatedAt: new Date()
     },
     {
+      id: 19,
+      name: 'Car',
+      slug: 'car',
+      definition: 'Cars in dreams often represent your drive and ambition, or the direction your life is taking.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
       id: 304,
       name: 'Castle',
       slug: 'castle',
       definition: 'Castles in dreams symbolize achievements, protection, or lofty aspirations.',
       relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 5,
+      name: 'Cats',
+      slug: 'cats',
+      definition: 'Cats in dreams often represent independence, mystery, and feminine energy.',
+      relatedTerms: [{ id: 14, name: 'Animals', slug: 'animals' }],
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -331,10 +322,64 @@ export const dictionaryTermsData: DictionaryTermsGrouped = {
       updatedAt: new Date()
     },
     {
+      id: 301,
+      name: 'Clock',
+      slug: 'clock',
+      definition: 'Clocks in dreams represent time pressure, deadlines, or awareness of mortality.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 302,
+      name: 'Cloud',
+      slug: 'cloud',
+      definition: 'Clouds in dreams symbolize confusion, unclear thinking, or temporary obstacles.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 314,
+      name: 'Clown',
+      slug: 'clown',
+      definition: 'Clowns in dreams may represent hidden emotions, the need for humor, or fear of ridicule.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
       id: 309,
       name: 'Coffee',
       slug: 'coffee',
       definition: 'Coffee in dreams represents energy, alertness, or the need for stimulation.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 9999,
+      name: 'Coin',
+      slug: 'coin',
+      definition: 'Coins in dreams symbolize value, luck, or small but significant gains.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 312,
+      name: 'Cow',
+      slug: 'cow',
+      definition: 'Cows in dreams symbolize value, luck, or small but significant gains.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 315,
+      name: 'Crow',
+      slug: 'crow',
+      definition: 'Crows in dreams symbolize intelligence, transformation, or messages from the unconscious.',
       relatedTerms: [],
       createdAt: new Date(),
       updatedAt: new Date()
@@ -347,7 +392,34 @@ export const dictionaryTermsData: DictionaryTermsGrouped = {
       relatedTerms: [],
       createdAt: new Date(),
       updatedAt: new Date()
-    }
+    },
+    {
+      id: 20,
+      name: 'Crying',
+      slug: 'crying',
+      definition: 'Crying in dreams often represents the release of pent-up emotions or grief.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 313,
+      name: 'Crystal',
+      slug: 'crystal',
+      definition: 'Crystals in dreams represent clarity, healing energy, and spiritual insight.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      id: 99998,
+      name: 'Cunt',
+      slug: 'cunt',
+      definition: 'Cunts in dreams represent clarity, healing energy, and spiritual insight.',
+      relatedTerms: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
   ],
   D: [],
   E: [
@@ -598,63 +670,9 @@ export const dictionaryTermsData: DictionaryTermsGrouped = {
       createdAt: new Date(),
       updatedAt: new Date()
     },
-    {
-      id: 607,
-      name: 'Grave',
-      slug: 'grave',
-      definition: 'Graves in dreams represent endings, memory, or buried aspects of yourself.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 608,
-      name: 'Guitar',
-      slug: 'guitar',
-      definition: 'Guitars in dreams symbolize creativity, harmony, and emotional expression.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
   ],
   H: [],
   I: [
-    {
-      id: 31,
-      name: 'Ice',
-      slug: 'ice',
-      definition: 'Ice in dreams often represents frozen emotions, rigidity, or situations that need to "thaw out".',
-      relatedTerms: [{ id: 12, name: 'Water', slug: 'water' }],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 32,
-      name: 'Insects',
-      slug: 'insects',
-      definition: 'Insects in dreams may represent minor annoyances, feelings of being "bugged", or small persistent problems.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 701,
-      name: 'Island',
-      slug: 'island',
-      definition: 'Islands in dreams represent isolation, independence, or a refuge from problems.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: 702,
-      name: 'Iron',
-      slug: 'iron',
-      definition: 'Iron in dreams symbolizes strength, durability, or inflexibility.',
-      relatedTerms: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
     {
       id: 703,
       name: 'Ivy',
