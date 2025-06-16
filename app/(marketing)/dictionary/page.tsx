@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { dictionaryTermsData } from '@/lib/data/dictionary-terms';
 import { Container } from '@/components/marketing/container';
 import { DictionarySubnav } from '@/components/dictionary-subnav';
+import { DictionaryTermService } from '@/lib/services/dictionary-term.service';
 
 export const metadata: Metadata = {
   title: 'Dream Dictionary',
@@ -14,7 +14,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DictionaryPage() {
+export default async function DictionaryPage() {
+  const dictionaryTermService = new DictionaryTermService();
+  const dictionaryTermsData = await dictionaryTermService.getTermsGroupedByLetter();
   const availableLetters = Object.keys(dictionaryTermsData).sort();
 
   return (
@@ -35,7 +37,7 @@ export default function DictionaryPage() {
       <hr className="border-gray-200 dark:border-gray-700" />
 
       <div className="mx-auto max-w-5xl">
-        <div className="space-y-28 mt-20">
+        <div className="space-y-28 my-20">
           {availableLetters.map(letter => {
             return dictionaryTermsData[letter].length > 0 ? (
               <section key={letter} id={`letter-${letter}`} className="scroll-mt-4 flex flex-col">

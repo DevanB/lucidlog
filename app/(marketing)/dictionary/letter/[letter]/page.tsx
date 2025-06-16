@@ -1,15 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { dictionaryTermsData } from '@/lib/data/dictionary-terms';
 import { Container } from '@/components/marketing/container';
 import { DictionarySubnav } from '@/components/dictionary-subnav';
+import { DictionaryTermService } from '@/lib/services/dictionary-term.service';
 
 type Props = {
   params: { letter: string };
 };
 
-export async function generateMetadata({ params: { letter } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { letter } = await params
   const uppercaseLetter = letter.toUpperCase();
   
   if (!uppercaseLetter || uppercaseLetter.length !== 1 || !/[A-Z]/.test(uppercaseLetter)) {
@@ -18,7 +19,8 @@ export async function generateMetadata({ params: { letter } }: Props): Promise<M
     };
   }
 
-  const terms = dictionaryTermsData[uppercaseLetter] || [];
+  const dictionaryTermService = new DictionaryTermService();
+  const terms = await dictionaryTermService.getTermsByLetter(uppercaseLetter);
   const termCount = terms.length;
 
   return {
@@ -33,8 +35,10 @@ export async function generateMetadata({ params: { letter } }: Props): Promise<M
 }
 
 export async function generateStaticParams() {
-  const availableLetters = Object.keys(dictionaryTermsData).filter(
-    letter => dictionaryTermsData[letter]?.length > 0
+  const dictionaryTermService = new DictionaryTermService();
+  const groupedTerms = await dictionaryTermService.getTermsGroupedByLetter();
+  const availableLetters = Object.keys(groupedTerms).filter(
+    letter => groupedTerms[letter]?.length > 0
   );
   
   return availableLetters.map((letter) => ({
@@ -42,14 +46,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function DictionaryLetterPage({ params: { letter } }: Props) {
+export default async function DictionaryLetterPage({ params }: Props) {
+  const { letter } = await params
   const uppercaseLetter = letter.toUpperCase();
   
   if (!uppercaseLetter || uppercaseLetter.length !== 1 || !/[A-Z]/.test(uppercaseLetter)) {
     notFound();
   }
 
-  const terms = dictionaryTermsData[uppercaseLetter] || [];
+  const dictionaryTermService = new DictionaryTermService();
+  const terms = await dictionaryTermService.getTermsByLetter(uppercaseLetter);
   
   if (terms.length === 0) {
     notFound();

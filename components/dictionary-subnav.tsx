@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { dictionaryTermsData } from '@/lib/data/dictionary-terms';
+import { DictionaryTermService } from '@/lib/services/dictionary-term.service';
 import { cn} from '@/lib/utils';
 
 interface DictionarySubnavProps {
@@ -12,9 +12,11 @@ const baseLinkStyles = 'text-md font-medium text-violet-600 hover:text-violet-80
 const activeLinkStyles = 'text-black dark:text-white underline';
 const inactiveLinkStyles = 'text-gray-400 dark:text-gray-500';
 
-export function DictionarySubnav({ currentLetter, root }: DictionarySubnavProps) {
-  const availableLetters = Object.keys(dictionaryTermsData).filter(
-    letter => dictionaryTermsData[letter]?.length > 0
+export async function DictionarySubnav({ currentLetter, root }: DictionarySubnavProps) {
+  const dictionaryTermService = new DictionaryTermService();
+  const groupedTerms = await dictionaryTermService.getTermsGroupedByLetter();
+  const availableLetters = Object.keys(groupedTerms).filter(
+    letter => groupedTerms[letter]?.length > 0
   ).sort();
 
   return (

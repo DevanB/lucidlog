@@ -12,8 +12,8 @@ export const dictionaryTerms = sqliteTable('dictionary_terms', {
 
 export const relatedTerms = sqliteTable('related_terms', {
   id: int().primaryKey({ autoIncrement: true }),
-  termId: int('term_id').notNull(),
-  relatedTermId: int('related_term_id').notNull(),
+  termId: int('term_id').references(() => dictionaryTerms.id).notNull(),
+  relatedTermId: int('related_term_id').references(() => dictionaryTerms.id).notNull(),
 }, (table) => [
   index('related_terms_term_id_idx').on(table.termId),
   unique('related_terms_unique_pair').on(table.termId, table.relatedTermId),

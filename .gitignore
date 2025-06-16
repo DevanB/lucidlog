@@ -64,3 +64,6 @@ tasks.json
 tasks/ 
 
 .cursor/mcp.json
+
+db/test.db*
+db/dev.db*

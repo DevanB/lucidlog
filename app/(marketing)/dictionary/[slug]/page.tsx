@@ -1,36 +1,24 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { dictionaryTermsData } from '@/lib/data/dictionary-terms';
+import { DictionaryTermService } from '@/lib/services/dictionary-term.service';
 import { Container } from '@/components/marketing/container';
-import { DictionaryTerm } from '@/types/services/dictionary-terms';
 import { DictionarySubnav } from '@/components/dictionary-subnav';
 
 type Props = {
   params: { slug: string };
 };
 
-// Helper function to find a term by slug across all letters
-function findTermBySlug(slug: string): { term: DictionaryTerm; letter: string } | null {
-  for (const [letter, terms] of Object.entries(dictionaryTermsData)) {
-    const term = terms.find(t => t.slug === slug);
-    if (term) {
-      return { term, letter };
-    }
-  }
-  return null;
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const result = findTermBySlug(params.slug);
+  const { slug } = await params
+  const dictionaryTermService = new DictionaryTermService();
+  const term = await dictionaryTermService.getTermBySlug(slug);
   
-  if (!result) {
+  if (!term) {
     return {
       title: 'Term Not Found',
     };
   }
-
-  const { term } = result;
 
   return {
     title: `${term.name} - Dictionary`,
@@ -44,31 +32,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const allTerms: { slug: string }[] = [];
+  const dictionaryTermService = new DictionaryTermService();
+  const allTerms = await dictionaryTermService.getAllTerms();
   
-  Object.values(dictionaryTermsData).forEach(terms => {
-    terms.forEach(term => {
-      allTerms.push({ slug: term.slug });
-    });
-  });
-  
-  return allTerms;
+  return allTerms.map(term => ({ slug: term.slug }));
 }
 
-export default function DictionaryTermPage({ params }: Props) {
-  const result = findTermBySlug(params.slug);
+export default async function DictionaryTermPage({ params }: Props) {
+  const { slug } = await params
+  const dictionaryTermService = new DictionaryTermService();
+  const term = await dictionaryTermService.getTermBySlug(slug);
   
-  if (!result) {
+  if (!term) {
     notFound();
   }
-
-  const { term, letter } = result;
 
   return (
     <Container>
       <hr className="border-gray-200 dark:border-gray-700" />
 
-      <DictionarySubnav currentLetter={letter} />
+      <DictionarySubnav />
 
       <div className="mx-auto max-w-5xl">
         <div className="my-20">
