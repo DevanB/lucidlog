@@ -94,6 +94,11 @@ echo "🔧 Running database migrations..."
 php artisan migrate --force --no-interaction --ansi
 echo ""
 
+# Seed database
+echo "🌱 Seeding database..."
+php artisan db:seed --force --no-interaction --ansi
+echo ""
+
 # Build frontend assets
 echo "🎨 Building frontend assets..."
 npm run build
