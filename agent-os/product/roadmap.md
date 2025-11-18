@@ -10,31 +10,31 @@ This roadmap outlines the development phases for LucidLog, ordered by technical 
 
 0. [ ] **Developer Tooling Setup** — Configure comprehensive development environment including Laravel Pint for PHP formatting, Larastan (PHPStan for Laravel) for static analysis and type checking, Laravel DebugBar for in-page debugging, Laravel Telescope for application insights, Rector for automated PHP refactoring and upgrades, Ultracite for TypeScript/JavaScript linting and formatting (replacing ESLint and Prettier), CodeRabbit CLI for AI-powered code reviews, Lefthook for fast Git hooks management, and automated checks on commit (Pint, Larastan, Ultracite, type checking) and PR opened (full test suite, static analysis). Set up pre-commit hooks to run code quality checks and ensure consistent code style across the team. Configure Larastan at level 5+ for strong type safety. `M`
 
-0. [ ] **User Authentication System** — Complete registration, login, email verification, and password reset flows using Laravel Fortify with Inertia.js forms and proper validation. `M`
+1. [ ] **User Authentication System** — Complete registration, login, email verification, and password reset flows using Laravel Fortify with Inertia.js forms and proper validation. `M`
 
-0. [ ] **User Onboarding Flow** — Build multi-step onboarding experience shown to new users after account creation, introducing key features (dream journal, dictionary, dashboard), highlighting core functionality with interactive tooltips, and providing quick tour of the app interface with skip/progress indicators. `S`
+2. [ ] **User Onboarding Flow** — Build multi-step onboarding experience shown to new users after account creation, introducing key features (dream journal, dictionary, dashboard), highlighting core functionality with interactive tooltips, and providing quick tour of the app interface with skip/progress indicators. `S`
 
-0. [ ] **Dream Entry CRUD Operations** — Create, read, update, and delete dream entries with title, Markdown content, date fields, and proper user ownership validation. `M`
+3. [ ] **Dream Entry CRUD Operations** — Create, read, update, and delete dream entries with title, Markdown content, date fields, and proper user ownership validation. `M`
 
-0. [ ] **Dream Journal List View** — Display paginated list of user's dream entries sorted by date with entry previews, edit/delete actions, and empty state for new users. `S`
+4. [ ] **Dream Journal List View** — Display paginated list of user's dream entries sorted by date with entry previews, edit/delete actions, and empty state for new users. `S`
 
-0. [ ] **Dream Entry Detail View** — Full-page view of individual dream with rendered Markdown, metadata display, and navigation to edit/delete functions. `S`
+5. [ ] **Dream Entry Detail View** — Full-page view of individual dream with rendered Markdown, metadata display, and navigation to edit/delete functions. `S`
 
-0. [ ] **User Dashboard** — Landing page after login showing total dream count, last entry date, quick-add dream button, and motivational empty states. `S`
+6. [ ] **User Dashboard** — Landing page after login showing total dream count, last entry date, quick-add dream button, and motivational empty states. `S`
 
-0. [ ] **Dream Dictionary Database Schema** — Create DreamSymbol model, migration, factory, and seeder with fields for symbol name, description, interpretation, SEO metadata, and slug. `S`
+7. [ ] **Dream Dictionary Database Schema** — Create DreamSymbol model, migration, factory, and seeder with fields for symbol name, description, interpretation, SEO metadata, and slug. `S`
 
-0. [ ] **Dream Dictionary Public Pages** — Build public-facing dictionary index with search functionality, individual symbol detail pages with SEO optimization, and alphabetical/category browsing. `M`
+8. [ ] **Dream Dictionary Public Pages** — Build public-facing dictionary index with search functionality, individual symbol detail pages with SEO, and alphabetical/category browsing. `M`
 
-0. [ ] **Marketing Website Pages** — Develop home page with value proposition, features page, pricing page (even if free), FAQ page with accordion UI, terms of service, privacy policy, and contact form. `L`
+9. [ ] **Marketing Website Pages** — Develop home page with value proposition, features page, pricing page (even if free), FAQ page with accordion UI, terms of service, privacy policy, and contact form. `L`
 
-0. [ ] **Application Layout & Navigation** — Implement responsive navigation with authenticated/guest states, footer with links, mobile menu, and consistent styling using Tailwind v4 and shadcn/ui components. `M`
+10. [ ] **Application Layout & Navigation** — Implement responsive navigation with authenticated/guest states, footer with links, mobile menu, and consistent styling using Tailwind v4 and shadcn/ui components. `M`
 
-0. [ ] **Database Optimization & Indexing** — Add proper indexes on foreign keys, search fields (dream title/content, symbol names), timestamps, and implement eager loading to prevent N+1 queries. `S`
+11. [ ] **Database Optimization & Indexing** — Add proper indexes on foreign keys, search fields (dream title/content, symbol names), timestamps, and implement eager loading to prevent N+1 queries. `S`
 
-0. [ ] **Form Validation & Error Handling** — Create Form Request classes for all user inputs with client-side validation feedback, custom error messages, and proper Inertia error handling. `S`
+12. [ ] **Form Validation & Error Handling** — Create Form Request classes for all user inputs with client-side validation feedback, custom error messages, and proper Inertia error handling. `S`
 
-0. [ ] **Initial Content Seeding** — Populate dream dictionary with 25-50 common dream symbols with quality interpretations and SEO-friendly descriptions. `M`
+13. [ ] **Initial Content Seeding** — Populate dream dictionary with 25-50 common dream symbols with quality interpretations and SEO-friendly descriptions. `M`
 
 ---
 
@@ -44,19 +44,19 @@ This roadmap outlines the development phases for LucidLog, ordered by technical 
 
 0. [ ] **Dream Search & Filtering** — Add full-text search across dream titles and content, filter by date range, and sort options (newest, oldest, title) with URL query parameter persistence. `M`
 
-0. [ ] **Dream Statistics Dashboard** — Display visual analytics including dreams per month chart, most active days, average dreams per week, and longest streak counter. `M`
+1. [ ] **Dream Statistics Dashboard** — Display visual analytics including dreams per month chart, most active days, average dreams per week, and longest streak counter. `M`
 
-0. [ ] **Enhanced Dream Dictionary** — Add categories/tags to symbols, related symbols linking, advanced search with filters, and user-contributed symbol request system. `L`
+2. [ ] **Enhanced Dream Dictionary** — Add categories/tags to symbols, related symbols linking, advanced search with filters, and user-contributed symbol request system. `L`
 
-0. [ ] **Dream Entry Templates** — Provide optional structured templates (what happened, emotions felt, notable symbols) to help users capture more detail consistently. `S`
+3. [ ] **Dream Entry Templates** — Provide optional structured templates (what happened, emotions felt, notable symbols) to help users capture more detail consistently. `S`
 
-0. [ ] **Markdown Editor Enhancement** — Upgrade to rich Markdown editor with toolbar, preview mode, symbol quick-insert from dictionary, and auto-save drafts. `M`
+4. [ ] **Markdown Editor Enhancement** — Upgrade to rich Markdown editor with toolbar, preview mode, symbol quick-insert from dictionary, and auto-save drafts. `M`
 
-0. [ ] **User Profile Management** — Allow users to update email, password, display preferences (theme, timezone), and view account creation date with profile completion prompts. `S`
+5. [ ] **User Profile Management** — Allow users to update email, password, display preferences (theme, timezone), and view account creation date with profile completion prompts. `S`
 
-0. [ ] **Email Notifications** — Send optional morning reminder emails, weekly summary emails, and milestone celebration emails (10th dream, 30-day streak). `M`
+6. [ ] **Email Notifications** — Send optional morning reminder emails, weekly summary emails, and milestone celebration emails (10th dream, 30-day streak). `M`
 
-0. [ ] **Performance Optimization** — Implement Redis caching for dictionary pages, optimize database queries with indexes, add Laravel Telescope for debugging, and ensure sub-2s page loads. `S`
+7. [ ] **Performance Optimization** — Implement Redis caching for dictionary pages, optimize database queries with indexes, add Laravel Telescope for debugging, and ensure sub-2s page loads. `S`
 
 ---
 
@@ -66,23 +66,23 @@ This roadmap outlines the development phases for LucidLog, ordered by technical 
 
 0. [ ] **AI Dream Pattern Detection** — Integrate OpenAI API to identify recurring themes, symbols, and emotional patterns across user's dream history with weekly insight emails. `XL`
 
-0. [ ] **AI Dream Interpretation Assistant** — Build conversational AI chatbot that answers questions about specific dreams, suggests interpretations based on dictionary and patterns, and learns user preferences. `XL`
+1. [ ] **AI Dream Interpretation Assistant** — Build conversational AI chatbot that answers questions about specific dreams, suggests interpretations based on dictionary and patterns, and learns user preferences. `XL`
 
-0. [ ] **AI Summary Generation** — Automatically generate concise summaries of long dream entries with key symbols highlighted and emotional tone detection. `L`
+2. [ ] **AI Summary Generation** — Automatically generate concise summaries of long dream entries with key symbols highlighted and emotional tone detection. `L`
 
-0. [ ] **Tag System** — Allow users to create custom tags for dreams, tag-based filtering and grouping, popular tag suggestions, and tag-based analytics views. `M`
+3. [ ] **Tag System** — Allow users to create custom tags for dreams, tag-based filtering and grouping, popular tag suggestions, and tag-based analytics views. `M`
 
-0. [ ] **Mood Tracking** — Add optional mood/emotion selection per dream entry, mood trend visualization over time, and correlation analysis between moods and dream themes. `M`
+4. [ ] **Mood Tracking** — Add optional mood/emotion selection per dream entry, mood trend visualization over time, and correlation analysis between moods and dream themes. `M`
 
-0. [ ] **Dream Export Functionality** — Enable export of all dreams to JSON, CSV, PDF, and Markdown formats with date range selection and formatting options. `M`
+5. [ ] **Dream Export Functionality** — Enable export of all dreams to JSON, CSV, PDF, and Markdown formats with date range selection and formatting options. `M`
 
-0. [ ] **Lucid Dream Tracking** — Add checkbox to mark lucid dreams, track lucidity rate over time, identify lucidity triggers from entry content, and provide lucid dreaming tips. `M`
+6. [ ] **Lucid Dream Tracking** — Add checkbox to mark lucid dreams, track lucidity rate over time, identify lucidity triggers from entry content, and provide lucid dreaming tips. `M`
 
-0. [ ] **Reality Check Reminders** — Send random push notifications during the day prompting reality checks to improve lucid dreaming success rate. `S`
+7. [ ] **Reality Check Reminders** — Send random push notifications during the day prompting reality checks to improve lucid dreaming success rate. `S`
 
-0. [ ] **Advanced Analytics Dashboard** — Display word clouds of most common terms, dream length trends, time-of-night patterns (if logged), and symbol frequency analysis. `L`
+8. [ ] **Advanced Analytics Dashboard** — Display word clouds of most common terms, dream length trends, time-of-night patterns (if logged), and symbol frequency analysis. `L`
 
-0. [ ] **API Development** — Build RESTful API with authentication for third-party integrations, mobile app support, and data import/export automation. `L`
+9. [ ] **API Development** — Build RESTful API with authentication for third-party integrations, mobile app support, and data import/export automation. `L`
 
 ---
 
@@ -104,6 +104,7 @@ This roadmap outlines the development phases for LucidLog, ordered by technical 
 ---
 
 > **Notes**
+>
 > - Effort scale: `XS` = 1 day | `S` = 2-3 days | `M` = 1 week | `L` = 2 weeks | `XL` = 3+ weeks
 > - Items are ordered by technical dependencies and product architecture priorities
 > - Each item represents an end-to-end (frontend + backend) functional and testable feature

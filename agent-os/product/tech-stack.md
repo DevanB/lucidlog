@@ -7,9 +7,11 @@ This document outlines the complete technology stack for LucidLog, including rat
 ## Backend Stack
 
 ### PHP 8.4.14
+
 **Purpose:** Core programming language for server-side logic
 
 **Rationale:**
+
 - Latest stable PHP version with performance improvements and modern language features
 - Constructor property promotion, named arguments, and union types improve code readability
 - JIT compiler provides significant performance gains for computational tasks
@@ -17,9 +19,11 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Excellent ecosystem for web applications with mature tooling
 
 ### Laravel 12
+
 **Purpose:** Primary application framework
 
 **Rationale:**
+
 - Industry-leading PHP framework with comprehensive feature set for rapid development
 - Eloquent ORM simplifies database interactions with clean, expressive syntax
 - Built-in authentication, authorization, validation, and queue systems
@@ -30,6 +34,7 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Migration system enables version-controlled database schema changes
 
 **Key Features Used:**
+
 - Eloquent relationships for User-Dream-Symbol associations
 - Form Request validation for all user inputs
 - Queue system for future email notifications and AI processing
@@ -37,9 +42,11 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Database migrations and seeders for reproducible environments
 
 ### Laravel Fortify v1
+
 **Purpose:** Headless authentication backend
 
 **Rationale:**
+
 - Provides complete authentication logic without imposing UI constraints
 - Perfect pairing with Inertia.js for custom frontend auth experiences
 - Handles registration, login, password reset, email verification out-of-the-box
@@ -48,6 +55,7 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Eliminates need to write repetitive authentication code from scratch
 
 **Features Enabled:**
+
 - User registration with email verification
 - Login with "remember me" functionality
 - Password reset via email
@@ -55,9 +63,11 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Password updates (future)
 
 ### Inertia.js v2 (Server-Side)
+
 **Purpose:** Server-side adapter for SPA architecture
 
 **Rationale:**
+
 - Bridges Laravel and React without needing separate API layer
 - Maintains traditional server-side routing while delivering SPA experience
 - Shares data from controllers directly to React components as props
@@ -66,6 +76,7 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Eliminates API versioning complexity for internal application
 
 **Key Benefits:**
+
 - No need for REST API boilerplate (auth tokens, CORS, serialization)
 - Server-side rendering potential for improved SEO on marketing pages
 - Automatic CSRF protection through Laravel
@@ -76,9 +87,11 @@ This document outlines the complete technology stack for LucidLog, including rat
 ## Frontend Stack
 
 ### React 19
+
 **Purpose:** UI component library and rendering engine
 
 **Rationale:**
+
 - Latest version with improved performance and concurrent rendering features
 - Mature ecosystem with extensive component libraries and tooling
 - Component-based architecture encourages reusability and maintainability
@@ -88,17 +101,20 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Server Components readiness for future SSR optimization
 
 **Usage:**
+
 - Functional components with hooks throughout application
 - Controlled form inputs with Inertia.js form helpers
 - Custom hooks for shared logic (useDebounce for search, useDreamStats)
 - Context API for theme and user preferences
 
 ### Inertia.js v2 (Client-Side)
+
 **Purpose:** Client-side SPA framework
 
 **Rationale:**
+
 - Seamless integration with React and Laravel backend
-- `<Link>` component for instant navigation without full page reloads
+- `<Link>` component for instant navigation without full-page reloads
 - `<Form>` component with built-in error handling and loading states
 - Prefetching for improved perceived performance
 - Deferred props for progressive data loading (useful for dashboard stats)
@@ -106,15 +122,18 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Preserves scroll position and component state during navigation
 
 **Key Features:**
+
 - Manual visits with `router.visit()` for programmatic navigation
 - Form helpers with processing states and error management
 - Layout persistence across page changes
 - Flash message handling from Laravel sessions
 
 ### Tailwind CSS v4
+
 **Purpose:** Utility-first CSS framework
 
 **Rationale:**
+
 - Rapid UI development with composable utility classes
 - Consistent design system through configuration without custom CSS
 - Purges unused styles for minimal production bundle size
@@ -124,15 +143,18 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Excellent IDE support with IntelliSense
 
 **Configuration:**
+
 - Custom color palette aligned with dream/nighttime theme
 - Extended spacing and typography scales for comfortable reading
 - Dark mode as default with light mode toggle
 - Custom animations for smooth transitions
 
 ### shadcn/ui
+
 **Purpose:** Accessible, customizable React component library
 
 **Rationale:**
+
 - Copy-paste component approach means full ownership and customization
 - Built on Radix UI primitives for accessibility compliance
 - Tailwind CSS integration eliminates style conflicts
@@ -141,6 +163,7 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Consistent styling and behavior across application
 
 **Components Used:**
+
 - Button, Input, Textarea for forms
 - Dialog/Modal for create/edit dream flows
 - Dropdown Menu for user navigation
@@ -153,9 +176,11 @@ This document outlines the complete technology stack for LucidLog, including rat
 ## Development Tools
 
 ### Laravel Wayfinder v0
+
 **Purpose:** Type-safe route generation for frontend
 
 **Rationale:**
+
 - Generates TypeScript functions for Laravel routes and controllers
 - Eliminates magic strings in frontend route references
 - Autocomplete and type checking for route parameters
@@ -164,15 +189,18 @@ This document outlines the complete technology stack for LucidLog, including rat
 - Tree-shakable imports reduce bundle size
 
 **Usage:**
+
 ```typescript
 import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 <Form {...store.form()}>...</Form>
 ```
 
 ### Laravel Pint v1
+
 **Purpose:** Opinionated PHP code formatter
 
 **Rationale:**
+
 - Zero-configuration code style enforcement
 - Based on PHP-CS-Fixer with Laravel conventions
 - Automatic code formatting in pre-commit hooks
@@ -180,9 +208,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - `--dirty` flag formats only changed files for speed
 
 ### Larastan (PHPStan for Laravel)
+
 **Purpose:** Static analysis and type checking for PHP
 
 **Rationale:**
+
 - Catches type errors and bugs before runtime
 - Laravel-specific rules understand Eloquent, facades, and magic methods
 - Enforces strict typing and prevents null pointer exceptions
@@ -192,9 +222,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Essential complement to Pint for code quality
 
 ### Rector
+
 **Purpose:** Automated PHP refactoring and upgrades
 
 **Rationale:**
+
 - Automated code modernization and refactoring
 - Upgrades PHP and Laravel versions automatically
 - Applies best practices and design patterns
@@ -203,9 +235,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Ensures codebase stays modern and maintainable
 
 ### Laravel Herd
+
 **Purpose:** Native local development environment for macOS
 
 **Rationale:**
+
 - Native macOS app with zero Docker overhead for faster performance
 - Automatic PHP version switching per project
 - Built-in database management (MySQL, PostgreSQL)
@@ -214,9 +248,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Perfect for rapid local development on Mac
 
 ### Laravel MCP v0
+
 **Purpose:** AI-assisted development tools
 
 **Rationale:**
+
 - Provides AI context about Laravel-specific patterns
 - Speeds up boilerplate generation (models, migrations, controllers)
 - Suggests Laravel best practices during development
@@ -227,9 +263,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 ## Testing Stack
 
 ### Pest v4
+
 **Purpose:** Primary testing framework
 
 **Rationale:**
+
 - Elegant, expressive syntax reduces test boilerplate
 - Built on PHPUnit but with modern, readable API
 - Parallel test execution for faster CI/CD pipelines
@@ -239,14 +277,17 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Expectation API more intuitive than PHPUnit assertions
 
 **Test Types:**
+
 - Feature tests for HTTP endpoints and Inertia responses
 - Unit tests for business logic and helpers
 - Browser tests for authentication flows and dream CRUD operations
 
 ### PHPUnit v12
+
 **Purpose:** Underlying test runner for Pest
 
 **Rationale:**
+
 - Industry-standard PHP testing framework
 - Robust assertion library and mocking capabilities
 - Excellent IDE integration for running individual tests
@@ -257,9 +298,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 ## Database
 
 ### PostgreSQL (Recommended)
+
 **Purpose:** Primary relational database
 
 **Rationale:**
+
 - Full-text search capabilities crucial for dream and dictionary search
 - JSONB column type useful for flexible dream metadata (tags, mood)
 - Superior handling of concurrent writes (important for multi-user journaling)
@@ -268,15 +311,18 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Scalability for future growth without migration
 
 **Schema Design:**
+
 - `users` table with email, password, verification status
 - `dreams` table with user_id FK, title, content (text/Markdown), date
 - `dream_symbols` table with name, slug, interpretation, SEO metadata
 - Indexes on user_id, created_at, search vectors for full-text search
 
 ### Redis (Optional, Recommended for Production)
+
 **Purpose:** Caching and session storage
 
 **Rationale:**
+
 - Dramatically improves performance for dictionary pages (high read, low write)
 - Session storage reduces database load
 - Queue backend for background jobs (emails, AI processing)
@@ -287,9 +333,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 ## Build Tools & Linters
 
 ### Vite
+
 **Purpose:** Frontend build tool and development server
 
 **Rationale:**
+
 - Lightning-fast HMR (Hot Module Replacement) during development
 - Optimized production builds with code splitting
 - Native ESM support eliminates unnecessary transpilation
@@ -297,9 +345,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Wayfinder Vite plugin auto-generates route types
 
 ### Ultracite
+
 **Purpose:** All-in-one TypeScript/JavaScript linter and formatter
 
 **Rationale:**
+
 - Unified linting and formatting tool replacing ESLint + Prettier
 - Zero configuration with sensible defaults
 - Faster than separate ESLint/Prettier setup
@@ -310,9 +360,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Eliminates ESLint/Prettier configuration conflicts
 
 ### Lefthook
+
 **Purpose:** Fast Git hooks manager
 
 **Rationale:**
+
 - Blazing-fast Git hooks written in Go
 - Runs linters and tests in parallel for speed
 - Language-agnostic configuration (YAML)
@@ -325,9 +377,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 ## Deployment & Infrastructure
 
 ### Laravel Cloud
+
 **Purpose:** Managed hosting and deployment platform
 
 **Rationale:**
+
 - Official Laravel hosting solution built for Laravel applications
 - Automatic deployments with zero-downtime releases
 - Integrated CDN and SSL certificate management
@@ -342,9 +396,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 ## Monitoring & Observability
 
 ### Laravel Telescope
+
 **Purpose:** Debug assistant and application insights
 
 **Rationale:**
+
 - Real-time monitoring of requests, queries, jobs, exceptions
 - Identify N+1 query problems before production
 - Debug mail sending and queue jobs
@@ -353,9 +409,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Database query analysis and optimization
 
 ### Laravel DebugBar
+
 **Purpose:** Development debugging toolbar
 
 **Rationale:**
+
 - In-page debugging toolbar for quick insights
 - View queries, timeline, memory usage at a glance
 - Complements Telescope for immediate feedback during development
@@ -363,9 +421,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Lightweight and unobtrusive during development
 
 ### Sentry (Production)
+
 **Purpose:** Error tracking and performance monitoring
 
 **Rationale:**
+
 - Real-time error alerts with stack traces
 - User impact tracking (how many users affected)
 - Performance monitoring for slow database queries
@@ -373,9 +433,11 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 - Laravel integration captures contextualized errors
 
 ### Laravel Nightwatch
+
 **Purpose:** Queue monitoring and management
 
 **Rationale:**
+
 - Modern queue monitoring dashboard built for Laravel Cloud
 - Real-time queue metrics and job tracking
 - Job failure alerting and retry management
@@ -388,12 +450,15 @@ import { store, update } from '@/actions/App/Http/Controllers/DreamController'
 ## Future Considerations
 
 ### AI/ML Integration
+
 - **OpenAI API** for GPT-4 dream interpretation and pattern detection
 - **Pinecone/Weaviate** for vector database storing dream embeddings
 - **LangChain** for prompt orchestration and RAG (Retrieval-Augmented Generation)
 
 ### Mobile Development
+
 - **React Native** for code sharing with web app
+
 ---
 
 ## Summary
