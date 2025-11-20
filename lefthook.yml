@@ -1,0 +1,33 @@
+# Lefthook Configuration
+# Git hooks management for automated pre-commit code quality checks
+# Run on staged files only for fast feedback
+
+pre-commit:
+  # Stop on first error for fast feedback
+  parallel: false
+
+  commands:
+    # 1. Format PHP code with Laravel Pint (auto-fix)
+    pint:
+      glob: "*.php"
+      run: vendor/bin/pint {staged_files}
+      stage_fixed: true
+
+    # 2. Check TypeScript types
+    typescript:
+      glob: "*.{ts,tsx}"
+      run: npm run types
+
+    # 3. Run Larastan static analysis on staged PHP files
+    larastan:
+      glob: "*.php"
+      run: vendor/bin/phpstan analyse --memory-limit=2G {staged_files} --error-format=table
+
+    # 4. Run Rector PHP upgrade checks and auto-fix
+    rector:
+      glob: "*.php"
+      run: vendor/bin/rector process {staged_files}
+      stage_fixed: true
+
+# Emergency bypass available with: git commit --no-verify
+# Use this only when you need to commit immediately without running checks

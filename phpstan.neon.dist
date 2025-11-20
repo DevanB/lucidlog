@@ -1,0 +1,26 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+    paths:
+        - app
+        - config
+        - database
+        - routes
+        - tests
+
+    # Exclude paths from analysis
+    excludePaths:
+        - vendor
+        - node_modules
+        - bootstrap/cache
+        - storage
+        - public/build
+
+    # Error format configuration
+    errorFormat: table
+
+    # Treat mixed types as violations at higher levels
+    treatPhpDocTypesAsCertain: true

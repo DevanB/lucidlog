@@ -1,0 +1,145 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/AuthenticationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:assertAuthenticated\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/AuthenticationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:assertGuest\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/Auth/AuthenticationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/AuthenticationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/Auth/AuthenticationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/Feature/Auth/EmailVerificationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/PasswordConfirmationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/PasswordConfirmationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/Auth/PasswordResetTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/Feature/Auth/PasswordResetTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:assertAuthenticated\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/RegistrationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/RegistrationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/RegistrationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/Auth/TwoFactorChallengeTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Auth/TwoFactorChallengeTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/Auth/VerificationNotificationTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/DashboardTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/DashboardTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ExampleTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/Settings/PasswordUpdateTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/Feature/Settings/ProfileUpdateTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:assertGuest\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/Settings/ProfileUpdateTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/Settings/TwoFactorAuthenticationTest.php
+
+		-
+			message: '#^Undefined variable\: \$this$#'
+			identifier: variable.undefined
+			count: 1
+			path: tests/Pest.php
