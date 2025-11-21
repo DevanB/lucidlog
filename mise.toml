@@ -1,0 +1,4 @@
+[tools]
+# Lefthook - Git hooks manager
+# Used for automated pre-commit checks (formatting, static analysis, type checking)
+lefthook = "latest"
