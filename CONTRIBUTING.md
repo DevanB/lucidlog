@@ -67,6 +67,7 @@ composer run setup
 ```
 
 This command will:
+
 - Install Composer dependencies
 - Install NPM dependencies
 - Copy `.env.example` to `.env`
@@ -229,6 +230,7 @@ Telescope provides insight into requests, exceptions, database queries, jobs, an
 2. Visit `http://127.0.0.1:8000/telescope`
 
 **Features:**
+
 - Request monitoring
 - Exception tracking
 - Database query inspection
@@ -237,6 +239,7 @@ Telescope provides insight into requests, exceptions, database queries, jobs, an
 - Mail preview
 
 **Environment Behavior:**
+
 - **Local:** Accessible without authentication
 - **Staging:** Requires authentication
 - **Production:** Completely disabled
@@ -248,12 +251,14 @@ DebugBar shows debug information at the bottom of each page.
 **Enabling DebugBar:**
 
 Set in your `.env`:
+
 ```env
 APP_DEBUG=true
 DEBUGBAR_ENABLED=true
 ```
 
 **Features:**
+
 - Request/response information
 - Database queries with execution time
 - Views and composers
@@ -261,12 +266,13 @@ DEBUGBAR_ENABLED=true
 - Memory usage
 
 **Environment Behavior:**
+
 - **Local:** Visible when `APP_DEBUG=true`
 - **Production:** Always disabled
 
 ## CI/CD Pipeline
 
-Our CI/CD pipeline runs on every push and pull request to `develop` and `main` branches.
+Our CI/CD pipeline runs on every push and pull request to the `master` branches.
 
 ### Pipeline Stages
 
@@ -309,6 +315,7 @@ Our CI/CD pipeline runs on every push and pull request to `develop` and `main` b
 **Problem:** Hooks not running when I commit
 
 **Solution:**
+
 ```bash
 # Reinstall hooks
 lefthook install
@@ -324,6 +331,7 @@ lefthook run pre-commit --all-files
 **Problem:** Pint fails with formatting errors
 
 **Solution:**
+
 ```bash
 # Auto-fix formatting issues
 vendor/bin/pint
@@ -360,6 +368,7 @@ vendor/bin/phpstan analyse --memory-limit=4G
 **Problem:** Rector wants to change auto-generated files
 
 **Solution:** Generated files should be excluded in `rector.php`. Check that these paths are excluded:
+
 - `resources/js/types/generated.d.ts`
 - Wayfinder action files
 - IDE helper files
@@ -367,6 +376,7 @@ vendor/bin/phpstan analyse --memory-limit=4G
 **Problem:** I want to preview Rector changes
 
 **Solution:**
+
 ```bash
 # Dry-run shows what would change
 composer run refactor:check
@@ -406,6 +416,7 @@ npm run types
 **Problem:** How do I debug CI/CD failures?
 
 **Solution:**
+
 1. Click the failed workflow run on GitHub
 2. Expand the failed step
 3. Read the error message and stack trace
@@ -417,6 +428,7 @@ npm run types
 **Problem:** Telescope not loading at `/telescope`
 
 **Solution:**
+
 1. Check `TELESCOPE_ENABLED=true` in `.env`
 2. Check `APP_ENV=local` (or `staging`)
 3. Run migrations: `php artisan migrate`
@@ -425,6 +437,7 @@ npm run types
 **Problem:** DebugBar not showing
 
 **Solution:**
+
 1. Check `DEBUGBAR_ENABLED=true` in `.env`
 2. Check `APP_DEBUG=true` in `.env`
 3. Check `APP_ENV` is not `production`
@@ -446,6 +459,7 @@ Use `git commit --no-verify` only in these situations:
 The following paths are excluded from all code quality tools:
 
 ### Standard Exclusions
+
 - `vendor/` - Composer dependencies
 - `node_modules/` - NPM dependencies
 - `storage/` - Runtime storage files
@@ -454,6 +468,7 @@ The following paths are excluded from all code quality tools:
 - `.phpunit.result.cache` - Test cache
 
 ### Generated Files
+
 - `resources/js/types/generated.d.ts` - TypeScript types from Wayfinder
 - Wayfinder action files
 - IDE helper files

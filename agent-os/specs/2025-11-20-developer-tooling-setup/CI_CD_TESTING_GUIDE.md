@@ -55,8 +55,8 @@ git push -u origin test/ci-cd-validation
 2. Click "Pull requests" tab
 3. Click "New pull request"
 4. Select:
-   - Base: `develop` (or `main`)
-   - Compare: `test/ci-cd-validation`
+    - Base: `master`
+    - Compare: `test/ci-cd-validation`
 5. Click "Create pull request"
 6. Add title: "Test: CI/CD Pipeline Validation"
 7. Add description with testing checklist (see below)
@@ -82,6 +82,7 @@ Test CI/CD pipeline configuration with new static analysis and code quality tool
 ## Testing Checklist
 
 ### Tests Workflow (`tests.yml`)
+
 - [ ] Workflow triggers on PR
 - [ ] PHP 8.4 setup succeeds
 - [ ] Node 22 setup succeeds
@@ -94,6 +95,7 @@ Test CI/CD pipeline configuration with new static analysis and code quality tool
 - [ ] All steps pass
 
 ### Linter Workflow (`lint.yml`)
+
 - [ ] Workflow triggers on PR
 - [ ] PHP 8.4 setup succeeds
 - [ ] Node 22 setup succeeds
@@ -106,6 +108,7 @@ Test CI/CD pipeline configuration with new static analysis and code quality tool
 - [ ] All steps pass
 
 ### Performance
+
 - [ ] Check cache hit/miss in logs
 - [ ] Note total workflow execution time
 - [ ] Verify workflows complete in reasonable time (<10 minutes)
@@ -118,9 +121,9 @@ Test CI/CD pipeline configuration with new static analysis and code quality tool
 1. On the pull request page, you'll see status checks appear
 2. Click "Details" next to each workflow to view logs
 3. Watch for:
-   - Green checkmarks (passing)
-   - Red X marks (failing)
-   - Yellow dots (in progress)
+    - Green checkmarks (passing)
+    - Red X marks (failing)
+    - Yellow dots (in progress)
 
 ### Reviewing Logs
 
@@ -129,10 +132,10 @@ For each workflow:
 1. Click "Details" to open the GitHub Actions run
 2. Expand each step to see detailed output
 3. Look for:
-   - "Cache restored from key:" messages (caching working)
-   - Tool output (Larastan, Rector, Pint results)
-   - Any error messages or warnings
-   - Total execution time
+    - "Cache restored from key:" messages (caching working)
+    - Tool output (Larastan, Rector, Pint results)
+    - Any error messages or warnings
+    - Total execution time
 
 ### Example: Checking Tests Workflow
 
@@ -178,57 +181,64 @@ To ensure CI/CD properly catches issues, test failure behavior:
 ### Test 1: Formatting Violation
 
 1. Create a new branch:
-   ```bash
-   git checkout -b test/formatting-failure
-   ```
+
+    ```bash
+    git checkout -b test/formatting-failure
+    ```
 
 2. Introduce formatting violation in a PHP file:
-   ```php
-   // Add bad formatting to app/Models/User.php
-   public function someMethod() {
-       $array = array('old', 'syntax'); // Should be []
-   return $array; // Bad indentation
-   }
-   ```
+
+    ```php
+    // Add bad formatting to app/Models/User.php
+    public function someMethod() {
+        $array = array('old', 'syntax'); // Should be []
+    return $array; // Bad indentation
+    }
+    ```
 
 3. Push and create PR:
-   ```bash
-   git add app/Models/User.php
-   git commit -m "Test: formatting violation"
-   git push -u origin test/formatting-failure
-   ```
+
+    ```bash
+    git add app/Models/User.php
+    git commit -m "Test: formatting violation"
+    git push -u origin test/formatting-failure
+    ```
 
 4. Verify lint workflow fails with clear Pint error message
 
 5. Fix the violation:
-   ```bash
-   vendor/bin/pint app/Models/User.php
-   git add app/Models/User.php
-   git commit -m "Fix: formatting"
-   git push
-   ```
+
+    ```bash
+    vendor/bin/pint app/Models/User.php
+    git add app/Models/User.php
+    git commit -m "Fix: formatting"
+    git push
+    ```
 
 6. Verify workflow passes after fix
 
 ### Test 2: Type Error
 
 1. Create a new branch:
-   ```bash
-   git checkout -b test/type-error
-   ```
+
+    ```bash
+    git checkout -b test/type-error
+    ```
 
 2. Introduce type error in TypeScript:
-   ```typescript
-   // In resources/js/Pages/Dashboard.tsx
-   const count: number = "string"; // Type error
-   ```
+
+    ```typescript
+    // In resources/js/Pages/Dashboard.tsx
+    const count: number = 'string'; // Type error
+    ```
 
 3. Push and create PR:
-   ```bash
-   git add resources/js/Pages/Dashboard.tsx
-   git commit -m "Test: type error"
-   git push -u origin test/type-error
-   ```
+
+    ```bash
+    git add resources/js/Pages/Dashboard.tsx
+    git commit -m "Test: type error"
+    git push -u origin test/type-error
+    ```
 
 4. Verify lint workflow fails with TypeScript error
 
@@ -237,18 +247,20 @@ To ensure CI/CD properly catches issues, test failure behavior:
 ### Test 3: Static Analysis Error
 
 1. Create a new branch:
-   ```bash
-   git checkout -b test/static-analysis-error
-   ```
+
+    ```bash
+    git checkout -b test/static-analysis-error
+    ```
 
 2. Introduce type error in PHP:
-   ```php
-   // In app/Models/User.php
-   public function getBadProperty(): string
-   {
-       return $this->nonExistentProperty; // Should fail PHPStan
-   }
-   ```
+
+    ```php
+    // In app/Models/User.php
+    public function getBadProperty(): string
+    {
+        return $this->nonExistentProperty; // Should fail PHPStan
+    }
+    ```
 
 3. Push and create PR
 
@@ -262,18 +274,22 @@ To ensure CI/CD properly catches issues, test failure behavior:
 
 1. Create a fresh PR (new branch)
 2. Check workflow logs for:
-   ```
-   Cache not found for input keys: Linux-composer-abc123
-   ```
+
+    ```
+    Cache not found for input keys: Linux-composer-abc123
+    ```
+
 3. Note the total execution time
 
 ### Second Run (Cache Hit)
 
 1. Push another commit to the same PR
 2. Check workflow logs for:
-   ```
-   Cache restored from key: Linux-composer-abc123
-   ```
+
+    ```
+    Cache restored from key: Linux-composer-abc123
+    ```
+
 3. Note the total execution time
 4. Verify execution time is faster with cache hit
 
@@ -297,6 +313,7 @@ After testing, create a summary of results:
 **Pull Request:** #[PR number]
 
 ### Tests Workflow
+
 - Status: ✅ PASS / ❌ FAIL
 - Execution Time: [X minutes]
 - Larastan: ✅ No errors
@@ -305,6 +322,7 @@ After testing, create a summary of results:
 - Cache: ✅ Working (hit on second run)
 
 ### Linter Workflow
+
 - Status: ✅ PASS / ❌ FAIL
 - Execution Time: [X minutes]
 - Pint: ✅ Formatting correct
@@ -313,19 +331,23 @@ After testing, create a summary of results:
 - Cache: ✅ Working (hit on second run)
 
 ### Failure Tests
+
 - Formatting violation: ✅ Detected and failed build
 - Type error: ✅ Detected and failed build
 - Static analysis error: ✅ Detected and failed build
 
 ### Caching Performance
+
 - First run (cache miss): [X minutes]
 - Second run (cache hit): [Y minutes]
 - Improvement: [Z%] faster
 
 ### Issues Found
+
 [List any issues discovered during testing]
 
 ### Recommendations
+
 [Any suggestions for improvement]
 ```
 
@@ -336,6 +358,7 @@ After testing, create a summary of results:
 **Symptom:** PR created but no workflows run
 
 **Solution:**
+
 - Check workflow files are in `.github/workflows/`
 - Verify branch names in workflow triggers match
 - Check GitHub Actions are enabled in repository settings
@@ -345,6 +368,7 @@ After testing, create a summary of results:
 **Symptom:** Always says "Cache not found"
 
 **Solution:**
+
 - Check cache key uses correct file: `hashFiles('**/composer.lock')`
 - Verify lock files are committed
 - First run will always miss (expected)
@@ -355,6 +379,7 @@ After testing, create a summary of results:
 **Symptom:** `vendor/bin/phpstan: command not found`
 
 **Solution:**
+
 - Check Composer dependencies installed successfully
 - Verify `composer install` step completed
 - Check for Composer installation errors in logs
@@ -364,20 +389,23 @@ After testing, create a summary of results:
 **Symptom:** Workflow runs longer than timeout limit
 
 **Solution:**
+
 - Check for infinite loops in code
 - Verify test suite isn't hanging
 - Increase timeout in workflow file:
-  ```yaml
-  jobs:
-    ci:
-      timeout-minutes: 30
-  ```
+
+    ```yaml
+    jobs:
+        ci:
+            timeout-minutes: 30
+    ```
 
 ### Issue: Environment Variables Missing
 
 **Symptom:** Application errors in CI/CD
 
 **Solution:**
+
 - Check `.env.example` is copied to `.env` in workflow
 - Verify `php artisan key:generate` runs
 - Check required environment variables are set
@@ -387,25 +415,27 @@ After testing, create a summary of results:
 After successful testing:
 
 1. **Merge the test PR:**
-   ```bash
-   # Via GitHub UI or command line
-   gh pr merge test/ci-cd-validation --squash
-   ```
+
+    ```bash
+    # Via GitHub UI or command line
+    gh pr merge test/ci-cd-validation --squash
+    ```
 
 2. **Delete test branches:**
-   ```bash
-   git checkout develop
-   git pull
-   git branch -d test/ci-cd-validation
-   git branch -d test/formatting-failure
-   git branch -d test/type-error
-   git branch -d test/static-analysis-error
-   ```
+
+    ```bash
+    git checkout develop
+    git pull
+    git branch -d test/ci-cd-validation
+    git branch -d test/formatting-failure
+    git branch -d test/type-error
+    git branch -d test/static-analysis-error
+    ```
 
 3. **Update team:**
-   - Announce CI/CD enhancements are live
-   - Share CONTRIBUTING.md with team
-   - Remind team about pre-commit hooks
+    - Announce CI/CD enhancements are live
+    - Share CONTRIBUTING.md with team
+    - Remind team about pre-commit hooks
 
 ## Ongoing Monitoring
 

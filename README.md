@@ -133,6 +133,7 @@ DB_DATABASE=database/database.sqlite
 Access at `http://127.0.0.1:8000/telescope`
 
 Monitor:
+
 - HTTP requests
 - Database queries
 - Exceptions
@@ -145,6 +146,7 @@ Monitor:
 Automatically appears at the bottom of pages when enabled.
 
 Shows:
+
 - Request/response details
 - Database queries with timing
 - Memory usage
@@ -175,8 +177,9 @@ Our CI/CD pipeline runs on GitHub Actions:
 - **Linter Workflow:** Pint, TypeScript, ESLint, Prettier
 
 Triggers on:
-- Push to `develop` or `main`
-- Pull requests to `develop` or `main`
+
+- Push to `master`
+- Pull requests to `master`
 
 ## Contributing
 
@@ -196,6 +199,7 @@ This project is proprietary and confidential.
 ## Support
 
 For questions or issues:
+
 - Check [CONTRIBUTING.md](CONTRIBUTING.md) for troubleshooting
 - Open an issue on GitHub
 - Contact the development team
