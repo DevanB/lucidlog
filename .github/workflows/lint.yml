@@ -44,8 +44,9 @@ jobs:
       - name: Generate Wayfinder Types
         run: |
           cp .env.example .env
+          touch database/database.sqlite
           php artisan key:generate
-          php artisan wayfinder:generate
+          php artisan wayfinder:generate --with-form
 
       - name: Run Pint
         run: vendor/bin/pint --test
