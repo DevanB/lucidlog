@@ -86,7 +86,7 @@ This project uses automated tools to maintain high code quality:
 
 ## Project Structure
 
-```
+```text
 .
 ├── app/                    # Application code
 │   ├── Actions/           # Fortify actions

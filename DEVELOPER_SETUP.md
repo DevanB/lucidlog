@@ -26,12 +26,14 @@ composer run dev
 ### Larastan (Static Analysis)
 
 **Configuration:** `phpstan.neon.dist`
+
 - **Level:** 5
 - **Memory Limit:** 2G
 - **Error Format:** table
 - **Baseline:** `phpstan-baseline.neon` (tracks legacy code exceptions)
 
 **Run Commands:**
+
 ```bash
 composer run analyse                              # Full codebase
 vendor/bin/phpstan analyse --memory-limit=2G     # Direct command
@@ -42,11 +44,13 @@ vendor/bin/phpstan analyse --generate-baseline   # Regenerate baseline
 ### Rector (PHP Upgrades)
 
 **Configuration:** `rector.php`
+
 - **PHP Version:** 8.4
 - **Laravel Version:** 12
 - **Rule Sets:** SetList::PHP_84, LaravelSetList::LARAVEL_120
 
 **Run Commands:**
+
 ```bash
 composer run refactor          # Apply changes (auto-fix)
 composer run refactor:check    # Check only (dry-run)
@@ -56,11 +60,13 @@ vendor/bin/rector process app/Models  # Specific directory
 ### Laravel Pint (Code Formatting)
 
 **Configuration:** `pint.json`
+
 - **Preset:** Laravel
 - **Auto-fix:** Enabled in pre-commit
 - **Check Mode:** Used in CI/CD
 
 **Run Commands:**
+
 ```bash
 composer run format            # Auto-fix entire codebase
 composer run format:check      # Check only
@@ -71,11 +77,13 @@ vendor/bin/pint --dirty        # Only changed files (git)
 ### TypeScript Type Checking
 
 **Configuration:** `tsconfig.json`
+
 - **Strict Mode:** Enabled
 - **Path Aliases:** `@/` maps to `resources/js/`
 - **Incremental:** Enabled for performance
 
 **Run Commands:**
+
 ```bash
 npm run types                  # Full type check
 npx tsc --noEmit              # Direct command
@@ -84,17 +92,20 @@ npx tsc --noEmit              # Direct command
 ### Lefthook (Pre-Commit Hooks)
 
 **Configuration:** `lefthook.yml`
+
 - **Trigger:** Pre-commit
 - **Scope:** Staged files only
 - **Fail Fast:** Stops on first error
 
 **Hook Execution Order:**
+
 1. Laravel Pint (auto-fixes formatting)
 2. TypeScript Type Check
 3. Larastan (static analysis)
 4. Rector (auto-applies upgrades)
 
 **Commands:**
+
 ```bash
 lefthook install                        # Install hooks
 lefthook uninstall                      # Remove hooks
@@ -105,9 +116,11 @@ git commit --no-verify                  # Bypass hooks (emergency only)
 ### Mise (Tool Management)
 
 **Configuration:** `mise.toml`
+
 - **Tools:** Lefthook (latest)
 
 **Commands:**
+
 ```bash
 mise install           # Install all tools from mise.toml
 mise list              # Show installed tools
@@ -121,17 +134,18 @@ The following paths are excluded from all code quality tools to avoid analyzing 
 
 ### Standard Exclusions (All Tools)
 
-| Path | Reason |
-|------|--------|
-| `vendor/` | Composer dependencies (third-party) |
-| `node_modules/` | NPM dependencies (third-party) |
-| `storage/` | Runtime storage, logs, caches |
-| `bootstrap/cache/` | Framework cache files |
-| `public/build/` | Compiled frontend assets |
+| Path               | Reason                              |
+| ------------------ | ----------------------------------- |
+| `vendor/`          | Composer dependencies (third-party) |
+| `node_modules/`    | NPM dependencies (third-party)      |
+| `storage/`         | Runtime storage, logs, caches       |
+| `bootstrap/cache/` | Framework cache files               |
+| `public/build/`    | Compiled frontend assets            |
 
 ### Tool-Specific Exclusions
 
 #### Larastan (`phpstan.neon.dist`)
+
 ```neon
 parameters:
   excludePaths:
@@ -143,6 +157,7 @@ parameters:
 ```
 
 #### Rector (`rector.php`)
+
 ```php
 ->withPaths([
     __DIR__ . '/app',
@@ -164,19 +179,21 @@ parameters:
 ```
 
 #### TypeScript (`tsconfig.json`)
+
 ```json
 {
-  "exclude": [
-    "node_modules",
-    "vendor",
-    "storage",
-    "public",
-    "resources/js/types/generated.d.ts"
-  ]
+    "exclude": [
+        "node_modules",
+        "vendor",
+        "storage",
+        "public",
+        "resources/js/types/generated.d.ts"
+    ]
 }
 ```
 
 #### Git (`.gitignore`)
+
 ```gitignore
 # Dependencies
 /vendor
@@ -202,14 +219,14 @@ parameters:
 
 These files are auto-generated and should never be manually edited or analyzed:
 
-| File Pattern | Tool | Purpose |
-|-------------|------|---------|
-| `resources/js/types/generated.d.ts` | Wayfinder | TypeScript route types |
-| `resources/js/actions/**` | Wayfinder | Route action functions |
-| `resources/js/routes/**` | Wayfinder | Route definitions |
-| `_ide_helper.php` | Laravel IDE Helper | IDE autocomplete |
-| `_ide_helper_models.php` | Laravel IDE Helper | Model autocomplete |
-| `.phpstorm.meta.php` | Laravel IDE Helper | PHPStorm metadata |
+| File Pattern                        | Tool               | Purpose                |
+| ----------------------------------- | ------------------ | ---------------------- |
+| `resources/js/types/generated.d.ts` | Wayfinder          | TypeScript route types |
+| `resources/js/actions/**`           | Wayfinder          | Route action functions |
+| `resources/js/routes/**`            | Wayfinder          | Route definitions      |
+| `_ide_helper.php`                   | Laravel IDE Helper | IDE autocomplete       |
+| `_ide_helper_models.php`            | Laravel IDE Helper | Model autocomplete     |
+| `.phpstorm.meta.php`                | Laravel IDE Helper | PHPStorm metadata      |
 
 ## Environment Variables
 
@@ -273,7 +290,7 @@ QUEUE_CONNECTION=redis
 
 ## File Structure
 
-```
+```text
 lucidlog/
 ├── app/                           # Application code
 │   ├── Actions/Fortify/          # Authentication actions
@@ -339,25 +356,25 @@ lucidlog/
 
 ## Composer Scripts Reference
 
-| Script | Command | Purpose |
-|--------|---------|---------|
-| `dev` | Start servers | Laravel + Vite dev servers |
-| `setup` | Install & configure | First-time project setup |
-| `analyse` | Run Larastan | Static analysis |
-| `refactor` | Run Rector | Apply PHP/Laravel upgrades |
-| `refactor:check` | Run Rector dry-run | Check upgrades without applying |
-| `format` | Run Pint | Auto-fix code formatting |
-| `format:check` | Run Pint test | Verify code formatting |
+| Script           | Command             | Purpose                         |
+| ---------------- | ------------------- | ------------------------------- |
+| `dev`            | Start servers       | Laravel + Vite dev servers      |
+| `setup`          | Install & configure | First-time project setup        |
+| `analyse`        | Run Larastan        | Static analysis                 |
+| `refactor`       | Run Rector          | Apply PHP/Laravel upgrades      |
+| `refactor:check` | Run Rector dry-run  | Check upgrades without applying |
+| `format`         | Run Pint            | Auto-fix code formatting        |
+| `format:check`   | Run Pint test       | Verify code formatting          |
 
 ## NPM Scripts Reference
 
-| Script | Command | Purpose |
-|--------|---------|---------|
-| `dev` | Vite dev server | Hot module replacement |
-| `build` | Vite build | Production build |
-| `types` | TypeScript check | Type checking |
-| `lint` | ESLint | JavaScript/TypeScript linting |
-| `format` | Prettier | Auto-fix formatting |
+| Script   | Command          | Purpose                       |
+| -------- | ---------------- | ----------------------------- |
+| `dev`    | Vite dev server  | Hot module replacement        |
+| `build`  | Vite build       | Production build              |
+| `types`  | TypeScript check | Type checking                 |
+| `lint`   | ESLint           | JavaScript/TypeScript linting |
+| `format` | Prettier         | Auto-fix formatting           |
 
 ## Common Workflows
 
@@ -499,6 +516,7 @@ alias gst='git status'
 ### VS Code
 
 Recommended extensions:
+
 - `bmewburn.vscode-intelephense-client` (PHP IntelliSense)
 - `MehediDracula.php-namespace-resolver` (PHP namespace)
 - `bradlc.vscode-tailwindcss` (Tailwind CSS)
@@ -506,19 +524,21 @@ Recommended extensions:
 - `dbaeumer.vscode-eslint` (ESLint)
 
 Settings (`.vscode/settings.json`):
+
 ```json
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[php]": {
-    "editor.defaultFormatter": "junstyle.php-cs-fixer"
-  }
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer"
+    }
 }
 ```
 
 ### PHPStorm
 
 Settings:
+
 - Enable Laravel plugin
 - Configure PHP CS Fixer to use Pint
 - Enable TypeScript support

@@ -1,6 +1,6 @@
-You are helping me shape and plan the scope for a new feature.  The following MULTI-PHASE process is aimed at documenting our key decisions regarding scope, design and architecture approach.
+You are helping me shape and plan the scope for a new feature. The following MULTI-PHASE process is aimed at documenting our key decisions regarding scope, design and architecture approach.
 
-Carefully read and execute the instructions in the following files IN SEQUENCE, following their numbered file names.  Only proceed to the next numbered instruction file once the previous numbered instruction has been executed.
+Carefully read and execute the instructions in the following files IN SEQUENCE, following their numbered file names. Only proceed to the next numbered instruction file once the previous numbered instruction has been executed.
 
 Instructions to follow in sequence:
 
@@ -29,7 +29,7 @@ OTHERWISE follow these steps to get the description:
 1. Check `@agent-os/product/roadmap.md` to find the next feature in the roadmap.
 2. OUTPUT the following to user and WAIT for user's response:
 
-```
+```text
 Which feature would you like to initiate a new spec for?
 
 - The roadmap shows [feature description] is next. Go with that?
@@ -65,6 +65,7 @@ echo "Created spec folder: $SPEC_PATH"
 ### Step 3: Create Implementation Folder
 
 Create 2 folders:
+
 - `$SPEC_PATH/implementation/`
 
 Leave this folder empty, for now. Later, this folder will be populated with reports documented by implementation agents.
@@ -73,7 +74,7 @@ Leave this folder empty, for now. Later, this folder will be populated with repo
 
 Return or output the following:
 
-```
+```text
 Spec folder initialized: `[spec-path]`
 
 Structure created:
@@ -119,23 +120,24 @@ Read the raw idea from `[spec-path]/planning/initialization.md` to understand wh
 Before generating questions, understand the broader product context:
 
 1. **Read Product Mission**: Load `agent-os/product/mission.md` to understand:
-   - The product's overall mission and purpose
-   - Target users and their primary use cases
-   - Core problems the product aims to solve
-   - How users are expected to benefit
+    - The product's overall mission and purpose
+    - Target users and their primary use cases
+    - Core problems the product aims to solve
+    - How users are expected to benefit
 
 2. **Read Product Roadmap**: Load `agent-os/product/roadmap.md` to understand:
-   - Features and capabilities already completed
-   - The current state of the product
-   - Where this new feature fits in the broader roadmap
-   - Related features that might inform or constrain this work
+    - Features and capabilities already completed
+    - The current state of the product
+    - Where this new feature fits in the broader roadmap
+    - Related features that might inform or constrain this work
 
 3. **Read Product Tech Stack**: Load `agent-os/product/tech-stack.md` to understand:
-   - Technologies and frameworks in use
-   - Technical constraints and capabilities
-   - Libraries and tools available
+    - Technologies and frameworks in use
+    - Technical constraints and capabilities
+    - Libraries and tools available
 
 This context will help you:
+
 - Ask more relevant and contextual questions
 - Identify existing features that might be reused or referenced
 - Ensure the feature aligns with product goals
@@ -148,6 +150,7 @@ Based on the initial idea, generate 4-8 targeted, NUMBERED questions that explor
 **CRITICAL: Always include the visual asset request AND reusability question at the END of your questions.**
 
 **Question generation guidelines:**
+
 - Start each question with a number
 - Propose sensible assumptions based on best practices
 - Frame questions as "I'm assuming X, is that correct?"
@@ -156,7 +159,8 @@ Based on the initial idea, generate 4-8 targeted, NUMBERED questions that explor
 - Always end with an open question about exclusions
 
 **Required output format:**
-```
+
+```text
 Based on your idea for [spec name], I have some clarifying questions:
 
 1. I assume [specific assumption]. Is that correct, or [alternative]?
@@ -206,36 +210,40 @@ ls -la [spec-path]/planning/visuals/ 2>/dev/null | grep -E '\.(png|jpg|jpeg|gif|
 ```
 
 3. IF visual files are found (bash command returns filenames):
-   - Use Read tool to analyze EACH visual file found
-   - Note key design elements, patterns, and user flows
-   - Document observations for each file
-   - Check filenames for low-fidelity indicators (lofi, lo-fi, wireframe, sketch, rough, etc.)
+    - Use Read tool to analyze EACH visual file found
+    - Note key design elements, patterns, and user flows
+    - Document observations for each file
+    - Check filenames for low-fidelity indicators (lofi, lo-fi, wireframe, sketch, rough, etc.)
 
 4. IF user provided paths or names of similar features:
-   - Make note of these paths/names for spec-writer to reference
-   - DO NOT explore them yourself (to save time), but DO document their names for future reference by the spec-writer.
+    - Make note of these paths/names for spec-writer to reference
+    - DO NOT explore them yourself (to save time), but DO document their names for future reference by the spec-writer.
 
 ### Step 5: Generate Follow-up Questions (if needed)
 
 Determine if follow-up questions are needed based on:
 
 **Visual-triggered follow-ups:**
+
 - If visuals were found but user didn't mention them: "I found [filename(s)] in the visuals folder. Let me analyze these for the specification."
 - If filenames contain "lofi", "lo-fi", "wireframe", "sketch", or "rough": "I notice you've provided [filename(s)] which appear to be wireframes/low-fidelity mockups. Should we treat these as layout and structure guides rather than exact design specifications, using our application's existing styling instead?"
 - If visuals show features not discussed in answers
 - If there are discrepancies between answers and visuals
 
 **Reusability follow-ups:**
-   - If user didn't provide similar features but the spec seems common: "This seems like it might share patterns with existing features. Could you point me to any similar forms/pages/logic in your app?"
+
+- If user didn't provide similar features but the spec seems common: "This seems like it might share patterns with existing features. Could you point me to any similar forms/pages/logic in your app?"
 - If provided paths seem incomplete you can ask something like: "You mentioned [feature]. Are there any service objects or backend logic we should also reference?"
 
 **User's Answers-triggered follow-ups:**
+
 - Vague requirements need clarification
 - Missing technical details
 - Unclear scope boundaries
 
 **If follow-ups needed, OUTPUT to orchestrator:**
-```
+
+```text
 Based on your answers [and the visual files I found], I have a few follow-up questions:
 
 1. [Specific follow-up question]
@@ -250,12 +258,13 @@ Please provide these additional details.
 
 After all questions are answered, record ALL gathered information to ONE FILE at this location with this name: `[spec-path]/planning/requirements.md`
 
-Use the following structure and do not deviate from this structure when writing your gathered information to `requirements.md`.  Include ONLY the items specified in the following structure:
+Use the following structure and do not deviate from this structure when writing your gathered information to `requirements.md`. Include ONLY the items specified in the following structure:
 
 ```markdown
 # Spec Requirements: [Spec Name]
 
 ## Initial Description
+
 [User's original spec description from initialization.md]
 
 ## Requirements Discussion
@@ -271,9 +280,11 @@ Use the following structure and do not deviate from this structure when writing 
 [Continue for all questions]
 
 ### Existing Code to Reference
+
 [Based on user's response about similar features]
 
 **Similar Features Identified:**
+
 - Feature: [Name] - Path: `[path provided by user]`
 - Components to potentially reuse: [user's description]
 - Backend logic to reference: [user's description]
@@ -282,6 +293,7 @@ Use the following structure and do not deviate from this structure when writing 
 No similar existing features identified for reference.
 
 ### Follow-up Questions
+
 [If any were asked]
 
 **Follow-up 1:** [Question]
@@ -290,11 +302,14 @@ No similar existing features identified for reference.
 ## Visual Assets
 
 ### Files Provided:
+
 [Based on actual bash check, not user statement]
+
 - `filename.png`: [Description of what it shows from your analysis]
 - `filename2.jpg`: [Key elements observed from your analysis]
 
 ### Visual Insights:
+
 - [Design patterns identified]
 - [User flow implications]
 - [UI components shown]
@@ -306,24 +321,30 @@ No visual assets provided.
 ## Requirements Summary
 
 ### Functional Requirements
+
 - [Core functionality based on answers]
 - [User actions enabled]
 - [Data to be managed]
 
 ### Reusability Opportunities
+
 - [Components that might exist already based on user's input]
 - [Backend patterns to investigate]
 - [Similar features to model after]
 
 ### Scope Boundaries
+
 **In Scope:**
+
 - [What will be built]
 
 **Out of Scope:**
+
 - [What won't be built]
 - [Future enhancements mentioned]
 
 ### Technical Considerations
+
 - [Integration points mentioned]
 - [Existing system constraints]
 - [Technology preferences stated]
@@ -334,7 +355,7 @@ No visual assets provided.
 
 Return to orchestrator:
 
-```
+```text
 Requirements research complete!
 
 ✅ Processed [X] clarifying questions
@@ -360,12 +381,11 @@ Ready for specification creation.
 - Document paths to similar features for spec-writer to reference
 - OUTPUT questions and STOP to wait for orchestrator to relay responses
 
-
 ## Display confirmation and next step
 
 Once you've completed your research and documented it, output the following message:
 
-```
+```text
 ✅ I have documented this spec's research and requirements in `agent-os/specs/[this-spec]/planning`.
 
 Next step: Run the command, `1-create-spec.md`.
@@ -373,7 +393,7 @@ Next step: Run the command, `1-create-spec.md`.
 
 After all steps complete, inform the user:
 
-```
+```text
 Spec initialized successfully!
 
 ✅ Spec folder created: `[spec-path]`

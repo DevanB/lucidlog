@@ -139,7 +139,7 @@ For each workflow:
 
 ### Example: Checking Tests Workflow
 
-```
+```text
 1. Setup PHP ✓
 2. Setup Node ✓
 3. Cache Composer Dependencies ✓
@@ -159,7 +159,7 @@ For each workflow:
 
 ### Example: Checking Linter Workflow
 
-```
+```text
 1. Checkout ✓
 2. Setup PHP ✓
 3. Setup Node ✓
@@ -275,7 +275,7 @@ To ensure CI/CD properly catches issues, test failure behavior:
 1. Create a fresh PR (new branch)
 2. Check workflow logs for:
 
-    ```
+    ```text
     Cache not found for input keys: Linux-composer-abc123
     ```
 
@@ -286,7 +286,7 @@ To ensure CI/CD properly catches issues, test failure behavior:
 1. Push another commit to the same PR
 2. Check workflow logs for:
 
-    ```
+    ```text
     Cache restored from key: Linux-composer-abc123
     ```
 

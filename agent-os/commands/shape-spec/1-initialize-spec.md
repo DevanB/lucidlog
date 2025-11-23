@@ -21,7 +21,7 @@ OTHERWISE follow these steps to get the description:
 1. Check `@agent-os/product/roadmap.md` to find the next feature in the roadmap.
 2. OUTPUT the following to user and WAIT for user's response:
 
-```
+```text
 Which feature would you like to initiate a new spec for?
 
 - The roadmap shows [feature description] is next. Go with that?
@@ -57,6 +57,7 @@ echo "Created spec folder: $SPEC_PATH"
 ### Step 3: Create Implementation Folder
 
 Create 2 folders:
+
 - `$SPEC_PATH/implementation/`
 
 Leave this folder empty, for now. Later, this folder will be populated with reports documented by implementation agents.
@@ -65,7 +66,7 @@ Leave this folder empty, for now. Later, this folder will be populated with repo
 
 Return or output the following:
 
-```
+```text
 Spec folder initialized: `[spec-path]`
 
 Structure created:
@@ -83,12 +84,11 @@ Ready for requirements research phase.
 - Follow folder structure exactly
 - Implementation folder should be empty, for now
 
-
 ## Display confirmation and next step
 
 Once you've initialized the spec folder, output the following message (replace `[this-spec]` with the folder name for this spec)
 
-```
+```text
 ✅ I have initialized the spec folder at `agent-os/specs/[this-spec]`.
 
 NEXT STEP 👉 Run the command, 2-research-spec.md
