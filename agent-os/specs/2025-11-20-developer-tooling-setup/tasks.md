@@ -15,8 +15,11 @@ This specification configures comprehensive developer tooling including static a
   - [x] 1.1 Install PHP tooling dependencies
     - Run `composer require --dev larastan/larastan --no-interaction`
     - Run `composer require --dev rector/rector --no-interaction`
-    - Run `composer require --dev sinnbeck/laravel-ultracite --no-interaction` (SKIPPED - package not available)
     - Verify Laravel Pint is already installed (check composer.json require-dev)
+  - [ ] 1.1b Install Ultracite for frontend linting
+    - Run `npx ultracite@latest init` to install and configure
+    - Verify biome.json configuration is created with React and TypeScript presets
+    - Confirm @biomejs/biome is added to package.json devDependencies
   - [x] 1.2 Create Larastan configuration file
     - Create `phpstan.neon.dist` at project root
     - Configure level 5 static analysis
@@ -129,10 +132,10 @@ This specification configures comprehensive developer tooling including static a
     - Add Rector command: `vendor/bin/rector process --dry-run=false {staged_files}` (auto-fix mode)
     - Run only on staged PHP files using glob pattern filter
     - Set as fourth check in execution order
-  - [x] 3.7 Configure Ultracite Laravel checks in Lefthook
-    - Add Ultracite command: `php artisan ultracite:check {staged_files}` (SKIPPED - package not available)
-    - Run only on staged PHP files using glob pattern filter
-    - Set as fifth check in execution order
+  - [ ] 3.2b Configure Ultracite frontend linting in Lefthook
+    - Add Ultracite command: `npx @biomejs/biome check --write {staged_files}`
+    - Run only on staged JavaScript/TypeScript files using glob pattern filter: `*.{js,jsx,ts,tsx}`
+    - Set as second check in execution order (after Pint, before TypeScript types)
   - [x] 3.8 Configure emergency bypass support
     - Ensure Lefthook respects `--no-verify` flag for emergency commits
     - Document bypass usage in commit failure messages
@@ -143,7 +146,7 @@ This specification configures comprehensive developer tooling including static a
 **Acceptance Criteria:**
 - `mise.toml` exists with Lefthook tool definition
 - `lefthook.yml` exists with pre-commit configuration
-- Pre-commit hook runs all 5 tools in correct order: Pint, TypeScript, Larastan, Rector, Ultracite
+- Pre-commit hook runs all 5 tools in correct order: Pint, Ultracite, TypeScript, Larastan, Rector
 - Hooks run only on staged files (not entire codebase)
 - Hooks fail fast on first error
 - `--no-verify` flag allows bypassing hooks
@@ -214,10 +217,11 @@ This specification configures comprehensive developer tooling including static a
     - Verify it formats PHP files according to Laravel preset
     - Run `composer run format:check` to verify formatted code passes
     - Check that formatting is consistent across codebase
-  - [x] 5.4 Test Ultracite Laravel checks
-    - Run `php artisan ultracite:check` manually on local environment (SKIPPED - package not available)
-    - Verify it detects Laravel-specific anti-patterns and best practice violations
-    - Check that exclusion paths are respected
+  - [ ] 5.4 Test Ultracite frontend linting
+    - Run `npx @biomejs/biome check` manually on local environment
+    - Verify it detects JavaScript/TypeScript/React code quality issues
+    - Run `npx @biomejs/biome check --write` to apply auto-fixes
+    - Check that it properly formats and lints frontend files
   - [x] 5.5 Test TypeScript type checking
     - Run `npm run types` manually on local environment
     - Verify it checks all TypeScript/React files

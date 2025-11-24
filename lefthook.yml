@@ -26,8 +26,7 @@ pre-commit:
     # 4. Run Rector PHP upgrade checks and auto-fix
     rector:
       glob: "*.php"
-      run: vendor/bin/rector process {staged_files}
+      run: vendor/bin/rector process {staged_files} --dry-run
       stage_fixed: true
-
 # Emergency bypass available with: git commit --no-verify
 # Use this only when you need to commit immediately without running checks

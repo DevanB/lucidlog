@@ -75,7 +75,7 @@ No visual assets to analyze.
 - Rector configured with PHP 8.4 and Laravel 12 rules
 - Auto-fix mode during pre-commit hooks
 - Check-only mode in CI/CD (reports issues, fails build on violations)
-- Ultracite integration for additional Laravel-specific checks
+- Ultracite (Biome-based) integration for frontend linting and formatting
 
 **Code Formatting:**
 - Laravel Pint for PHP code formatting
@@ -87,11 +87,11 @@ No visual assets to analyze.
 - Installed via Mise (configured in mise.toml)
 - Project-level configuration (lefthook.yml)
 - Run on staged files only:
-  - Pint (auto-fix formatting)
+  - Pint (auto-fix PHP formatting)
+  - Ultracite (auto-fix frontend linting/formatting)
+  - TypeScript type checking
   - Larastan (static analysis)
   - Rector (auto-fix PHP upgrades)
-  - Ultracite (Laravel-specific checks)
-  - TypeScript type checking
 - Block commits on failure
 - Allow --no-verify bypass for emergencies
 
@@ -143,13 +143,14 @@ No visual assets to analyze.
 ### Scope Boundaries
 
 **In Scope:**
-- Installing and configuring all specified tools (Larastan, Pint, Rector, Ultracite, Telescope, DebugBar)
+- Installing and configuring all specified tools (Larastan, Pint, Rector, Ultracite/Biome, Telescope, DebugBar)
 - Setting up Lefthook with Mise integration
 - Configuring pre-commit hooks for staged file checking
 - Establishing CI/CD pipeline with full codebase analysis
 - Environment-based configuration for debugging tools
 - Exclusion pattern configuration
 - Documentation for developers on hook usage and bypass options
+- Replacing ESLint/Prettier with Ultracite (Biome) for frontend linting
 
 **Out of Scope:**
 - CodeRabbit setup (already configured)
@@ -170,8 +171,8 @@ No visual assets to analyze.
 ### Technical Considerations
 
 **Tool Installation:**
-- Composer for PHP tools (Larastan, Pint, Rector, Ultracite, Telescope, DebugBar)
-- NPM/Yarn for TypeScript tooling
+- Composer for PHP tools (Larastan, Pint, Rector, Telescope, DebugBar)
+- NPM for frontend tools (Ultracite/Biome, TypeScript tooling)
 - Mise for Lefthook installation (system-level hook manager)
 - GitHub Actions for CI/CD execution
 

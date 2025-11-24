@@ -27,11 +27,13 @@ Configure comprehensive developer tooling including static analysis, code format
 - Auto-fix mode on pre-commit: `rector process --dry-run=false`
 - Check-only mode in CI/CD: `rector process --dry-run` that fails build on violations
 
-**Ultracite Laravel-Specific Checks**
-- Install `sinnbeck/laravel-ultracite` via Composer as a dev dependency
-- Run `php artisan ultracite:check` on staged PHP files during pre-commit
-- Configure to check for Laravel best practices and common anti-patterns
-- Exclude standard Laravel paths (vendor/, storage/, bootstrap/cache/)
+**Ultracite Frontend Linting and Formatting**
+- Install Ultracite via NPM: `npx ultracite@latest init`
+- Ultracite is a Biome-based linter and formatter for JavaScript/TypeScript/React
+- Zero-configuration preset that replaces ESLint + Prettier with a single tool
+- Run `npx @biomejs/biome check --write` on staged frontend files during pre-commit
+- Run `npx @biomejs/biome check` in CI/CD to verify code quality
+- Configure for React and TypeScript in biome.json (auto-generated)
 
 **Laravel Pint Code Formatting**
 - Laravel Pint already installed in composer.json
@@ -51,7 +53,7 @@ Configure comprehensive developer tooling including static analysis, code format
 - Define Lefthook installation with version pinning in mise.toml
 - Create `lefthook.yml` configuration at project root
 - Configure pre-commit hook that runs on staged files only using `{staged_files}` pattern
-- Execute in order: Pint (formatting), TypeScript types, Larastan (analysis), Rector (upgrades), Ultracite (Laravel checks)
+- Execute in order: Pint (PHP formatting), Ultracite (frontend linting), TypeScript types, Larastan (analysis), Rector (upgrades)
 - Each tool should fail fast (stop on first error)
 - Support `--no-verify` flag for emergency bypasses
 - Install hooks automatically with `lefthook install` in setup documentation

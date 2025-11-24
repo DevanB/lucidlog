@@ -272,7 +272,7 @@ DEBUGBAR_ENABLED=true
 
 ## CI/CD Pipeline
 
-Our CI/CD pipeline runs on every push and pull request to the `master` branches.
+Our CI/CD pipeline runs on every push and pull request to the `master` branch.
 
 ### Pipeline Stages
 

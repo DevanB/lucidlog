@@ -35,4 +35,4 @@ return RectorConfig::configure()
         // Laravel 12 rule set - using driftingly/rector-laravel
         LaravelSetList::LARAVEL_120,
     ])
-    ->withTypeCoverageLevel(0);
+    ->withTypeCoverageLevel(5);
