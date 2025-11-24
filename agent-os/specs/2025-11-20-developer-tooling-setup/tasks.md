@@ -212,7 +212,7 @@ This specification configures comprehensive developer tooling including static a
 - [x] 5.0 Validate all tooling configurations and integrations
   - [x] 5.1 Test Larastan static analysis
     - Run `composer run analyse` manually on local environment
-    - Verify it analyzes entire PHP codebase at level 5
+    - Verify it analyses entire PHP codebase at level 5
     - Check that exclusion paths are respected (vendor/, node_modules/, etc.)
     - Confirm memory limit (2G) prevents out-of-memory errors
     - Verify baseline file prevents legacy code from failing checks
@@ -262,7 +262,7 @@ This specification configures comprehensive developer tooling including static a
 **Acceptance Criteria:**
 
 - All Composer scripts execute successfully (analyse, refactor, refactor:check, format, format:check)
-- Larastan analyzes codebase at level 5 with proper exclusions
+- Larastan analyses codebase at level 5 with proper exclusions
 - Rector detects PHP 8.4 and Laravel 12 upgrade opportunities
 - Pint formats code according to Laravel preset
 - Ultracite detects Laravel-specific issues

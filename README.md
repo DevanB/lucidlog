@@ -67,7 +67,6 @@ npm run lint              # Lint frontend code
 
 # Testing
 php artisan test          # Run Pest test suite
-npm run test              # Run frontend tests (if configured)
 
 # Build
 npm run build             # Build frontend assets for production

@@ -89,7 +89,7 @@ Test CI/CD pipeline configuration with new static analysis and code quality tool
 - [ ] Composer dependencies install with caching
 - [ ] NPM dependencies install with caching
 - [ ] Frontend assets build successfully
-- [ ] Larastan runs and analyzes codebase
+- [ ] Larastan runs and analyses codebase
 - [ ] Rector check runs in dry-run mode
 - [ ] Pest test suite executes successfully
 - [ ] All steps pass
@@ -376,7 +376,7 @@ After testing, create a summary of results:
 
 ### Issue: Tools Not Found
 
-**Symptom:** `vendor/bin/larastan: command not found`
+**Symptom:** `vendor/bin/phpstan: command not found`
 
 **Solution:**
 
@@ -458,7 +458,7 @@ After deployment, monitor CI/CD health:
 ## Success Criteria
 
 ✅ All workflows pass on pull requests
-✅ Larastan analyzes codebase without errors (or only baseline errors)
+✅ Larastan analyses codebase without errors (or only baseline errors)
 ✅ Rector check runs successfully
 ✅ Pint verifies formatting
 ✅ TypeScript type checking passes

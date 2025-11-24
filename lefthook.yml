@@ -29,10 +29,9 @@ pre-commit:
       glob: "*.php"
       run: vendor/bin/phpstan analyse --memory-limit=2G {staged_files} --error-format=table
 
-    # 5. Run Rector PHP upgrade checks and auto-fix
+    # 5. Run Rector PHP upgrade checks on staged PHP files
     rector:
       glob: "*.php"
       run: vendor/bin/rector process {staged_files} --dry-run
-      stage_fixed: true
 # Emergency bypass available with: git commit --no-verify
 # Use this only when you need to commit immediately without running checks

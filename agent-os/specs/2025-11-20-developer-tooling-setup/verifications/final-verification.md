@@ -148,36 +148,36 @@ This was the first item in the roadmap and has been successfully completed, esta
 All failing tests are related to CSRF token validation (419 errors), not the developer tooling setup:
 
 1. `Tests\Feature\Auth\AuthenticationTest`
-   - users can authenticate using the login screen
-   - users with two factor enabled are redirected to two factor challenge
-   - users can logout
-   - users are rate limited
+    - users can authenticate using the login screen
+    - users with two-factor enabled are redirected to two factor challenge
+    - users can logout
+    - users are rate limited
 
 2. `Tests\Feature\Auth\PasswordResetTest`
-   - reset password link can be requested
-   - reset password screen can be rendered
-   - password can be reset with valid token
-   - password cannot be reset with invalid token
+    - reset password link can be requested
+    - reset password screen can be rendered
+    - password can be reset with valid token
+    - password cannot be reset with invalid token
 
 3. `Tests\Feature\Auth\RegistrationTest`
-   - new users can register
+    - new users can register
 
 4. `Tests\Feature\Auth\TwoFactorChallengeTest`
-   - two factor challenge can be rendered
+    - two-factor challenge can be rendered
 
 5. `Tests\Feature\Auth\VerificationNotificationTest`
-   - sends verification notification
-   - does not send verification notification if email is verified
+    - sends verification notification
+    - does not send verification notification if email is verified
 
 6. `Tests\Feature\Settings\PasswordUpdateTest`
-   - password can be updated
-   - correct password must be provided to update password
+    - password can be updated
+    - correct password must be provided to update password
 
 7. `Tests\Feature\Settings\ProfileUpdateTest`
-   - profile information can be updated
-   - email verification status is unchanged when the email address is unchanged
-   - user can delete their account
-   - correct password must be provided to delete account
+    - profile information can be updated
+    - email verification status is unchanged when the email address is unchanged
+    - user can delete their account
+    - correct password must be provided to delete account
 
 ### Root Cause Analysis
 
@@ -288,24 +288,24 @@ resources/js/pages/auth/two-factor-challenge.tsx:74:72 lint/suspicious/noArrayIn
 ### Hook Commands (in order)
 
 1. **Pint** - PHP formatting (auto-fix, stages fixed files)
-   - Glob: `*.php`
-   - Command: `vendor/bin/pint {staged_files}`
+    - Glob: `*.php`
+    - Command: `vendor/bin/pint {staged_files}`
 
 2. **Ultracite/Biome** - Frontend linting (auto-fix, stages fixed files)
-   - Glob: `*.{js,jsx,ts,tsx}`
-   - Command: `npx @biomejs/biome check --write {staged_files}`
+    - Glob: `*.{js,jsx,ts,tsx}`
+    - Command: `npx @biomejs/biome check --write {staged_files}`
 
 3. **TypeScript** - Type checking
-   - Glob: `*.{ts,tsx}`
-   - Command: `npm run types`
+    - Glob: `*.{ts,tsx}`
+    - Command: `npm run types`
 
 4. **Larastan** - Static analysis
-   - Glob: `*.php`
-   - Command: `vendor/bin/phpstan analyse --memory-limit=2G {staged_files}`
+    - Glob: `*.php`
+    - Command: `vendor/bin/phpstan analyse --memory-limit=2G {staged_files}`
 
 5. **Rector** - PHP upgrade check (dry-run)
-   - Glob: `*.php`
-   - Command: `vendor/bin/rector process {staged_files} --dry-run`
+    - Glob: `*.php`
+    - Command: `vendor/bin/rector process {staged_files} --dry-run`
 
 ### Installation
 
@@ -328,10 +328,12 @@ The pre-commit hooks are properly configured to run only on staged files for fas
 **Purpose:** Run full test suite with static analysis
 
 **Triggers:**
+
 - Push to `master` branch
 - Pull requests to `master` branch
 
 **Steps:**
+
 1. Checkout code
 2. Setup PHP 8.4
 3. Setup Node 22
@@ -346,6 +348,7 @@ The pre-commit hooks are properly configured to run only on staged files for fas
 12. Run Pest test suite
 
 **Caching:**
+
 - ✅ Composer vendor/ directory
 - ✅ NPM node_modules/ (via setup-node action)
 
@@ -354,10 +357,12 @@ The pre-commit hooks are properly configured to run only on staged files for fas
 **Purpose:** Verify code formatting and frontend quality
 
 **Triggers:**
+
 - Push to `master` branch
 - Pull requests to `master` branch
 
 **Steps:**
+
 1. Checkout code
 2. Setup PHP 8.4
 3. Setup Node 22
@@ -371,6 +376,7 @@ The pre-commit hooks are properly configured to run only on staged files for fas
 11. Run ESLint
 
 **Caching:**
+
 - ✅ Composer vendor/ directory
 - ✅ NPM node_modules/ (via setup-node action)
 
@@ -423,16 +429,16 @@ Both debugging tools are configured to be automatically disabled in production v
 
 All required Composer scripts are properly defined in `composer.json`:
 
-| Script | Command | Purpose |
-|--------|---------|---------|
-| `setup` | Multi-step | First-time project setup |
-| `dev` | Concurrently | Start all dev servers |
-| `test` | php artisan test | Run test suite |
-| `analyse` | phpstan analyse | Static analysis |
-| `refactor` | rector process | Apply PHP upgrades |
-| `refactor:check` | rector --dry-run | Check upgrades |
-| `format` | pint | Auto-fix formatting |
-| `format:check` | pint --test | Verify formatting |
+| Script           | Command          | Purpose                  |
+| ---------------- | ---------------- | ------------------------ |
+| `setup`          | Multi-step       | First-time project setup |
+| `dev`            | Concurrently     | Start all dev servers    |
+| `test`           | php artisan test | Run test suite           |
+| `analyse`        | phpstan analyse  | Static analysis          |
+| `refactor`       | rector process   | Apply PHP upgrades       |
+| `refactor:check` | rector --dry-run | Check upgrades           |
+| `format`         | pint             | Auto-fix formatting      |
+| `format:check`   | pint --test      | Verify formatting        |
 
 ### Setup Script Enhancement
 
@@ -447,6 +453,7 @@ The `setup` script includes `lefthook install` as the final step, ensuring hooks
 ### DEVELOPER_SETUP.md
 
 Comprehensive 559-line quick reference covering:
+
 - Quick setup instructions
 - Tool configurations overview
 - Run commands for each tool
@@ -462,6 +469,7 @@ Comprehensive 559-line quick reference covering:
 ### TROUBLESHOOTING.md
 
 Extensive 1091-line guide covering:
+
 - Pre-commit hook issues
 - Static analysis (Larastan) issues
 - PHP upgrades (Rector) issues
@@ -475,6 +483,7 @@ Extensive 1091-line guide covering:
 ### Coverage
 
 Both documents are well-organized with:
+
 - Clear table of contents
 - Symptom-diagnosis-solution format
 - Code examples and commands
@@ -508,46 +517,46 @@ All tools properly exclude the same base paths:
 ### Issues Found
 
 1. **TypeScript Type Errors (12 errors)**
-   - Location: `resources/js/pages/auth/login.tsx` and `register.tsx`
-   - Issue: `maxLength` prop receiving string instead of number
-   - Severity: Medium
-   - Impact: Pre-commit hooks will fail on TS file changes
-   - Recommendation: Convert string literals to numbers or adjust prop types
+    - Location: `resources/js/pages/auth/login.tsx` and `register.tsx`
+    - Issue: `maxLength` prop receiving string instead of number
+    - Severity: Medium
+    - Impact: Pre-commit hooks will fail on TS file changes
+    - Recommendation: Convert string literals to numbers or adjust prop types
 
 2. **Biome Linting Warning (1 warning)**
-   - Location: `resources/js/pages/auth/two-factor-challenge.tsx:74`
-   - Issue: Using array index as React key
-   - Severity: Low
-   - Impact: Best practice violation, potential React rendering issues
-   - Recommendation: Use stable identifier for keys
+    - Location: `resources/js/pages/auth/two-factor-challenge.tsx:74`
+    - Issue: Using array index as React key
+    - Severity: Low
+    - Impact: Best practice violation, potential React rendering issues
+    - Recommendation: Use stable identifier for keys
 
 3. **Test Failures (18 failures)**
-   - Location: Various auth and settings tests
-   - Issue: CSRF token validation failing (419 errors)
-   - Severity: High
-   - Impact: CI/CD pipeline may fail
-   - Recommendation: Fix CSRF token handling in test setup
-   - Note: This is NOT a tooling issue - tooling is correctly identifying application issues
+    - Location: Various auth and settings tests
+    - Issue: CSRF token validation failing (419 errors)
+    - Severity: High
+    - Impact: CI/CD pipeline may fail
+    - Recommendation: Fix CSRF token handling in test setup
+    - Note: This is NOT a tooling issue - tooling is correctly identifying application issues
 
 ### Recommendations
 
 1. **Fix TypeScript Errors**
-   - Priority: High
-   - Quick fix available - convert strings to numbers
+    - Priority: High
+    - Quick fix available - convert strings to numbers
 
 2. **Fix Test Failures**
-   - Priority: High
-   - Investigate CSRF token middleware in test environment
-   - May need to add `withoutMiddleware` or configure test setup
+    - Priority: High
+    - Investigate CSRF token middleware in test environment
+    - May need to add `withoutMiddleware` or configure test setup
 
 3. **Address Biome Warning**
-   - Priority: Low
-   - Refactor to use stable keys in two-factor challenge component
+    - Priority: Low
+    - Refactor to use stable keys in two-factor challenge component
 
 4. **Consider Adding More Tools (Future)**
-   - PHPDoc validation
-   - Import sorting automation
-   - Security vulnerability scanning (e.g., composer audit)
+    - PHPDoc validation
+    - Import sorting automation
+    - Security vulnerability scanning (e.g., composer audit)
 
 ---
 
