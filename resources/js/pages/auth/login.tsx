@@ -34,7 +34,7 @@ export default function Login({ status, canResetPassword, canRegister }: LoginPr
                                     name="email"
                                     required
                                     autoFocus
-                                    tabIndex="0"
+                                    tabIndex={0}
                                     autoComplete="email"
                                     placeholder="email@example.com"
                                 />
@@ -45,7 +45,7 @@ export default function Login({ status, canResetPassword, canRegister }: LoginPr
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
                                     {canResetPassword && (
-                                        <TextLink href={request()} className="ml-auto text-sm" tabIndex="0">
+                                        <TextLink href={request()} className="ml-auto text-sm" tabIndex={0}>
                                             Forgot password?
                                         </TextLink>
                                     )}
@@ -55,7 +55,7 @@ export default function Login({ status, canResetPassword, canRegister }: LoginPr
                                     type="password"
                                     name="password"
                                     required
-                                    tabIndex="0"
+                                    tabIndex={0}
                                     autoComplete="current-password"
                                     placeholder="Password"
                                 />
@@ -63,14 +63,14 @@ export default function Login({ status, canResetPassword, canRegister }: LoginPr
                             </div>
 
                             <div className="flex items-center space-x-3">
-                                <Checkbox id="remember" name="remember" tabIndex="0" />
+                                <Checkbox id="remember" name="remember" tabIndex={0} />
                                 <Label htmlFor="remember">Remember me</Label>
                             </div>
 
                             <Button
                                 type="submit"
                                 className="mt-4 w-full"
-                                tabIndex="0"
+                                tabIndex={0}
                                 disabled={processing}
                                 data-test="login-button"
                             >
@@ -82,7 +82,7 @@ export default function Login({ status, canResetPassword, canRegister }: LoginPr
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
                                 Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex="0">
+                                <TextLink href={register()} tabIndex={0}>
                                     Sign up
                                 </TextLink>
                             </div>
