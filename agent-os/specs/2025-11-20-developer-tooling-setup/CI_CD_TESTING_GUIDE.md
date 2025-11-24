@@ -376,7 +376,7 @@ After testing, create a summary of results:
 
 ### Issue: Tools Not Found
 
-**Symptom:** `vendor/bin/phpstan: command not found`
+**Symptom:** `vendor/bin/larastan: command not found`
 
 **Solution:**
 
@@ -424,7 +424,7 @@ After successful testing:
 2. **Delete test branches:**
 
     ```bash
-    git checkout develop
+    git checkout master
     git pull
     git branch -d test/ci-cd-validation
     git branch -d test/formatting-failure

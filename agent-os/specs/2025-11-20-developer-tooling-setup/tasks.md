@@ -1,6 +1,7 @@
 # Task Breakdown: Developer Tooling Setup
 
 ## Overview
+
 Total Tasks: 6 Task Groups
 This specification configures comprehensive developer tooling including static analysis (Larastan), code formatting (Pint), PHP upgrades (Rector), Laravel-specific checks (Ultracite), debugging tools (Telescope, DebugBar), pre-commit hooks (Lefthook), and CI/CD pipeline enhancements.
 
@@ -9,6 +10,7 @@ This specification configures comprehensive developer tooling including static a
 ### Configuration Files & Dependencies
 
 #### Task Group 1: Core Tooling Installation and Configuration
+
 **Dependencies:** None
 
 - [x] 1.0 Install and configure static analysis and code quality tools
@@ -50,6 +52,7 @@ This specification configures comprehensive developer tooling including static a
     - Document baseline purpose in comments
 
 **Acceptance Criteria:**
+
 - All PHP dev dependencies successfully installed via Composer
 - `phpstan.neon.dist` exists with level 5 configuration and proper exclusions
 - `rector.php` exists with PHP 8.4 and Laravel 12 rule sets
@@ -60,6 +63,7 @@ This specification configures comprehensive developer tooling including static a
 ### Debugging Tools Configuration
 
 #### Task Group 2: Laravel Telescope and DebugBar Setup
+
 **Dependencies:** Task Group 1
 
 - [x] 2.0 Install and configure debugging tools for local/staging environments
@@ -92,6 +96,7 @@ This specification configures comprehensive developer tooling including static a
     - Add `DEBUGBAR_ENABLED=true` to `.env.example` with comment "# Local/Staging only"
 
 **Acceptance Criteria:**
+
 - Telescope successfully installed with migrations run
 - Telescope accessible at `/telescope` route in local environment
 - Telescope protected by authentication in staging environment
@@ -104,6 +109,7 @@ This specification configures comprehensive developer tooling including static a
 ### Pre-Commit Hook Management
 
 #### Task Group 3: Lefthook Pre-Commit Hook Configuration
+
 **Dependencies:** Task Group 1
 
 - [x] 3.0 Configure Lefthook for automated pre-commit checks
@@ -144,6 +150,7 @@ This specification configures comprehensive developer tooling including static a
     - Ensure hooks are installed automatically during project setup
 
 **Acceptance Criteria:**
+
 - `mise.toml` exists with Lefthook tool definition
 - `lefthook.yml` exists with pre-commit configuration
 - Pre-commit hook runs all 5 tools in correct order: Pint, Ultracite, TypeScript, Larastan, Rector
@@ -155,6 +162,7 @@ This specification configures comprehensive developer tooling including static a
 ### CI/CD Pipeline Enhancement
 
 #### Task Group 4: GitHub Actions Workflow Updates
+
 **Dependencies:** Task Group 1
 
 - [x] 4.0 Update CI/CD workflows for comprehensive code quality checks
@@ -187,6 +195,7 @@ This specification configures comprehensive developer tooling including static a
     - Check for proper error messages on failures
 
 **Acceptance Criteria:**
+
 - `tests.yml` includes Larastan and Rector check steps
 - `lint.yml` runs Pint in test mode and TypeScript type checking
 - Both workflows fail fast on first error
@@ -197,6 +206,7 @@ This specification configures comprehensive developer tooling including static a
 ### Testing & Verification
 
 #### Task Group 5: Tooling Validation and Testing
+
 **Dependencies:** Task Groups 1-4
 
 - [x] 5.0 Validate all tooling configurations and integrations
@@ -250,6 +260,7 @@ This specification configures comprehensive developer tooling including static a
     - Confirm service providers are not registered in production
 
 **Acceptance Criteria:**
+
 - All Composer scripts execute successfully (analyse, refactor, refactor:check, format, format:check)
 - Larastan analyzes codebase at level 5 with proper exclusions
 - Rector detects PHP 8.4 and Laravel 12 upgrade opportunities
@@ -265,6 +276,7 @@ This specification configures comprehensive developer tooling including static a
 ### Documentation & Final Testing
 
 #### Task Group 6: CI/CD Validation and Documentation
+
 **Dependencies:** Task Groups 1-5
 
 - [x] 6.0 Validate CI/CD pipeline and document setup
@@ -310,6 +322,7 @@ This specification configures comprehensive developer tooling including static a
     - Document how to disable specific hooks temporarily if needed
 
 **Acceptance Criteria:**
+
 - CI/CD pipelines execute successfully on pull requests
 - Larastan, Rector, Pint test mode, and TypeScript checking run in CI/CD
 - CI/CD fails fast with clear error messages on violations
@@ -322,6 +335,7 @@ This specification configures comprehensive developer tooling including static a
 ## Execution Order
 
 Recommended implementation sequence:
+
 1. Configuration Files & Dependencies (Task Group 1)
 2. Debugging Tools Configuration (Task Group 2)
 3. Pre-Commit Hook Management (Task Group 3)
@@ -332,29 +346,34 @@ Recommended implementation sequence:
 ## Important Notes
 
 **Test Coverage Approach:**
+
 - This feature primarily involves configuration and tooling setup rather than application code
 - Validation is performed through manual testing and CI/CD pipeline execution
 - No traditional unit/feature tests are written for configuration files
 - Testing focuses on verifying each tool runs correctly and integrates properly
 
 **Pre-commit Hook Philosophy:**
+
 - Staged files only for speed (pre-commit)
 - Full codebase analysis in CI/CD for comprehensive quality checks
 - Auto-fix mode in pre-commit (Pint, Rector) to minimize developer friction
 - Check-only mode in CI/CD to prevent unexpected code changes
 
 **Environment-Based Tool Enabling:**
+
 - Telescope and DebugBar are dev dependencies (`--dev` flag)
-- Enabled only when `APP_ENV` is `local` or `staging`
+- Enabled when `APP_ENV` is not `production`
 - Production environment should never load these tools
 - Use environment variables for explicit control: `TELESCOPE_ENABLED`, `DEBUGBAR_ENABLED`
 
 **Exclusion Pattern Consistency:**
+
 - Apply same exclusion patterns across all tools: vendor/, node_modules/, storage/, bootstrap/cache/, public/build/
 - Skip generated files: Wayfinder actions, IDE helpers, Vite manifest, compiled assets
 - Maintain baseline file (`.phpstan-baseline.neon`) for legacy code that doesn't meet current standards
 
 **CI/CD Integration Strategy:**
+
 - Extend existing workflows rather than creating new ones
 - Maintain existing branch triggers and pull request workflows
 - Use same PHP (8.4) and Node (22) versions across all tools
