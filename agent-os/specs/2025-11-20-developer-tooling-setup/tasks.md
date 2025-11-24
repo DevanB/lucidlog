@@ -16,7 +16,7 @@ This specification configures comprehensive developer tooling including static a
     - Run `composer require --dev larastan/larastan --no-interaction`
     - Run `composer require --dev rector/rector --no-interaction`
     - Verify Laravel Pint is already installed (check composer.json require-dev)
-  - [ ] 1.1b Install Ultracite for frontend linting
+  - [x] 1.1b Install Ultracite for frontend linting
     - Run `npx ultracite@latest init` to install and configure
     - Verify biome.json configuration is created with React and TypeScript presets
     - Confirm @biomejs/biome is added to package.json devDependencies
@@ -132,7 +132,7 @@ This specification configures comprehensive developer tooling including static a
     - Add Rector command: `vendor/bin/rector process --dry-run=false {staged_files}` (auto-fix mode)
     - Run only on staged PHP files using glob pattern filter
     - Set as fourth check in execution order
-  - [ ] 3.2b Configure Ultracite frontend linting in Lefthook
+  - [x] 3.2b Configure Ultracite frontend linting in Lefthook
     - Add Ultracite command: `npx @biomejs/biome check --write {staged_files}`
     - Run only on staged JavaScript/TypeScript files using glob pattern filter: `*.{js,jsx,ts,tsx}`
     - Set as second check in execution order (after Pint, before TypeScript types)
@@ -217,7 +217,7 @@ This specification configures comprehensive developer tooling including static a
     - Verify it formats PHP files according to Laravel preset
     - Run `composer run format:check` to verify formatted code passes
     - Check that formatting is consistent across codebase
-  - [ ] 5.4 Test Ultracite frontend linting
+  - [x] 5.4 Test Ultracite frontend linting
     - Run `npx @biomejs/biome check` manually on local environment
     - Verify it detects JavaScript/TypeScript/React code quality issues
     - Run `npx @biomejs/biome check --write` to apply auto-fixes

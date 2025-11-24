@@ -1,20 +1,20 @@
-import HeadingSmall from '@/components/heading-small';
-import TwoFactorRecoveryCodes from '@/components/two-factor-recovery-codes';
-import TwoFactorSetupModal from '@/components/two-factor-setup-modal';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
-import AppLayout from '@/layouts/app-layout';
-import SettingsLayout from '@/layouts/settings/layout';
-import { disable, enable, show } from '@/routes/two-factor';
-import { type BreadcrumbItem } from '@/types';
-import { Form, Head } from '@inertiajs/react';
-import { ShieldBan, ShieldCheck } from 'lucide-react';
-import { useState } from 'react';
+import { Form, Head } from '@inertiajs/react'
+import { ShieldBan, ShieldCheck } from 'lucide-react'
+import { useState } from 'react'
+import HeadingSmall from '@/components/heading-small'
+import TwoFactorRecoveryCodes from '@/components/two-factor-recovery-codes'
+import TwoFactorSetupModal from '@/components/two-factor-setup-modal'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth'
+import AppLayout from '@/layouts/app-layout'
+import SettingsLayout from '@/layouts/settings/layout'
+import { disable, enable, show } from '@/routes/two-factor'
+import type { BreadcrumbItem } from '@/types'
 
 interface TwoFactorProps {
-    requiresConfirmation?: boolean;
-    twoFactorEnabled?: boolean;
+    requiresConfirmation?: boolean
+    twoFactorEnabled?: boolean
 }
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -22,12 +22,9 @@ const breadcrumbs: BreadcrumbItem[] = [
         title: 'Two-Factor Authentication',
         href: show.url(),
     },
-];
+]
 
-export default function TwoFactor({
-    requiresConfirmation = false,
-    twoFactorEnabled = false,
-}: TwoFactorProps) {
+export default function TwoFactor({ requiresConfirmation = false, twoFactorEnabled = false }: TwoFactorProps) {
     const {
         qrCodeSvg,
         hasSetupData,
@@ -37,8 +34,8 @@ export default function TwoFactor({
         recoveryCodesList,
         fetchRecoveryCodes,
         errors,
-    } = useTwoFactorAuth();
-    const [showSetupModal, setShowSetupModal] = useState<boolean>(false);
+    } = useTwoFactorAuth()
+    const [showSetupModal, setShowSetupModal] = useState<boolean>(false)
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -53,10 +50,8 @@ export default function TwoFactor({
                         <div className="flex flex-col items-start justify-start space-y-4">
                             <Badge variant="default">Enabled</Badge>
                             <p className="text-muted-foreground">
-                                With two-factor authentication enabled, you will
-                                be prompted for a secure, random pin during
-                                login, which you can retrieve from the
-                                TOTP-supported application on your phone.
+                                With two-factor authentication enabled, you will be prompted for a secure, random pin
+                                during login, which you can retrieve from the TOTP-supported application on your phone.
                             </p>
 
                             <TwoFactorRecoveryCodes
@@ -68,11 +63,7 @@ export default function TwoFactor({
                             <div className="relative inline">
                                 <Form {...disable.form()}>
                                     {({ processing }) => (
-                                        <Button
-                                            variant="destructive"
-                                            type="submit"
-                                            disabled={processing}
-                                        >
+                                        <Button variant="destructive" type="submit" disabled={processing}>
                                             <ShieldBan /> Disable 2FA
                                         </Button>
                                     )}
@@ -83,32 +74,20 @@ export default function TwoFactor({
                         <div className="flex flex-col items-start justify-start space-y-4">
                             <Badge variant="destructive">Disabled</Badge>
                             <p className="text-muted-foreground">
-                                When you enable two-factor authentication, you
-                                will be prompted for a secure pin during login.
-                                This pin can be retrieved from a TOTP-supported
-                                application on your phone.
+                                When you enable two-factor authentication, you will be prompted for a secure pin during
+                                login. This pin can be retrieved from a TOTP-supported application on your phone.
                             </p>
 
                             <div>
                                 {hasSetupData ? (
-                                    <Button
-                                        onClick={() => setShowSetupModal(true)}
-                                    >
+                                    <Button onClick={() => setShowSetupModal(true)}>
                                         <ShieldCheck />
                                         Continue Setup
                                     </Button>
                                 ) : (
-                                    <Form
-                                        {...enable.form()}
-                                        onSuccess={() =>
-                                            setShowSetupModal(true)
-                                        }
-                                    >
+                                    <Form {...enable.form()} onSuccess={() => setShowSetupModal(true)}>
                                         {({ processing }) => (
-                                            <Button
-                                                type="submit"
-                                                disabled={processing}
-                                            >
+                                            <Button type="submit" disabled={processing}>
                                                 <ShieldCheck />
                                                 Enable 2FA
                                             </Button>
@@ -133,5 +112,5 @@ export default function TwoFactor({
                 </div>
             </SettingsLayout>
         </AppLayout>
-    );
+    )
 }

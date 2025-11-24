@@ -1,40 +1,28 @@
-import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useAppearance } from '@/hooks/use-appearance';
-import { Monitor, Moon, Sun } from 'lucide-react';
-import { HTMLAttributes } from 'react';
+import { Monitor, Moon, Sun } from 'lucide-react'
+import type { HTMLAttributes } from 'react'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { useAppearance } from '@/hooks/use-appearance'
 
-export default function AppearanceToggleDropdown({
-    className = '',
-    ...props
-}: HTMLAttributes<HTMLDivElement>) {
-    const { appearance, updateAppearance } = useAppearance();
+export default function AppearanceToggleDropdown({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
+    const { appearance, updateAppearance } = useAppearance()
 
     const getCurrentIcon = () => {
         switch (appearance) {
             case 'dark':
-                return <Moon className="h-5 w-5" />;
+                return <Moon className="h-5 w-5" />
             case 'light':
-                return <Sun className="h-5 w-5" />;
+                return <Sun className="h-5 w-5" />
             default:
-                return <Monitor className="h-5 w-5" />;
+                return <Monitor className="h-5 w-5" />
         }
-    };
+    }
 
     return (
         <div className={className} {...props}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-9 w-9 rounded-md"
-                    >
+                    <Button variant="ghost" size="icon" className="h-9 w-9 rounded-md">
                         {getCurrentIcon()}
                         <span className="sr-only">Toggle theme</span>
                     </Button>
@@ -52,9 +40,7 @@ export default function AppearanceToggleDropdown({
                             Dark
                         </span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem
-                        onClick={() => updateAppearance('system')}
-                    >
+                    <DropdownMenuItem onClick={() => updateAppearance('system')}>
                         <span className="flex items-center gap-2">
                             <Monitor className="h-5 w-5" />
                             System
@@ -63,5 +49,5 @@ export default function AppearanceToggleDropdown({
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
-    );
+    )
 }

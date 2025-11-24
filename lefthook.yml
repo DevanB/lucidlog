@@ -13,17 +13,23 @@ pre-commit:
       run: vendor/bin/pint {staged_files}
       stage_fixed: true
 
-    # 2. Check TypeScript types
+    # 2. Lint and format frontend code with Ultracite/Biome (auto-fix)
+    ultracite:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: npx @biomejs/biome check --write {staged_files}
+      stage_fixed: true
+
+    # 3. Check TypeScript types
     typescript:
       glob: "*.{ts,tsx}"
       run: npm run types
 
-    # 3. Run Larastan static analysis on staged PHP files
+    # 4. Run Larastan static analysis on staged PHP files
     larastan:
       glob: "*.php"
       run: vendor/bin/phpstan analyse --memory-limit=2G {staged_files} --error-format=table
 
-    # 4. Run Rector PHP upgrade checks and auto-fix
+    # 5. Run Rector PHP upgrade checks and auto-fix
     rector:
       glob: "*.php"
       run: vendor/bin/rector process {staged_files} --dry-run
