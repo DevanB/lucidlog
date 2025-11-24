@@ -434,7 +434,6 @@ After successful testing:
 
 3. **Update team:**
     - Announce CI/CD enhancements are live
-    - Share CONTRIBUTING.md with team
     - Remind team about pre-commit hooks
 
 ## Ongoing Monitoring

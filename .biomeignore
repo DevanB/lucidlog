@@ -13,3 +13,6 @@ storage/
 
 # Generated types
 resources/js/types/generated.d.ts
+
+# Shadcn UI components (vendor)
+resources/js/components/ui/**

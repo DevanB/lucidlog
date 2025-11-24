@@ -47,10 +47,6 @@ Visit `http://127.0.0.1:8000` to see the application.
 - Node.js 22.x+
 - Mise (for development tools)
 
-### Setup
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed setup instructions.
-
 ### Available Commands
 
 ```bash
@@ -180,25 +176,6 @@ Triggers on:
 - Push to `master`
 - Pull requests to `master`
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
-
-- Setting up your development environment
-- Code quality tools and workflow
-- Pre-commit hooks
-- Debugging tools
-- CI/CD pipeline
-- Troubleshooting guide
-
-## License
-
-This project is proprietary and confidential.
-
 ## Support
 
-For questions or issues:
-
-- Check [CONTRIBUTING.md](CONTRIBUTING.md) for troubleshooting
-- Open an issue on GitHub
-- Contact the development team
+For questions or issues open an issue on GitHub

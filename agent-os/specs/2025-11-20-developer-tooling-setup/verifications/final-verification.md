@@ -261,7 +261,7 @@ resources/js/pages/auth/register.tsx(90,54): error TS2322: Type 'string' is not 
 
 - **Configuration:** `biome.json`
 - **Result:** ⚠️ 1 warning
-- **Command:** `npx @biomejs/biome check`
+- **Command:** `npx ultracite check`
 
 **Warning Found:**
 
@@ -293,7 +293,7 @@ resources/js/pages/auth/two-factor-challenge.tsx:74:72 lint/suspicious/noArrayIn
 
 2. **Ultracite/Biome** - Frontend linting (auto-fix, stages fixed files)
     - Glob: `*.{js,jsx,ts,tsx}`
-    - Command: `npx @biomejs/biome check --write {staged_files}`
+    - Command: `npx ultracite fix {staged_files}`
 
 3. **TypeScript** - Type checking
     - Glob: `*.{ts,tsx}`

@@ -139,7 +139,7 @@ This specification configures comprehensive developer tooling including static a
     - Run only on staged PHP files using glob pattern filter
     - Set as fourth check in execution order
   - [x] 3.2b Configure Ultracite frontend linting in Lefthook
-    - Add Ultracite command: `npx @biomejs/biome check --write {staged_files}`
+    - Add Ultracite command: `npx ultracite fix {staged_files}`
     - Run only on staged JavaScript/TypeScript files using glob pattern filter: `*.{js,jsx,ts,tsx}`
     - Set as second check in execution order (after Pint, before TypeScript types)
   - [x] 3.8 Configure emergency bypass support
@@ -228,9 +228,9 @@ This specification configures comprehensive developer tooling including static a
     - Run `composer run format:check` to verify formatted code passes
     - Check that formatting is consistent across codebase
   - [x] 5.4 Test Ultracite frontend linting
-    - Run `npx @biomejs/biome check` manually on local environment
+    - Run `npx ultracite check` manually on local environment
     - Verify it detects JavaScript/TypeScript/React code quality issues
-    - Run `npx @biomejs/biome check --write` to apply auto-fixes
+    - Run `npx ultracite fix` to apply auto-fixes
     - Check that it properly formats and lints frontend files
   - [x] 5.5 Test TypeScript type checking
     - Run `npm run types` manually on local environment
@@ -304,7 +304,7 @@ This specification configures comprehensive developer tooling including static a
     - Verify NPM dependencies are cached
     - Note execution time improvements from caching
   - [x] 6.5 Document developer workflow and setup
-    - Update project README or create CONTRIBUTING.md
+    - Update project README
     - Document Mise installation requirement: `curl https://mise.jdx.dev/install.sh | sh` or similar
     - Document first-time setup: `composer run setup` installs Lefthook hooks
     - Document pre-commit hook usage and bypass option (`git commit --no-verify`)
@@ -328,7 +328,7 @@ This specification configures comprehensive developer tooling including static a
 - CI/CD fails fast with clear error messages on violations
 - Dependency caching improves pipeline execution time
 - Developer setup documentation complete and clear
-- README or CONTRIBUTING.md documents all Composer scripts
+- README documents all Composer scripts
 - Troubleshooting guide covers common issues
 - Exclusion patterns documented and consistent across tools
 

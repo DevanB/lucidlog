@@ -13,10 +13,10 @@ pre-commit:
       run: vendor/bin/pint {staged_files}
       stage_fixed: true
 
-    # 2. Lint and format frontend code with Ultracite/Biome (auto-fix)
+    # 2. Lint and format frontend code with Ultracite (auto-fix)
     ultracite:
       glob: "*.{js,jsx,ts,tsx}"
-      run: npx @biomejs/biome check --write {staged_files}
+      run: npx ultracite fix {staged_files}
       stage_fixed: true
 
     # 3. Check TypeScript types

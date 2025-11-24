@@ -1,20 +1,22 @@
 {
-    "mcpServers": {
-        "laravel-boost": {
-            "command": "/Users/devanbeitel/Library/Application Support/Herd/bin/php84",
-            "args": [
-                "/Users/devanbeitel/Developer/laravel-projects/lucidlog/artisan",
-                "boost:mcp"
-            ]
-        },
-        "herd": {
-            "command": "/Users/devanbeitel/Library/Application Support/Herd/bin/php84",
-            "args": [
-                "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
-            ],
-            "env": {
-                "SITE_PATH": "/Users/devanbeitel/Developer/laravel-projects/lucidlog"
-            }
-        }
+  "mcpServers": {
+    "laravel-boost": {
+      "command": "/Users/devanbeitel/Library/Application Support/Herd/bin/php84",
+      "args": [
+        "/Users/devanbeitel/Developer/laravel-projects/lucidlog/artisan",
+        "boost:mcp"
+      ]
+    },
+    "herd": {
+      "command": "/Users/devanbeitel/Library/Application Support/Herd/bin/php84",
+      "args": ["/Applications/Herd.app/Contents/Resources/herd-mcp.phar"],
+      "env": {
+        "SITE_PATH": "/Users/devanbeitel/Developer/laravel-projects/lucidlog"
+      }
+    },
+    "ultracite": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://www.ultracite.ai/api/mcp/mcp"]
     }
+  }
 }

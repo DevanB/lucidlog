@@ -7,12 +7,37 @@ indent_size = 4
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
+max_line_length = 120
 
-[*.md]
-trim_trailing_whitespace = false
+# PHP files (Laravel Pint uses 4 spaces)
+[*.php]
+indent_size = 4
 
+# JavaScript/TypeScript/JSX/TSX (Biome uses 2 spaces)
+[*.{js,jsx,ts,tsx,mjs,cjs}]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# CSS/SCSS
+[*.{css,scss,sass}]
+indent_size = 2
+
+# YAML files (common convention: 2 spaces)
 [*.{yml,yaml}]
 indent_size = 2
 
+# Docker Compose (keep 4 spaces as you had it)
 [compose.yaml]
+indent_size = 4
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Blade templates (Laravel convention: 4 spaces)
+[*.blade.php]
 indent_size = 4

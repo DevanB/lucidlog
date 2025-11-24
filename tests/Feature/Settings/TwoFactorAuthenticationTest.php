@@ -44,7 +44,7 @@ test('two-factor settings page requires password confirmation when enabled', fun
     $response->assertRedirect(route('password.confirm'));
 });
 
-test('two-factor settings page does not requires password confirmation when disabled', function (): void {
+test('two-factor settings page does not require password confirmation when disabled', function (): void {
     if (! Features::canManageTwoFactorAuthentication()) {
         $this->markTestSkipped('Two-factor authentication is not enabled.');
     }
