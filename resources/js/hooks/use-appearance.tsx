@@ -16,6 +16,10 @@ const setCookie = (name: string, value: string, days = 365) => {
 }
 
 const applyTheme = (appearance: Appearance) => {
+  if (typeof document === 'undefined') {
+    return
+  }
+
   const isDark = appearance === 'dark' || (appearance === 'system' && prefersDark())
 
   document.documentElement.classList.toggle('dark', isDark)
@@ -36,6 +40,10 @@ const handleSystemThemeChange = () => {
 }
 
 export function initializeTheme() {
+  if (typeof window === 'undefined') {
+    return
+  }
+
   const savedAppearance = (localStorage.getItem('appearance') as Appearance) || 'system'
 
   applyTheme(savedAppearance)

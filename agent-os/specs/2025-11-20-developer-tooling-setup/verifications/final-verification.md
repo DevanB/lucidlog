@@ -149,7 +149,7 @@ All failing tests are related to CSRF token validation (419 errors), not the dev
 
 1. `Tests\Feature\Auth\AuthenticationTest`
     - users can authenticate using the login screen
-    - users with two-factor enabled are redirected to two factor challenge
+    - users with two-factor enabled are redirected to two-factor challenge
     - users can logout
     - users are rate limited
 
@@ -240,7 +240,7 @@ The test failures indicate that the existing authentication implementation needs
 
 All errors are in `resources/js/pages/auth/login.tsx` and `resources/js/pages/auth/register.tsx`, where `maxLength` prop is receiving `string` instead of `number`:
 
-```
+```bash
 resources/js/pages/auth/login.tsx(37,37): error TS2322: Type 'string' is not assignable to type 'number'.
 resources/js/pages/auth/login.tsx(48,96): error TS2322: Type 'string' is not assignable to type 'number'.
 resources/js/pages/auth/login.tsx(58,37): error TS2322: Type 'string' is not assignable to type 'number'.
@@ -265,7 +265,7 @@ resources/js/pages/auth/register.tsx(90,54): error TS2322: Type 'string' is not 
 
 **Warning Found:**
 
-```
+```bash
 resources/js/pages/auth/two-factor-challenge.tsx:74:72 lint/suspicious/noArrayIndexKey
 × Avoid using the index of an array as key property in an element.
 ```

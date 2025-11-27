@@ -4,7 +4,11 @@
     "laravel-boost": {
       "type": "local",
       "enabled": true,
-      "command": ["php", "artisan", "boost:mcp"]
+      "command": [
+        "php",
+        "artisan",
+        "boost:mcp"
+      ]
     },
     "herd": {
       "type": "local",
@@ -14,7 +18,7 @@
         "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
       ],
       "environment": {
-        "SITE_PATH": "/Users/devanbeitel/Developer/laravel-projects/lucidlog"
+        "SITE_PATH": "./lucidlog"
       }
     },
     "ultracite": {

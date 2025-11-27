@@ -38,7 +38,7 @@ export default function TwoFactorChallenge() {
   }, [showRecoveryInput])
 
   const toggleRecoveryMode = (clearErrors: () => void): void => {
-    setShowRecoveryInput(!showRecoveryInput)
+    setShowRecoveryInput((prev) => !prev)
     clearErrors()
     setCode('')
   }
