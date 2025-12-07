@@ -54,8 +54,5 @@ jobs:
       - name: Run TypeScript Type Checking
         run: npm run types
 
-      - name: Format Frontend
-        run: npm run format
-
-      - name: Lint Frontend
-        run: npm run lint
+      - name: Check Frontend (Lint & Format)
+        run: npm run check
