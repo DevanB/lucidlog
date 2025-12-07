@@ -35,6 +35,10 @@ const mediaQuery = () => {
 }
 
 const handleSystemThemeChange = () => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
   const currentAppearance = localStorage.getItem('appearance') as Appearance
   applyTheme(currentAppearance || 'system')
 }

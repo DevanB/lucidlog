@@ -2,27 +2,18 @@
   "mcpServers": {
     "laravel-boost": {
       "command": "php",
-      "args": [
-        "artisan",
-        "boost:mcp"
-      ]
+      "args": ["artisan", "boost:mcp"]
     },
     "herd": {
       "command": "php",
-      "args": [
-        "/Applications/Herd.app/Contents/Resources/herd-mcp.phar"
-      ],
+      "args": ["/Applications/Herd.app/Contents/Resources/herd-mcp.phar"],
       "env": {
         "SITE_PATH": "./lucidlog"
       }
     },
     "ultracite": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://www.ultracite.ai/api/mcp/mcp"
-      ]
+      "args": ["-y", "mcp-remote", "https://www.ultracite.ai/api/mcp/mcp"]
     }
   }
 }

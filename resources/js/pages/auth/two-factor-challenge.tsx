@@ -17,25 +17,17 @@ export default function TwoFactorChallenge() {
   // Generate stable UUIDs for OTP slots once per component mount
   const slotKeys = useMemo(() => Array.from({ length: OTP_MAX_LENGTH }, () => uuidv4()), [])
 
-  const authConfigContent = useMemo<{
-    title: string
-    description: string
-    toggleText: string
-  }>(() => {
-    if (showRecoveryInput) {
-      return {
+  const authConfigContent = showRecoveryInput
+    ? {
         title: 'Recovery Code',
         description: 'Please confirm access to your account by entering one of your emergency recovery codes.',
         toggleText: 'login using an authentication code',
       }
-    }
-
-    return {
-      title: 'Authentication Code',
-      description: 'Enter the authentication code provided by your authenticator application.',
-      toggleText: 'login using a recovery code',
-    }
-  }, [showRecoveryInput])
+    : {
+        title: 'Authentication Code',
+        description: 'Enter the authentication code provided by your authenticator application.',
+        toggleText: 'login using a recovery code',
+      }
 
   const toggleRecoveryMode = (clearErrors: () => void): void => {
     setShowRecoveryInput((prev) => !prev)
