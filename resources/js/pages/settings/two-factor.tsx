@@ -40,6 +40,9 @@ export default function TwoFactor({ requiresConfirmation = false, twoFactorEnabl
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Two-Factor Authentication" />
+
+      <h1 className="sr-only">Two-factor authentication settings</h1>
+
       <SettingsLayout>
         <div className="space-y-6">
           <HeadingSmall

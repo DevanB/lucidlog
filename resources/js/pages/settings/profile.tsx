@@ -27,6 +27,8 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Profile settings" />
 
+      <h1 className="sr-only">Profile settings</h1>
+
       <SettingsLayout>
         <div className="space-y-6">
           <HeadingSmall description="Update your name and email address" title="Profile information" />

@@ -1,4 +1,6 @@
 import { Form, Head } from '@inertiajs/react'
+import { EyeIcon, EyeOffIcon } from 'lucide-react'
+import { useState } from 'react'
 import InputError from '@/components/input-error'
 import TextLink from '@/components/text-link'
 import { Button } from '@/components/ui/button'
@@ -18,6 +20,8 @@ type LoginProps = {
 }
 
 export default function Login({ status, canResetPassword, canRegister }: LoginProps) {
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+
   return (
     <AuthLayout description="Enter your email and password below to log in" title="Log in to your account">
       <Head title="Log in" />
@@ -50,15 +54,31 @@ export default function Login({ status, canResetPassword, canRegister }: LoginPr
                     </TextLink>
                   )}
                 </div>
-                <Input
-                  autoComplete="current-password"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                  tabIndex={0}
-                  type="password"
-                />
+                <div className="relative">
+                  <Input
+                    aria-describedby="password-help"
+                    autoComplete="current-password"
+                    className="pr-10"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                    tabIndex={0}
+                    type={showPassword ? 'text' : 'password'}
+                  />
+                  <Button
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    className="absolute top-1.5 right-2 h-6 w-6 cursor-pointer text-muted-foreground"
+                    onClick={() => setShowPassword((v) => !v)}
+                    size="icon"
+                    tabIndex={0}
+                    title={showPassword ? 'Hide password' : 'Show password'}
+                    type="button"
+                    variant="ghost"
+                  >
+                    {showPassword ? <EyeOffIcon aria-hidden="true" /> : <EyeIcon aria-hidden="true" />}
+                  </Button>
+                </div>
                 <InputError message={errors.password} />
               </div>
 

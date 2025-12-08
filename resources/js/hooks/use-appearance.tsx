@@ -1,9 +1,13 @@
 import Cookies from 'js-cookie'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useMemo, useSyncExternalStore } from 'react'
 
-export type Appearance = 'light' | 'dark' | 'system'
+export type ResolvedAppearance = 'light' | 'dark'
+export type Appearance = ResolvedAppearance | 'system'
 
-const prefersDark = () => {
+const listeners = new Set<() => void>()
+let currentAppearance: Appearance = 'system'
+
+const prefersDark = (): boolean => {
   if (typeof window === 'undefined') {
     return false
   }
@@ -15,18 +19,39 @@ const setCookie = (name: string, value: string, days = 365) => {
   Cookies.set(name, value, { path: '/', expires: days, sameSite: 'Lax' })
 }
 
-const applyTheme = (appearance: Appearance) => {
+const getStoredAppearance = (): Appearance => {
+  if (typeof window === 'undefined') {
+    return 'system'
+  }
+  return (localStorage.getItem('appearance') as Appearance) || 'system'
+}
+
+const isDarkMode = (appearance: Appearance): boolean =>
+  appearance === 'dark' || (appearance === 'system' && prefersDark())
+
+const applyTheme = (appearance: Appearance): void => {
   if (typeof document === 'undefined') {
     return
   }
 
-  const isDark = appearance === 'dark' || (appearance === 'system' && prefersDark())
+  const isDark = isDarkMode(appearance)
 
   document.documentElement.classList.toggle('dark', isDark)
   document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
 }
 
-const mediaQuery = () => {
+const subscribe = (callback: () => void) => {
+  listeners.add(callback)
+  return () => listeners.delete(callback)
+}
+
+const notify = (): void => {
+  for (const listener of listeners) {
+    listener()
+  }
+}
+
+const mediaQuery = (): MediaQueryList | null => {
   if (typeof window === 'undefined') {
     return null
   }
@@ -34,33 +59,42 @@ const mediaQuery = () => {
   return window.matchMedia('(prefers-color-scheme: dark)')
 }
 
-const handleSystemThemeChange = () => {
-  if (typeof window === 'undefined') {
-    return
-  }
-
-  const currentAppearance = localStorage.getItem('appearance') as Appearance
+const handleSystemThemeChange = (): void => {
   applyTheme(currentAppearance || 'system')
+  notify()
 }
 
-export function initializeTheme() {
+export function initializeTheme(): void {
   if (typeof window === 'undefined') {
     return
   }
 
-  const savedAppearance = (localStorage.getItem('appearance') as Appearance) || 'system'
+  if (!localStorage.getItem('appearance')) {
+    localStorage.setItem('appearance', 'system')
+    setCookie('appearance', 'system')
+  }
 
-  applyTheme(savedAppearance)
+  currentAppearance = getStoredAppearance()
+  applyTheme(currentAppearance)
 
-  // Add the event listener for system theme changes...
+  // Set up system theme change listener
   mediaQuery()?.addEventListener('change', handleSystemThemeChange)
 }
 
 export function useAppearance() {
-  const [appearance, setAppearance] = useState<Appearance>('system')
+  const appearance: Appearance = useSyncExternalStore(
+    subscribe,
+    () => currentAppearance,
+    () => 'system'
+  )
 
-  const updateAppearance = useCallback((mode: Appearance) => {
-    setAppearance(mode)
+  const resolvedAppearance: ResolvedAppearance = useMemo(
+    () => (isDarkMode(appearance) ? 'dark' : 'light'),
+    [appearance]
+  )
+
+  const updateAppearance = useCallback((mode: Appearance): void => {
+    currentAppearance = mode
 
     // Store in localStorage for client-side persistence...
     localStorage.setItem('appearance', mode)
@@ -69,16 +103,8 @@ export function useAppearance() {
     setCookie('appearance', mode)
 
     applyTheme(mode)
+    notify()
   }, [])
 
-  useEffect(() => {
-    const savedAppearance = localStorage.getItem('appearance') as Appearance | null
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    updateAppearance(savedAppearance || 'system')
-
-    return () => mediaQuery()?.removeEventListener('change', handleSystemThemeChange)
-  }, [updateAppearance])
-
-  return { appearance, updateAppearance } as const
+  return { appearance, resolvedAppearance, updateAppearance } as const
 }
