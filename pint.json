@@ -1,0 +1,11 @@
+{
+  "preset": "laravel",
+  "line-length": 120,
+  "exclude": [
+    "vendor",
+    "node_modules",
+    "storage",
+    "bootstrap/cache",
+    "public/build"
+  ]
+}

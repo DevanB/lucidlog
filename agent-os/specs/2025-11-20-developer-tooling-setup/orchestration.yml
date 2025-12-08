@@ -1,0 +1,13 @@
+task_groups:
+  - name: Configuration Files & Dependencies
+    claude_code_subagent: implementer
+  - name: Debugging Tools Configuration
+    claude_code_subagent: implementer
+  - name: Pre-Commit Hook Management
+    claude_code_subagent: implementer
+  - name: CI/CD Pipeline Enhancement
+    claude_code_subagent: implementer
+  - name: Testing & Verification
+    claude_code_subagent: implementer
+  - name: Documentation & Final Testing
+    claude_code_subagent: implementer

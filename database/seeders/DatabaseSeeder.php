@@ -17,11 +17,9 @@ class DatabaseSeeder extends Seeder
 
         User::firstOrCreate(
             ['email' => 'test@example.com'],
-            [
+            User::factory()->withoutTwoFactor()->make([
                 'name' => 'Test User',
-                'password' => 'password',
-                'email_verified_at' => now(),
-            ]
+            ])->toArray()
         );
     }
 }

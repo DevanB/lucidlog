@@ -1,84 +1,110 @@
-import { useCallback, useEffect, useState } from 'react';
+import Cookies from 'js-cookie'
+import { useCallback, useMemo, useSyncExternalStore } from 'react'
 
-export type Appearance = 'light' | 'dark' | 'system';
+export type ResolvedAppearance = 'light' | 'dark'
+export type Appearance = ResolvedAppearance | 'system'
 
-const prefersDark = () => {
-    if (typeof window === 'undefined') {
-        return false;
-    }
+const listeners = new Set<() => void>()
+let currentAppearance: Appearance = 'system'
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-};
+const prefersDark = (): boolean => {
+  if (typeof window === 'undefined') {
+    return false
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
 
 const setCookie = (name: string, value: string, days = 365) => {
-    if (typeof document === 'undefined') {
-        return;
-    }
+  Cookies.set(name, value, { path: '/', expires: days, sameSite: 'Lax' })
+}
 
-    const maxAge = days * 24 * 60 * 60;
-    document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`;
-};
+const getStoredAppearance = (): Appearance => {
+  if (typeof window === 'undefined') {
+    return 'system'
+  }
+  return (localStorage.getItem('appearance') as Appearance) || 'system'
+}
 
-const applyTheme = (appearance: Appearance) => {
-    const isDark =
-        appearance === 'dark' || (appearance === 'system' && prefersDark());
+const isDarkMode = (appearance: Appearance): boolean =>
+  appearance === 'dark' || (appearance === 'system' && prefersDark())
 
-    document.documentElement.classList.toggle('dark', isDark);
-    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
-};
+const applyTheme = (appearance: Appearance): void => {
+  if (typeof document === 'undefined') {
+    return
+  }
 
-const mediaQuery = () => {
-    if (typeof window === 'undefined') {
-        return null;
-    }
+  const isDark = isDarkMode(appearance)
 
-    return window.matchMedia('(prefers-color-scheme: dark)');
-};
+  document.documentElement.classList.toggle('dark', isDark)
+  document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
+}
 
-const handleSystemThemeChange = () => {
-    const currentAppearance = localStorage.getItem('appearance') as Appearance;
-    applyTheme(currentAppearance || 'system');
-};
+const subscribe = (callback: () => void) => {
+  listeners.add(callback)
+  return () => listeners.delete(callback)
+}
 
-export function initializeTheme() {
-    const savedAppearance =
-        (localStorage.getItem('appearance') as Appearance) || 'system';
+const notify = (): void => {
+  for (const listener of listeners) {
+    listener()
+  }
+}
 
-    applyTheme(savedAppearance);
+const mediaQuery = (): MediaQueryList | null => {
+  if (typeof window === 'undefined') {
+    return null
+  }
 
-    // Add the event listener for system theme changes...
-    mediaQuery()?.addEventListener('change', handleSystemThemeChange);
+  return window.matchMedia('(prefers-color-scheme: dark)')
+}
+
+const handleSystemThemeChange = (): void => {
+  applyTheme(currentAppearance || 'system')
+  notify()
+}
+
+export function initializeTheme(): void {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  if (!localStorage.getItem('appearance')) {
+    localStorage.setItem('appearance', 'system')
+    setCookie('appearance', 'system')
+  }
+
+  currentAppearance = getStoredAppearance()
+  applyTheme(currentAppearance)
+
+  // Set up system theme change listener
+  mediaQuery()?.addEventListener('change', handleSystemThemeChange)
 }
 
 export function useAppearance() {
-    const [appearance, setAppearance] = useState<Appearance>('system');
+  const appearance: Appearance = useSyncExternalStore(
+    subscribe,
+    () => currentAppearance,
+    () => 'system'
+  )
 
-    const updateAppearance = useCallback((mode: Appearance) => {
-        setAppearance(mode);
+  const resolvedAppearance: ResolvedAppearance = useMemo(
+    () => (isDarkMode(appearance) ? 'dark' : 'light'),
+    [appearance]
+  )
 
-        // Store in localStorage for client-side persistence...
-        localStorage.setItem('appearance', mode);
+  const updateAppearance = useCallback((mode: Appearance): void => {
+    currentAppearance = mode
 
-        // Store in cookie for SSR...
-        setCookie('appearance', mode);
+    // Store in localStorage for client-side persistence...
+    localStorage.setItem('appearance', mode)
 
-        applyTheme(mode);
-    }, []);
+    // Store in cookie for SSR...
+    setCookie('appearance', mode)
 
-    useEffect(() => {
-        const savedAppearance = localStorage.getItem(
-            'appearance',
-        ) as Appearance | null;
+    applyTheme(mode)
+    notify()
+  }, [])
 
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        updateAppearance(savedAppearance || 'system');
-
-        return () =>
-            mediaQuery()?.removeEventListener(
-                'change',
-                handleSystemThemeChange,
-            );
-    }, [updateAppearance]);
-
-    return { appearance, updateAppearance } as const;
+  return { appearance, resolvedAppearance, updateAppearance } as const
 }
